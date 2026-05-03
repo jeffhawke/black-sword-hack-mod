@@ -6,7 +6,7 @@ export default class BSHCombat extends Combat {
      */
     async nextRound() {
         let roundIndex   = this.round;
-        let roundHistory = (this.getFlag("black-sword-hack", "roundHistory") || []);
+        let roundHistory = (this.getFlag("black-sword-hack-mod", "roundHistory") || []);
 
         if(roundIndex < 0 || roundIndex >= roundHistory.length) {
             let ids = [];
@@ -30,7 +30,7 @@ export default class BSHCombat extends Combat {
      */
     async previousRound() {
         let roundIndex   = this.round - 2;
-        let roundHistory = (this.getFlag("black-sword-hack", "roundHistory") || []);
+        let roundHistory = (this.getFlag("black-sword-hack-mod", "roundHistory") || []);
 
         if(roundIndex >= 0 && roundIndex < roundHistory.length) {
             await this._applyRoundInitiatives(roundIndex);
@@ -78,7 +78,7 @@ export default class BSHCombat extends Combat {
     }
 
     async _applyRoundInitiatives(roundIndex) {
-        let roundHistory = (this.getFlag("black-sword-hack", "roundHistory") || []);
+        let roundHistory = (this.getFlag("black-sword-hack-mod", "roundHistory") || []);
 
         if(roundIndex >= 0 && roundIndex < roundHistory.length) {
             let changes = [];
@@ -177,7 +177,7 @@ export default class BSHCombat extends Combat {
      */
     async _pushRoundInitiatives(roundIndex=null) {
         let initiatives = {};
-        let history     = (this.getFlag("black-sword-hack", "roundHistory") || []).slice();
+        let history     = (this.getFlag("black-sword-hack-mod", "roundHistory") || []).slice();
 
         for(let combatant of this.combatants) {
             initiatives[combatant.id] = combatant.initiative;
@@ -187,6 +187,6 @@ export default class BSHCombat extends Combat {
         } else {
             history.push(initiatives);
         }
-        await this.setFlag("black-sword-hack", "roundHistory", history);
+        await this.setFlag("black-sword-hack-mod", "roundHistory", history);
     }
 }

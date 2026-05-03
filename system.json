@@ -17,8 +17,8 @@
     "minimum": 13,
     "verified": "13.346"
   },
-  "esmodules": ["black-sword-hack.js"],
-  "styles": ["black-sword-hack.css"],
+  "esmodules": ["black-sword-hack-mod.js"],
+  "styles": ["black-sword-hack-mod.css"],
   "languages": [
   	{"lang": "en",
      "name": "English",

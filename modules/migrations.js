@@ -20,7 +20,7 @@ async function updateCharacterBirthPlaces() {
  * one based on an origin id and background index.
  */
 async function updateClassicCharacterBackgrounds() {
-    if(!game.settings.get("black-sword-hack", "customOrigins")) {
+    if(!game.settings.get("black-sword-hack-mod", "customOrigins")) {
     	game.actors.forEach((actor) => {
     		if(actor.type === "character") {
     			let first  = `${actor.system.backgrounds.first}`.trim();
@@ -107,7 +107,7 @@ async function updateOriginBackgrounds() {
  * the correct background keys.
  */
 async function updateNewCharacterBackgrounds() {
-    if(game.settings.get("black-sword-hack", "customOrigins")) {
+    if(game.settings.get("black-sword-hack-mod", "customOrigins")) {
         game.actors.forEach((actor) => {
             if(actor.type === "character") {
                 let backgrounds = actor.system.backgrounds;

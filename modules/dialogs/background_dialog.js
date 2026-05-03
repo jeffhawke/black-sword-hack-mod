@@ -18,7 +18,7 @@ export default class BackgroundDialog extends FormApplication {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {closeOnSubmit: false,
                                           height:        550,
-                                          template:      "systems/black-sword-hack/templates/dialogs/background.html",
+                                          template:      "systems/black-sword-hack-mod/templates/dialogs/background.html",
                                           title:         "Background",
                                           width:         575}));
     }
@@ -166,7 +166,7 @@ export default class BackgroundDialog extends FormApplication {
             settings.newOrigin = false;
             settings.originId  = origin.id;
             settings.title     = game.i18n.localize(`bsh.dialogs.titles.background`);
-            return(renderTemplate("systems/black-sword-hack/templates/dialogs/background.html", data)
+            return(renderTemplate("systems/black-sword-hack-mod/templates/dialogs/background.html", data)
                        .then((content) => {
                                  settings.content = content;
                                  return(new BackgroundDialog(settings));
@@ -188,7 +188,7 @@ export default class BackgroundDialog extends FormApplication {
             settings.newOrigin = true;
             settings.originId  = origin.id;
             settings.title     = game.i18n.localize(`bsh.dialogs.titles.background`);
-            return(renderTemplate("systems/black-sword-hack/templates/dialogs/background.html", data)
+            return(renderTemplate("systems/black-sword-hack-mod/templates/dialogs/background.html", data)
                        .then((content) => {
                                  settings.content = content;
                                  return(new BackgroundDialog(settings));

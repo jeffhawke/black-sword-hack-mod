@@ -7,7 +7,7 @@ export default class CreatureActionSheet extends ItemSheet {
     }
 
     get template() {
-        return("systems/black-sword-hack/templates/sheets/creature-action-sheet.html");
+        return("systems/black-sword-hack-mod/templates/sheets/creature-action-sheet.html");
     }
 
     getData() {

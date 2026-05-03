@@ -104,7 +104,7 @@ export default class AttributeTestDialog extends Dialog {
         data.score     = (actor.system.calculated || actor.system.calculated)[attribute];
         settings.title = game.i18n.localize(`bsh.rolls.tests.${attribute}.title`);
 
-        return(renderTemplate("systems/black-sword-hack/templates/roll-modal.html", data)
+        return(renderTemplate("systems/black-sword-hack-mod/templates/roll-modal.html", data)
                    .then((content) => {
                              settings.content = content;
                              return(new AttributeTestDialog(actor, attribute, settings, options));

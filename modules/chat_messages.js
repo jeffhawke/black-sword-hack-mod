@@ -76,7 +76,7 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false, 
                                    weaponId: weapon.id};
                 }
 
-                showMessage(actor, "systems/black-sword-hack/templates/messages/attack-roll.hbs", data);
+                showMessage(actor, "systems/black-sword-hack-mod/templates/messages/attack-roll.hbs", data);
             });
         } else {
             console.error(`Unable to locate weapon id '${weaponId}' on actor '${actor.name}'.`);
@@ -138,7 +138,7 @@ export function logAttributeTest(actor, attribute, shiftKey=false, ctrlKey=false
                 message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
             }
         }
-        showMessage(actor, "systems/black-sword-hack/templates/messages/die-roll.hbs", message);
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
 
@@ -156,7 +156,7 @@ export function logCallSpirit(spirit, result) {
                              success:  true,
                              tested:   true}};
 
-    showMessage(actor, "systems/black-sword-hack/templates/messages/spirit-success.hbs", message);
+    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spirit-success.hbs", message);
 }
 
 export function logCallSpiritFailure(spirit, result) {
@@ -174,7 +174,7 @@ export function logCallSpiritFailure(spirit, result) {
                              success:  false,
                              tested:   true}};
 
-    showMessage(actor, "systems/black-sword-hack/templates/messages/spirit-failure.hbs", message);
+    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spirit-failure.hbs", message);
 }
 
 export function logDamageRoll(event) {
@@ -192,7 +192,7 @@ export function logDamageRoll(event) {
         data.roll.formula = formula;
         rollEm(new Roll(formula)).then((roll) => {
             data.roll.result  = roll.total;
-            showMessage(actor, "systems/black-sword-hack/templates/messages/damage-roll.hbs", data)
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/damage-roll.hbs", data)
         });
     } else {
         console.error("Damage roll requested but requesting element did not have a damage formula attribute.");
@@ -235,7 +235,7 @@ export function logDemonSummoning(demon, result) {
                              success:  true,
                              tested:   true}};
 
-    showMessage(actor, "systems/black-sword-hack/templates/messages/demon-success.hbs", message);
+    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/demon-success.hbs", message);
 }
 
 export function logDemonSummoningFailure(demon, result) {
@@ -253,7 +253,7 @@ export function logDemonSummoningFailure(demon, result) {
                              success:  false,
                              tested:   true}};
 
-    showMessage(actor, "systems/black-sword-hack/templates/messages/demon-failure.hbs", message);
+    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/demon-failure.hbs", message);
 }
 
 export function logDieRoll(actor, dieType, title, shiftKey=false, ctrlKey=false) {
@@ -277,7 +277,7 @@ export function logDieRoll(actor, dieType, title, shiftKey=false, ctrlKey=false)
     }
     rollEm(new Roll(formula)).then((roll) => {
         message.roll.result = roll.total;
-        showMessage(actor, "systems/black-sword-hack/templates/messages/die-roll.hbs", message);
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
 
@@ -325,7 +325,7 @@ export function logDodgeRoll(actor, shiftKey=false, ctrlKey=false) {
             }
         }
 
-        showMessage(actor, "systems/black-sword-hack/templates/messages/die-roll.hbs", message);
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
 
@@ -358,7 +358,7 @@ export function logDoomDieRoll(actor, shiftKey=false, ctrlKey=false) {
                 message.roll.labels.result = interpolate("bsh.fields.titles.success");
             }
 
-            showMessage(actor, "systems/black-sword-hack/templates/messages/doom-roll.hbs", message);
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/doom-roll.hbs", message);
         });
     } else {
         console.error(`Unable to make a doom roll for '${actor.name}' as their doom die is exhausted.`);
@@ -414,7 +414,7 @@ export function logInitiativeRoll(event) {
                 }
             }
 
-            showMessage(actor, "systems/black-sword-hack/templates/messages/die-roll.hbs", message);
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
         });
     } else {
         console.error("Initiative roll requested but requesting element is missing an actor id data attribute.");
@@ -466,7 +466,7 @@ export function logItemUsageDieRoll(item, field, shiftKey=false, ctrlKey=false) 
                     message.roll.labels.result = interpolate("bsh.fields.titles.success");                
                 }
 
-                showMessage(item.actor, "systems/black-sword-hack/templates/messages/usage-die-roll.hbs", message);
+                showMessage(item.actor, "systems/black-sword-hack-mod/templates/messages/usage-die-roll.hbs", message);
             });
         } else {
             console.warn(`Unable to roll usage die for item id ${item.id} as the particular usage die request is exhausted.`);
@@ -524,7 +524,7 @@ export function logParryRoll(actor, shiftKey=false, ctrlKey=false) {
             }
         }
 
-        showMessage(actor, "systems/black-sword-hack/templates/messages/die-roll.hbs", message);
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
 
@@ -576,7 +576,7 @@ export function logPerceptionRoll(event) {
                 }
             }
 
-            showMessage(actor, "systems/black-sword-hack/templates/messages/die-roll.hbs", message);
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
         });
     } else {
         console.error("Perception roll requested but requesting element is missing an actor id data attribute.");
@@ -597,7 +597,7 @@ export function logSpellCast(spell, result) {
                              success:  true,
                              tested:   true}};
 
-    showMessage(actor, "systems/black-sword-hack/templates/messages/spell-success.hbs", message);
+    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
 }
 
 export function logSpellCastFailure(spell, result) {
@@ -615,7 +615,7 @@ export function logSpellCastFailure(spell, result) {
                              success:  false,
                              tested:   true}};
 
-    showMessage(actor, "systems/black-sword-hack/templates/messages/spell-failure.hbs", message);
+    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
 }
 
 export function showMessage(actor, templateKey, data) {

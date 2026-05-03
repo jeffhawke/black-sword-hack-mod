@@ -3,12 +3,12 @@ export default class DemonSheet  extends ItemSheet {
 	    return(foundry.utils.mergeObject(super.defaultOptions,
 	    	                             {classes: ["bsh", "bsh-sheet", "bsh-demon"],
 	    	                              height: 350,
-	    	               	              template: "systems/black-sword-hack/templates/sheets/demon-sheet.html",
+	    	               	              template: "systems/black-sword-hack-mod/templates/sheets/demon-sheet.html",
 	    	                              width: 700}));
 	}
 
 	get template() {
-		return("systems/black-sword-hack/templates/sheets/demon-sheet.html");
+		return("systems/black-sword-hack-mod/templates/sheets/demon-sheet.html");
 	}
 
 	getData() {

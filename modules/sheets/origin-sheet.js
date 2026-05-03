@@ -5,12 +5,12 @@ export default class OriginSheet extends ItemSheet {
 	    return(foundry.utils.mergeObject(super.defaultOptions,
 	    	                             {classes: ["bsh", "bsh-sheet", "bsh-origin"],
 	    	                              height: 600,
-	    	               	              template: "systems/black-sword-hack/templates/sheets/origin-sheet.html",
+	    	               	              template: "systems/black-sword-hack-mod/templates/sheets/origin-sheet.html",
 	    	                              width: 700}));
 	}
 
 	get template() {
-		return("systems/black-sword-hack/templates/sheets/origin-sheet.html");
+		return("systems/black-sword-hack-mod/templates/sheets/origin-sheet.html");
 	}
 
 	getData() {
@@ -28,7 +28,7 @@ export default class OriginSheet extends ItemSheet {
 
 		Array.from(html.find(".bsh-background-column")).forEach((row) => row.dataset.origin = this.object.id);
 		super.activateListeners(html);
-		if(!game.settings.get("black-sword-hack", "customOrigins")) {
+		if(!game.settings.get("black-sword-hack-mod", "customOrigins")) {
 		    ui.notifications.error(game.i18n.localize("bsh.errors.origins.custom.inactive"));
 		}
 	}

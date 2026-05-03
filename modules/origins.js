@@ -67,7 +67,7 @@ function getCustomOrigins() {
 }
 
 function isCustomOriginsActive() {
-    return(game.settings.get("black-sword-hack", "customOrigins"));
+    return(game.settings.get("black-sword-hack-mod", "customOrigins"));
 }
 
 export {

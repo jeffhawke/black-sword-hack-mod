@@ -36,7 +36,7 @@ export default class CharacterSheet extends ActorSheet {
 	    return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes: ["bsh", "bsh-sheet", "bsh-character"],
                 			    	      height: 920,
-                			    	      template: "systems/black-sword-hack/templates/sheets/character-sheet.html"}));
+                			    	      template: "systems/black-sword-hack-mod/templates/sheets/character-sheet.html"}));
 	}
 
     /** @override */
@@ -45,7 +45,7 @@ export default class CharacterSheet extends ActorSheet {
         let   data    = context.actor.system;
 
         context.flags         = context.actor.flags;
-        context.customOrigins = game.settings.get("black-sword-hack", "customOrigins");
+        context.customOrigins = game.settings.get("black-sword-hack-mod", "customOrigins");
         Object.keys(data.stories).forEach((key) => data.stories[key].configuration = CONFIG.configuration);
 
         if(context.actor.type === "character") {
@@ -61,7 +61,7 @@ export default class CharacterSheet extends ActorSheet {
 
     /** @override */
     get template() {
-        return(`systems/black-sword-hack/templates/sheets/character-sheet.html`);
+        return(`systems/black-sword-hack-mod/templates/sheets/character-sheet.html`);
     }
 
 	activateListeners(html) {

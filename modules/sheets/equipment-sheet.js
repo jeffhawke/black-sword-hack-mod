@@ -8,7 +8,7 @@ export default class EquipmentSheet  extends ItemSheet {
     }
 
 	get template() {
-		return("systems/black-sword-hack/templates/sheets/equipment-sheet.html");
+		return("systems/black-sword-hack-mod/templates/sheets/equipment-sheet.html");
 	}
 
 	getData() {

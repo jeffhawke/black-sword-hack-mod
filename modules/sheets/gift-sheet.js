@@ -8,7 +8,7 @@ export default class GiftSheet  extends ItemSheet {
     }
 
 	get template() {
-		return("systems/black-sword-hack/templates/sheets/gift-sheet.html");
+		return("systems/black-sword-hack-mod/templates/sheets/gift-sheet.html");
 	}
 
 	getData() {
