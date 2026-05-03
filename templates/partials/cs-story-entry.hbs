@@ -7,26 +7,26 @@
                 <span class="collapsible-widget-icon"><i class="fas fa-minus"></i></span>
             </div>
             &nbsp;
-            Story for level {{level}}
+            {{localize "bsh.fields.labels.storyForLevel"}} {{level}}
         </h2>
 
         <div class="collapsible-widget-target">
         
 
             <div class="bsh-field" >
-                <label class="bsh-label">What happened since last time</label>
+                <label class="bsh-label">{{localize "bsh.fields.labels.whatHappened"}}</label>
                 <textarea id="story.{{@key}}" name="system.stories.{{@key}}.trueTitle"  rows="5" cols="33">{{trueTitle}}</textarea>
             </div>
 
                 
             <div class="bsh-story-entry-level">
                 <div class="bsh-field">
-                    <label class="bsh-label">Number of sessions</label>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.numberOfSessions"}}</label>
                     <input type="range" min="0" max="{{requiredForNextLevel}}" class="slider" id="myRange.{{@key}}" value="{{sessions}}" name="system.stories.{{@key}}.sessions" step=1 >
                 </div>
                 <div class="bsh-field">
                     <center>
-                    <label class="bsh-label">Value</label>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.value"}}</label>
                     <div>
                         {{sessions}}
                     </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="bsh-field">
                     <center>
-                    <label class="bsh-label">Required for next level</label>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.requiredForNextLevel"}}</label>
                     <div>
                         {{requiredForNextLevel}}
                     </div>
@@ -47,7 +47,7 @@
             <div class="bsh-story-entry-improvements">
             {{#if improvements.level}}
                 <div class="bsh-field">
-                    <label class="bsh-label">Next {{localize "bsh.fields.labels.level"}}</label>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.nextLevel"}}</label>
                     <div>
                         {{localize improvements.level}}
                     </div>
