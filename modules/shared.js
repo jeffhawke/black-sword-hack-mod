@@ -97,18 +97,19 @@ export function calculateAttributeValues(data, configuration) {
 
     Object.keys(data.stories).forEach((key) => {
         let story = data.stories[key];
+        if(story.title && story.title.trim() !== "") {
+            if(story.improvements && story.improvements.attributes && story.improvements.attributes.granted) {
+                let attribute = story.improvements.attributes.first.choice;
 
-        if(story.improvements && story.improvements.attributes && story.improvements.attributes.granted) {
-            let attribute = story.improvements.attributes.first.choice;
-
-            if(attribute in calculated) {
-                calculated[attribute] += 1;
-            }
-
-            if(story.improvements.attributes.second) {
-                attribute = story.improvements.attributes.second.choice;
                 if(attribute in calculated) {
                     calculated[attribute] += 1;
+                }
+
+                if(story.improvements.attributes.second) {
+                    attribute = story.improvements.attributes.second.choice;
+                    if(attribute in calculated) {
+                        calculated[attribute] += 1;
+                    }
                 }
             }
         }
@@ -148,8 +149,11 @@ export function calculateLevel(data, configuration) {
     let stories      = data.stories;
 
     Object.keys(stories).sort().forEach((index) => {
-        if(stories[index].title && stories[index].title.trim() !== "") {
+        if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
+            stories[index].title = "level achieved";
             totalStories++;
+        } else {
+            stories[index].title = ""
         }
     });
 

@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types" : ["character", "creature"],
+    "types": ["character", "creature"],
     "character": {
       "armour": {
         "description": "",
@@ -9,7 +9,7 @@
       },
       "attributes": {
         "strength": 10,
-        "dexterity" : 10,
+        "dexterity": 10,
         "constitution": 10,
         "intelligence": 10,
         "wisdom": 10,
@@ -35,96 +35,194 @@
         "unarmed": "d4"
       },
       "doom": "d6",
+      "equipmentNotes": "",
       "gifts": [
         "", "", "", "", ""
       ],
       "languages": [
         "", "", "", "", ""
       ],
+      "languageNotes": "",
       "level": 1,
       "origin": "barbarian",
       "playerName": "",
       "stories": {
-        "00": {"improvements": {
-                 "attributes": {
-                   "first": {"choice": "none"},
-                   "granted": true
-                 },
-                 "gift": {
-                   "granted": false
-                 },
-                 "hitPoints": 1,
-                 "level": "bsh.levels.names.2"
-               },
-               "title": ""},
-        "01": {"improvements": {
-               "attributes": {"granted": false},
-               "gift": {
-                 "choice": "none",
-                 "granted": true
-               },
-               "hitPoints": 1,
-               "level": "bsh.levels.names.3"
-               },
-               "title": ""},
-        "02": {"improvements": {
-               "attributes": {"first": {"choice": "none"},
-                              "granted": true,
-                              "second": {"choice": "none"}},
-               "gift": {"granted": false},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.4"
-               },
-               "title": ""},
-        "03": {"improvements": {
-               "attributes": {"granted": false},
-               "gift": {"choice": "none",
-                        "granted": true},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.5"
-               },
-               "title": ""},
-        "04": {"improvements": {
-               "attributes": {"first": {"choice": "none"},
-                              "granted": true},
-               "gift": {"granted": false},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.6"
-               },
-               "title": ""},
-        "05": {"improvements": {
-               "attributes": {"granted": false},
-               "gift": {"choice": "none",
-                        "granted": true},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.7"
-               },
-               "title": ""},
-        "06": {"improvements": {
-               "attributes": {"first": {"choice": "none"},
-                              "granted": true,
-                              "second": {"choice": "none"}},
-               "gift": {"granted": false},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.8"
-               },
-               "title": ""},
-        "07": {"improvements": {
-               "attributes": {"granted": false},
-               "gift": {"choice": "none",
-                        "granted": true},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.9"
-               },
-               "title": ""},
-        "08": {"improvements": {
-               "attributes": {"granted": false},
-               "doomDie": "d8",
-               "gift": {"granted": false},
-               "hitPoints": 1,
-               "level": "bsh.levels.names.10"
-               },
-               "title": ""}
+        "00": {
+          "improvements": {
+            "attributes": {
+              "first": {
+                "choice": "none"
+              },
+              "granted": true
+            },
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.2"
+          },
+          "level": 1,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 1
+        },
+        "01": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.3"
+          },
+          "level": 2,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 3
+        },
+        "02": {
+          "improvements": {
+            "attributes": {
+              "first": {
+                "choice": "none"
+              },
+              "granted": true,
+              "second": {
+                "choice": "none"
+              }
+            },
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.4"
+          },
+          "level": 3,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 6
+        },
+        "03": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.5"
+          },
+          "level": 4,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 10
+        },
+        "04": {
+          "improvements": {
+            "attributes": {
+              "first": {
+                "choice": "none"
+              },
+              "granted": true
+            },
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.6"
+          },
+          "level": 5,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 15
+        },
+        "05": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.7"
+          },
+          "level": 6,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 21
+        },
+        "06": {
+          "improvements": {
+            "attributes": {
+              "first": {
+                "choice": "none"
+              },
+              "granted": true,
+              "second": {
+                "choice": "none"
+              }
+            },
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.8"
+          },
+          "level": 7,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 28
+        },
+        "07": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.9"
+          },
+          "level": 8,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 36
+        },
+        "08": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "doomDie": "d8",
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1,
+            "level": "bsh.levels.names.10"
+          },
+          "level": 9,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 45
+        }
       },
       "summoning": {
         "demon": "unused",
@@ -141,16 +239,16 @@
     }
   },
   "Item": {
-  	"types": ["consumable", "creature_action", "demon", "equipment", "gift", "origin", "spell", "spirit", "weapon"],
-  	"templates": {
-  	},
+    "types": ["consumable", "creature_action", "demon", "equipment", "gift", "origin", "spell", "spirit", "weapon"],
+    "templates": {},
     "consumable": {
       "description": "",
       "quantity": 1,
       "rarity": "common",
       "usageDie": {
         "current": "^",
-        "maximum": "d4"}
+        "maximum": "d4"
+      }
     },
     "creature_action": {
       "attributes": {

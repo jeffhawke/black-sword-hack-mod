@@ -569,6 +569,12 @@
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.bsh-story-entry-level {
+	display: grid;
+	gap: 3px 5px;
+	grid-template-columns: 2fr 1fr 1fr;
+}
+
 .bsh-summon-results {
 	font-size: 120%;
 	font-weight: bold;

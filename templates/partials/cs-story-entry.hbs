@@ -1,71 +1,114 @@
 <div class="bsh-story-entry-container">
-	<div class="bsh-field">
-		<label class="bsh-label">{{localize "bsh.fields.labels.adventureName"}}</label>
-		<input name="system.stories.{{@key}}.title" type="text" value="{{title}}">
-	</div>
+
+    <div class="collapsible-widget" data-expanded="true">
+        <h2>
+            <div class="bsh-float-left collapsible-widget-toggle">
+                <span class="collapsible-widget-icon"><i class="fas fa-plus"></i></span>
+                <span class="collapsible-widget-icon"><i class="fas fa-minus"></i></span>
+            </div>
+            &nbsp;
+            Story for level {{level}}
+        </h2>
+
+        <div class="collapsible-widget-target">
+        
+
+            <div class="bsh-field" >
+                <label class="bsh-label">What happened since last time</label>
+                <textarea id="story.{{@key}}" name="system.stories.{{@key}}.trueTitle"  rows="5" cols="33">{{trueTitle}}</textarea>
+            </div>
+
+                
+            <div class="bsh-story-entry-level">
+                <div class="bsh-field">
+                    <label class="bsh-label">Number of sessions</label>
+                    <input type="range" min="0" max="{{requiredForNextLevel}}" class="slider" id="myRange.{{@key}}" value="{{sessions}}" name="system.stories.{{@key}}.sessions" step=1 >
+                </div>
+                <div class="bsh-field">
+                    <center>
+                    <label class="bsh-label">Value</label>
+                    <div>
+                        {{sessions}}
+                    </div>
+                    </center>
+                </div>
+                <div class="bsh-field">
+                    <center>
+                    <label class="bsh-label">Required for next level</label>
+                    <div>
+                        {{requiredForNextLevel}}
+                    </div>
+                    </center>
+                </div>        
+
+            </div>
 
 {{#if improvements}}
-	<div class="bsh-story-entry-improvements">
-	{{#if improvements.level}}
-		<div class="bsh-field">
-			<label class="bsh-label">{{localize "bsh.fields.labels.level"}}</label>
-			<div>
-				{{localize improvements.level}}
-			</div>
-		</div>
-	{{/if}}
+            <div class="bsh-story-entry-improvements">
+            {{#if improvements.level}}
+                <div class="bsh-field">
+                    <label class="bsh-label">Next {{localize "bsh.fields.labels.level"}}</label>
+                    <div>
+                        {{localize improvements.level}}
+                    </div>
+                </div>
+            {{/if}}
 
-	{{#if improvements.hitPoints}}
-		<div class="bsh-field">
-			<label class="bsh-label">{{localize "bsh.fields.labels.hitPoints"}}</label>
-			<div>
-				+{{improvements.hitPoints}}
-			</div>
-		</div>
-	{{/if}}
+            {{#if improvements.hitPoints}}
+                <div class="bsh-field">
+                    <label class="bsh-label">{{localize "bsh.fields.labels.hitPoints"}}</label>
+                    <div>
+                        +{{improvements.hitPoints}}
+                    </div>
+                </div>
+            {{/if}}
 
-	{{#if improvements.gift.granted}}
-	    <div class="bsh-field">
-	    	<label class="bsh-label">{{localize "bsh.fields.labels.gift"}}</label>
-	    	<select name="system.stories.{{@key}}.improvements.gift.choice">
-    	{{#each configuration.giftList}}
-            {{{selectGiftOption ../improvements.gift.choice}}}
-    	{{/each}}
-	    	</select>
-	    </div>
-	{{/if}}
+            {{#if improvements.gift.granted}}
+                <div class="bsh-field">
+                    <label class="bsh-label">{{localize "bsh.fields.labels.gift"}}</label>
+                    <select name="system.stories.{{@key}}.improvements.gift.choice">
+                {{#each configuration.giftList}}
+                    {{{selectGiftOption ../improvements.gift.choice}}}
+                {{/each}}
+                    </select>
+                </div>
+            {{/if}}
 
-	{{#if improvements.attributes.granted}}
-	    {{#if improvements.attributes.first}}
-		    <div class="bsh-field">
-		    	<label class="bsh-label">{{localize "bsh.fields.labels.attributeBonus"}}</label>
-		    	<select name="system.stories.{{@key}}.improvements.attributes.first.choice">
-	    	{{#each configuration.optionalAttributeListLong}}
-                {{{selectAttributeOption ../improvements.attributes.first.choice}}}
-	    	{{/each}}
-		    	</select>
-		    </div>
-	    {{/if}}
+            {{#if improvements.attributes.granted}}
+                {{#if improvements.attributes.first}}
+                    <div class="bsh-field">
+                        <label class="bsh-label">{{localize "bsh.fields.labels.attributeBonus"}}</label>
+                        <select name="system.stories.{{@key}}.improvements.attributes.first.choice">
+                    {{#each configuration.optionalAttributeListLong}}
+                        {{{selectAttributeOption ../improvements.attributes.first.choice}}}
+                    {{/each}}
+                        </select>
+                    </div>
+                {{/if}}
 
-	    {{#if improvements.attributes.second}}
-		    <div class="bsh-field">
-		    	<label class="bsh-label">{{localize "bsh.fields.labels.attributeBonus"}}</label>
-		    	<select name="system.stories.{{@key}}.improvements.attributes.second.choice">
-	    	{{#each configuration.optionalAttributeListLong}}
-                {{{selectAttributeOption ../improvements.attributes.second.choice}}}
-	    	{{/each}}
-		    	</select>
-		    </div>
-	    {{/if}}
-	{{/if}}
+                {{#if improvements.attributes.second}}
+                    <div class="bsh-field">
+                        <label class="bsh-label">{{localize "bsh.fields.labels.attributeBonus"}}</label>
+                        <select name="system.stories.{{@key}}.improvements.attributes.second.choice">
+                    {{#each configuration.optionalAttributeListLong}}
+                        {{{selectAttributeOption ../improvements.attributes.second.choice}}}
+                    {{/each}}
+                        </select>
+                    </div>
+                {{/if}}
+            {{/if}}
 
-	{{#if improvements.doomDie}}
-	    <div>
-	    	<label class="bsh-label">{{localize "bsh.fields.labels.doomDieUpgrade"}}</label>
-	    	<div>1{{improvements.doomDie}}</div>
-	    </div>
-	{{/if}}
-	</div>
+            {{#if improvements.doomDie}}
+                <div>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.doomDieUpgrade"}}</label>
+                    <div>1{{improvements.doomDie}}</div>
+                </div>
+            {{/if}}
+            </div>
 {{/if}}
+
+        </div>
+    </div>
+
 </div>
 <hr>
