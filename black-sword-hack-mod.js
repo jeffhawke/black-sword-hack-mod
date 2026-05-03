@@ -20,39 +20,39 @@ import {getBackgrounds, getOrigins, isCustomOriginsActive} from './modules/origi
 import {capitalize, stringToKey} from './modules/shared.js';
 
 async function preloadHandlebarsTemplates() {
-    const paths = ["systems/black-sword-hack/templates/messages/attack-roll.hbs",
-                   "systems/black-sword-hack/templates/messages/damage.hbs",
-                   "systems/black-sword-hack/templates/messages/damage-roll.hbs",
-                   "systems/black-sword-hack/templates/messages/demon-failure.hbs",
-                   "systems/black-sword-hack/templates/messages/demon-success.hbs",
-                   "systems/black-sword-hack/templates/messages/die-roll.hbs",
-                   "systems/black-sword-hack/templates/messages/doomed.hbs",
-                   "systems/black-sword-hack/templates/messages/doom-roll.hbs",
-                   "systems/black-sword-hack/templates/messages/roll.hbs",
-                   "systems/black-sword-hack/templates/messages/spirit-failure.hbs",
-                   "systems/black-sword-hack/templates/messages/spirit-success.hbs",
-                   "systems/black-sword-hack/templates/messages/usage-die-roll.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-attribute-list.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-background-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-background-tab-body.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-backgrounds-classic.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-base-attributes-list.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-consumable-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-demon-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-equipment-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-equipment-tab-body.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-fp-background-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-front-page-tab-body.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-gift-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-magic-tab-body.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-saga-tab-body.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-spell-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-spirit-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-story-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-tab-bodies.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-tab-labels.hbs",
-                   "systems/black-sword-hack/templates/partials/cs-weapon-entry.hbs",
-                   "systems/black-sword-hack/templates/partials/cr-action-entry.hbs"];
+    const paths = ["systems/black-sword-hack-mod/templates/messages/attack-roll.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/damage.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/damage-roll.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/demon-failure.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/demon-success.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/die-roll.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/doomed.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/doom-roll.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/roll.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/spirit-failure.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/spirit-success.hbs",
+                   "systems/black-sword-hack-mod/templates/messages/usage-die-roll.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-attribute-list.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-background-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-background-tab-body.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-backgrounds-classic.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-base-attributes-list.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-consumable-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-demon-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-equipment-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-equipment-tab-body.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-fp-background-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-front-page-tab-body.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-gift-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-magic-tab-body.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-saga-tab-body.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-spell-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-spirit-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-story-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-tab-bodies.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-tab-labels.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-weapon-entry.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cr-action-entry.hbs"];
     return(loadTemplates(paths))
 }
 
@@ -64,7 +64,7 @@ Hooks.once("init", function() {
     CONFIG.configuration        = BSHConfiguration;
     CONFIG.Item.documentClass   = BSHItem;
 
-    game.settings.register("black-sword-hack", "customOrigins", {config:  true,
+    game.settings.register("black-sword-hack-mod", "customOrigins", {config:  true,
                                                                  default: false,
                                                                  hint:    game.i18n.localize("bsh.settings.options.customOrigins.blurb"),
                                                                  name:    game.i18n.localize("bsh.settings.options.customOrigins.title"),
@@ -72,19 +72,19 @@ Hooks.once("init", function() {
                                                                  type:    Boolean});
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("black-sword-hack", ConsumableSheet, {types: ["consumable"]});
-    Items.registerSheet("black-sword-hack", CreatureActionSheet, {types: ["creature_action"]});
-    Items.registerSheet("black-sword-hack", DemonSheet, {types: ["demon"]});
-    Items.registerSheet("black-sword-hack", EquipmentSheet, {types: ["equipment"]});
-    Items.registerSheet("black-sword-hack", GiftSheet, {types: ["gift"]});
-    Items.registerSheet("black-sword-hack", OriginSheet, {types: ["origin"]});
-    Items.registerSheet("black-sword-hack", SpellSheet, {types: ["spell"]});
-    Items.registerSheet("black-sword-hack", SpiritSheet, {types: ["spirit"]});
-    Items.registerSheet("black-sword-hack", WeaponSheet, {types: ["weapon"]});
+    Items.registerSheet("black-sword-hack-mod", ConsumableSheet, {types: ["consumable"]});
+    Items.registerSheet("black-sword-hack-mod", CreatureActionSheet, {types: ["creature_action"]});
+    Items.registerSheet("black-sword-hack-mod", DemonSheet, {types: ["demon"]});
+    Items.registerSheet("black-sword-hack-mod", EquipmentSheet, {types: ["equipment"]});
+    Items.registerSheet("black-sword-hack-mod", GiftSheet, {types: ["gift"]});
+    Items.registerSheet("black-sword-hack-mod", OriginSheet, {types: ["origin"]});
+    Items.registerSheet("black-sword-hack-mod", SpellSheet, {types: ["spell"]});
+    Items.registerSheet("black-sword-hack-mod", SpiritSheet, {types: ["spirit"]});
+    Items.registerSheet("black-sword-hack-mod", WeaponSheet, {types: ["weapon"]});
 
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("black-sword-hack", CharacterSheet, {makeDefault: true, types: ["character"]});
-    Actors.registerSheet("black-sword-hack", CreatureSheet, {makeDefault: true, types: ["creature"]});
+    Actors.registerSheet("black-sword-hack-mod", CharacterSheet, {makeDefault: true, types: ["character"]});
+    Actors.registerSheet("black-sword-hack-mod", CreatureSheet, {makeDefault: true, types: ["creature"]});
     // Actors.registerSheet("bh2e", BH2eCreatureSheet, {makeDefault: true, types: ["creature"]});
 
     // Load templates.
