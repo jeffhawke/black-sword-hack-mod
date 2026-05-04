@@ -1,4 +1,4 @@
-export default class SpiritSheet  extends ItemSheet {
+export default class SpiritSheet  extends foundry.appv1.sheets.ItemSheet {
 	get template() {
 		return("systems/black-sword-hack-mod/templates/sheets/spirit-sheet.html");
 	}

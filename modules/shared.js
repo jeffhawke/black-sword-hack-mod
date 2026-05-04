@@ -314,7 +314,7 @@ export async function handleRollAttributeDieEvent(event) {
  * This function provides functionality for rolling a single die including
  * with advantage/disadvantage (via the use of the shift or ctrl keys). This
  * function is expecting to be attached to a die icon that has attributes
- * that allow it to do it's work.
+ * that allow it to do its work.
  */
 export async function handleRollDieEvent(event) {
     let element = event.currentTarget;

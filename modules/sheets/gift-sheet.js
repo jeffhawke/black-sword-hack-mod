@@ -1,4 +1,4 @@
-export default class GiftSheet  extends ItemSheet {
+export default class GiftSheet  extends foundry.appv1.sheets.ItemSheet {
     static get defaultOptions() {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes:  ["bsh", "bsh-sheet", "bsh-gift-sheet", "sheet"],
