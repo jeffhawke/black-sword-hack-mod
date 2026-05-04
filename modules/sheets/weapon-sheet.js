@@ -1,4 +1,4 @@
-export default class WeaponSheet  extends ItemSheet {
+export default class WeaponSheet  extends foundry.appv1.sheets.ItemSheet {
 	get template() {
 		return("systems/black-sword-hack-mod/templates/sheets/weapon-sheet.html");
 	}

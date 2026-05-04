@@ -1,6 +1,6 @@
 import {onInfoIconClicked} from "../shared.js";
 
-export default class CreatureSheet extends ActorSheet {
+export default class CreatureSheet extends foundry.appv1.sheets.ActorSheet {
     static get defaultOptions() {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes: ["bsh", "bsh-sheet", "bsh-character"],

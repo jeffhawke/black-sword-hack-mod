@@ -53,7 +53,7 @@ async function preloadHandlebarsTemplates() {
                    "systems/black-sword-hack-mod/templates/partials/cs-tab-labels.hbs",
                    "systems/black-sword-hack-mod/templates/partials/cs-weapon-entry.hbs",
                    "systems/black-sword-hack-mod/templates/partials/cr-action-entry.hbs"];
-    return(loadTemplates(paths))
+    return(foundry.applications.handlebars.loadTemplates(paths))
 }
 
 Hooks.once("init", function() {
@@ -71,21 +71,25 @@ Hooks.once("init", function() {
                                                                  scope:   "world",
                                                                  type:    Boolean});
 
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("black-sword-hack-mod", ConsumableSheet, {types: ["consumable"]});
-    Items.registerSheet("black-sword-hack-mod", CreatureActionSheet, {types: ["creature_action"]});
-    Items.registerSheet("black-sword-hack-mod", DemonSheet, {types: ["demon"]});
-    Items.registerSheet("black-sword-hack-mod", EquipmentSheet, {types: ["equipment"]});
-    Items.registerSheet("black-sword-hack-mod", GiftSheet, {types: ["gift"]});
-    Items.registerSheet("black-sword-hack-mod", OriginSheet, {types: ["origin"]});
-    Items.registerSheet("black-sword-hack-mod", SpellSheet, {types: ["spell"]});
-    Items.registerSheet("black-sword-hack-mod", SpiritSheet, {types: ["spirit"]});
-    Items.registerSheet("black-sword-hack-mod", WeaponSheet, {types: ["weapon"]});
+	//foundry.documents.collections.Items
+	//foundry.appv1.sheets.ItemSheet
+    foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", ConsumableSheet, {types: ["consumable"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", CreatureActionSheet, {types: ["creature_action"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", DemonSheet, {types: ["demon"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", EquipmentSheet, {types: ["equipment"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", GiftSheet, {types: ["gift"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", OriginSheet, {types: ["origin"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", SpellSheet, {types: ["spell"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", SpiritSheet, {types: ["spirit"]});
+    foundry.documents.collections.Items.registerSheet("black-sword-hack-mod", WeaponSheet, {types: ["weapon"]});
 
-    Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("black-sword-hack-mod", CharacterSheet, {makeDefault: true, types: ["character"]});
-    Actors.registerSheet("black-sword-hack-mod", CreatureSheet, {makeDefault: true, types: ["creature"]});
-    // Actors.registerSheet("bh2e", BH2eCreatureSheet, {makeDefault: true, types: ["creature"]});
+	//foundry.documents.collections.Actors
+	//foundry.appv1.sheets.ActorSheet
+    foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+    foundry.documents.collections.Actors.registerSheet("black-sword-hack-mod", CharacterSheet, {makeDefault: true, types: ["character"]});
+    foundry.documents.collections.Actors.registerSheet("black-sword-hack-mod", CreatureSheet, {makeDefault: true, types: ["creature"]});
+    // foundry.documents.collections.Actors.registerSheet("bh2e", BH2eCreatureSheet, {makeDefault: true, types: ["creature"]});
 
     // Load templates.
     preloadHandlebarsTemplates();

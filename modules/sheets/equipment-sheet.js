@@ -1,4 +1,4 @@
-export default class EquipmentSheet  extends ItemSheet {
+export default class EquipmentSheet  extends foundry.appv1.sheets.ItemSheet {
     static get defaultOptions() {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes:  ["bsh", "bsh-sheet", "bsh-equipment-sheet", "sheet"],
