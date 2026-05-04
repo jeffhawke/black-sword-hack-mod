@@ -21,11 +21,7 @@
         <div class="bsh-field">
             <label class="bsh-label">{{localize "bsh.fields.labels.rollType"}}</label>
             <select name="type" class="bsh-input bsh-select">
-            {{#select type}}
-            {{#each configuration.rollTypes as |label value|}}
-                <option value="{{value}}">{{localize label}}</option>
-            {{/each}}
-            {{/select}}
+			{{selectOptions configuration.rollTypes selected=value localize=true}}
             </select>
         </div>
         <br>
