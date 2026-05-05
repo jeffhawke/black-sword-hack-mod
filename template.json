@@ -83,7 +83,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 3
+          "requiredForNextLevel": 2
         },
         "02": {
           "improvements": {
@@ -106,7 +106,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 6
+          "requiredForNextLevel": 3
         },
         "03": {
           "improvements": {
@@ -124,7 +124,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 10
+          "requiredForNextLevel": 4
         },
         "04": {
           "improvements": {
@@ -144,7 +144,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 15
+          "requiredForNextLevel": 5
         },
         "05": {
           "improvements": {
@@ -162,7 +162,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 21
+          "requiredForNextLevel": 6
         },
         "06": {
           "improvements": {
@@ -185,7 +185,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 28
+          "requiredForNextLevel": 7
         },
         "07": {
           "improvements": {
@@ -203,7 +203,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 36
+          "requiredForNextLevel": 8
         },
         "08": {
           "improvements": {
@@ -221,7 +221,7 @@
           "title": "",
           "trueTitle": "",
           "sessions": 0,
-          "requiredForNextLevel": 45
+          "requiredForNextLevel": 9
         }
       },
       "summoning": {

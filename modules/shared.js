@@ -149,6 +149,10 @@ export function calculateLevel(data, configuration) {
     let stories      = data.stories;
 
     Object.keys(stories).sort().forEach((index) => {
+		//safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
+		if(stories[index].requiredForNextLevel != stories[index].level) {
+			stories[index].requiredForNextLevel = stories[index].level;
+		}
         if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
             stories[index].title = "level achieved";
             totalStories++;
