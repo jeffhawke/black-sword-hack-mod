@@ -264,6 +264,12 @@
 	grid-template-columns: 100px auto;
 }
 
+.bsh-cs-decorated-container {
+	display: grid;
+	gap: 0 5px;
+	grid-template-columns: 200px auto;
+}
+
 .bsh-damage-button-container {
 	margin-top: 5px;
 }

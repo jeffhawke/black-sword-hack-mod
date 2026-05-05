@@ -32,7 +32,7 @@ async function preloadHandlebarsTemplates() {
                    "systems/black-sword-hack-mod/templates/messages/spirit-failure.hbs",
                    "systems/black-sword-hack-mod/templates/messages/spirit-success.hbs",
                    "systems/black-sword-hack-mod/templates/messages/usage-die-roll.hbs",
-                   "systems/black-sword-hack-mod/templates/partials/cs-attribute-list.hbs",
+                   "systems/black-sword-hack-mod/templates/partials/cs-attribute-list-decorated.hbs",
                    "systems/black-sword-hack-mod/templates/partials/cs-background-entry.hbs",
                    "systems/black-sword-hack-mod/templates/partials/cs-background-tab-body.hbs",
                    "systems/black-sword-hack-mod/templates/partials/cs-backgrounds-classic.hbs",

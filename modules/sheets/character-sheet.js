@@ -36,7 +36,7 @@ export default class CharacterSheet extends ActorSheet {
 	    return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes: ["bsh", "bsh-sheet", "bsh-character"],
                 			    	      height: 920,
-                			    	      template: "systems/black-sword-hack-mod/templates/sheets/character-sheet.html"}));
+                			    	      template: "systems/black-sword-hack-mod/templates/sheets/character-sheet-decorated.html"}));
 	}
 
     /** @override */
@@ -61,7 +61,7 @@ export default class CharacterSheet extends ActorSheet {
 
     /** @override */
     get template() {
-        return(`systems/black-sword-hack-mod/templates/sheets/character-sheet.html`);
+        return(`systems/black-sword-hack-mod/templates/sheets/character-sheet-decorated.html`);
     }
 
 	activateListeners(html) {
