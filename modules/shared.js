@@ -1,6 +1,7 @@
 import {BSHConfiguration} from './configuration.js';
 import AttributeTestDialog from './attribute_test_dialog.js';
 import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll} from './chat_messages.js';
+import {getTriswitchState, setTriswitchState, TSCENTER, TSLEFT, TSRIGHT} from './triswitch.js';
 
 /**
  * Retrieves an actor from the game list of actors based on it's unique
@@ -282,22 +283,33 @@ export async function handleRollAttributeDieEvent(event) {
     event.preventDefault();
     if(element.dataset.actor) {
         let actor = getActorById(element.dataset.actor);
-
+		
+		let triswitchState = getTriswitchState();
+		let isWithDisadvantage = triswitchState == TSLEFT;
+		let isWithAdvantage = triswitchState == TSRIGHT;
+		if(event.shiftKey) {
+			isWithAdvantage = true;
+			isWithDisadvantage = false;
+		} else if(event.ctrlKey) {
+			isWithAdvantage = false;
+			isWithDisadvantage = true;
+		} 
+				
         if(actor) {
             if(event.altKey) {
                 let attribute = element.dataset.attribute;
                 let rollType = "standard";
                 let title     = game.i18n.localize(`bsh.rolls.tests.${attribute}.title`);
 
-                if(event.shiftKey) {
+                if(isWithAdvantage) {
                     rollType = "advantage";
-                } else if(event.ctrlKey) {
+                } else if(isWithDisadvantage) {
                     rollType = "disadvantage";
                 }
 
                 showAttributeRollModal(actor, attribute, title, {rollType: rollType});
             } else {
-                logAttributeTest(actor, element.dataset.attribute, event.shiftKey, event.ctrlKey);
+                logAttributeTest(actor, element.dataset.attribute, isWithAdvantage, isWithDisadvantage);
             }
         } else {
             console.error(`Unable to locate an actor with the id ${element.dataset.actor} for attribute die roll.`);

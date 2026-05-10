@@ -9,6 +9,8 @@ import {calculateAttributeValues,
         interpolate,
         rollEm,
         setObjectField} from './shared.js';
+import {getTriswitchState, setTriswitchState, TSCENTER, TSLEFT, TSRIGHT} from './triswitch.js';
+
 
 export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false, expanded=false) {
     let actor  = game.actors.find((a) => a.id === actorId);
@@ -86,7 +88,7 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false, 
     }
 }
 
-export function logAttributeTest(actor, attribute, shiftKey=false, ctrlKey=false, expanded=false, adjustment=0) {
+export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWithDisadvantage=false, expanded=false, adjustment=0) {
     let attributes = calculateAttributeValues(actor.system, BSHConfiguration);
     let critical   = {failure: false, success: true};
     let doomed     = (actor.system.doom === "exhausted");
@@ -103,9 +105,9 @@ export function logAttributeTest(actor, attribute, shiftKey=false, ctrlKey=false
 
     message.roll.labels.title = game.i18n.localize(`bsh.fields.titles.dieRolls.attributes.${attribute}`);
 
-    if(shiftKey) {
+    if(isWithAdvantage) {
         message.roll.formula = (doomed ? `1d20` : `2d20kl`);
-    } else if(ctrlKey) {
+    } else if(isWithDisadvantage) {
         if(!doomed) {
             message.roll.formula = "2d20kh";
         }
@@ -138,6 +140,7 @@ export function logAttributeTest(actor, attribute, shiftKey=false, ctrlKey=false
                 message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
             }
         }
+		setTriswitchState(TSCENTER);
         showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }

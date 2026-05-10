@@ -71,6 +71,12 @@ Hooks.once("init", function() {
                                                                  scope:   "world",
                                                                  type:    Boolean});
 
+	game.keybindings.register("black-sword-hack-mod", "bsh-roll-modifier", { 
+		name: "BSH Roll Modifier for advantage and disadvantage rolls",
+		
+		onDown: () => {console.log("ciao");}
+	}); 
+
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("black-sword-hack-mod", ConsumableSheet, {types: ["consumable"]});
     Items.registerSheet("black-sword-hack-mod", CreatureActionSheet, {types: ["creature_action"]});

@@ -27,6 +27,7 @@ import {calculateCharacterData,
 	    resetItemUsageDie,
 	    showAttributeRollModal,
 	    stringToKey} from '../shared.js';
+import { setTriswitchState } from '../triswitch.js';
 import {castSpell,
         resetSpellState,
         resetSpellStatesForActor} from '../spells.js';
@@ -86,6 +87,10 @@ export default class CharacterSheet extends ActorSheet {
 		html.find(".bsh-summon-spirit-icon").click(this._onSummonSpiritClicked.bind(this));
 		html.find(".bsh-random-character-generator-button").click(this._onRandomizeMyCharacterClicked.bind(this));
 		html.find(".bsh-rest-icon").click(this._onTakeRestClicked.bind(this));
+		html.find(".bsh-triswitch-segment").click(this._onChangeTriswitchState.bind(this));
+		
+		game.keybindings.set("black-sword-hack-mod", "bsh-roll-modifier", [{key: "ShiftLeft"}]);
+		
 		initializeCollapsibles();
 		super.activateListeners(html);
 	}
@@ -348,6 +353,25 @@ export default class CharacterSheet extends ActorSheet {
         } else {
         	console.error("Rest requested but requesting element has no actor data attribute.");
         }
+	}
+
+	_onChangeTriswitchState(event) {
+		let element = event.currentTarget;
+		console.log("[_onChangeTriswitchState]");
+		let newState = "";
+		if (element.classList.contains("bsh-triswitch-left-segment")) {
+			newState = "left";
+		} 
+		if (element.classList.contains("bsh-triswitch-right-segment")) {
+			newState = "right";
+		} 
+		if (element.classList.contains("bsh-triswitch-center-segment")) {
+			newState = "center";
+		} 
+		//element.classList.forEach((c) => { if (c.length > 21) {newState = c.substring(14, (c.length - 8))}  });
+		if (newState != "") {
+			setTriswitchState(newState);
+		}
 	}
 
 	_onUsageDieRollClicked(event) {

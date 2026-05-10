@@ -1,3 +1,85 @@
+/* triswitch on character sheet */
+.bsh-triswitch-main {
+	position: relative;
+	width: 200px;
+	height: 105px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	border-radius: 999px;
+	overflow: hidden;
+	user-select: none;
+	cursor: pointer;
+	/*background: #404040;*/
+	/*background-image: url("Stelline_Low_transparent_white_center.png");*/
+	background-image: url("/systems/black-sword-hack-mod/templates/images/Stelline_Low_transparent_white_center_FlippedOK.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/* triswitch segments */
+.bsh-triswitch-segment {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.4rem;
+	font-weight: bold;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.bsh-triswitch-left-segment {
+   /* background: #703030;*/
+}
+
+.bsh-triswitch-center-segment {
+	/*background: #505050;*/
+}
+
+.bsh-triswitch-right-segment {
+  /*  background: #307030;*/
+}
+
+.bsh-triswitch-segment-img {
+  height: 100%;
+  width: auto;
+}
+
+/* triswitch knob */
+.bsh-triswitch-knob {
+	position: absolute;
+	border-radius: 999px;
+	background-color: rgb(204,17,0, 0.5);
+	transition: grid-column 0.15s ease;
+	z-index: 10;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+
+/* triswitch states */
+.bsh-triswitch-main.left .bsh-triswitch-knob {
+	grid-column: 1;
+	width: 18%;
+	height: 32%;
+	left: 26px;
+	top: 36px;
+}
+
+.bsh-triswitch-main.center .bsh-triswitch-knob {
+	grid-column: 2;
+	width: 17%;
+	left: 21px;
+	height: 21%;
+	top: 42px;
+}
+
+.bsh-triswitch-main.right .bsh-triswitch-knob {
+	grid-column: 3;
+	width: 52%;
+	left: 6px;
+	height: 33%;
+	top: 35px;
+}
+
 .bsh-action-description {
 	border: groove 3px;
 	font-size: 1.1em;
@@ -78,9 +160,9 @@
 	display: grid;
 	font-size: 1.2em;
 	gap: 0 3px;
-    grid-template-columns: 30px auto;
-    margin: 2px 0;
-    padding: 5px 3px;
+	grid-template-columns: 30px auto;
+	margin: 2px 0;
+	padding: 5px 3px;
 }
 
 .bsh-backgrounds-container-row {
@@ -108,8 +190,8 @@
 	align-items: center;
 	display: grid;
 	gap: 0 3px;
-    grid-auto-flow: column;
-    justify-items: center;
+	grid-auto-flow: column;
+	justify-items: center;
 	margin-bottom: 10px;
 }
 
@@ -144,8 +226,8 @@
 	align-items: center;
 	display: grid;
 	gap: 0 5px;
-    grid-auto-flow: column;
-    justify-items: center;
+	grid-auto-flow: column;
+	justify-items: center;
 	margin: 5px 0;
 }
 
@@ -161,8 +243,8 @@
 	align-items: left;
 	display: grid;
 	gap: 0 3px;
-    grid-template-columns: 30px 100px;
-    justify-items: left;
+	grid-template-columns: 30px 100px;
+	justify-items: left;
 	margin: 10px 5px;
 }
 
@@ -478,7 +560,7 @@
 .bsh-origin-container {
 	display: grid;
 	gap: 0 10px;
-    grid-template-columns: 128px auto;
+	grid-template-columns: 128px auto;
 	margin-bottom: 10px;
 }
 
