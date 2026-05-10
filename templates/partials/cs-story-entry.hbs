@@ -1,13 +1,13 @@
 <div class="bsh-story-entry-container">
 
-    <div class="collapsible-widget" data-expanded="true">
+    <div class="collapsible-widget" data-expanded="{{isEquals level prefix.actor.system.level}}">
         <h2>
             <div class="bsh-float-left collapsible-widget-toggle">
                 <span class="collapsible-widget-icon"><i class="fas fa-plus"></i></span>
                 <span class="collapsible-widget-icon"><i class="fas fa-minus"></i></span>
             </div>
             &nbsp;
-            {{localize "bsh.fields.labels.storyForLevel"}} {{level}}
+            {{localize "bsh.fields.labels.level"}} {{level}}
         </h2>
 
         <div class="collapsible-widget-target">

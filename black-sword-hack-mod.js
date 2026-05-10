@@ -261,6 +261,16 @@ Hooks.once("init", function() {
             return(game.i18n.localize("bsh.weapons.types.melee"));
         };
     });
+	
+	Handlebars.registerHelper("isEquals", function(value1, value2) {
+		// console.log(value1);
+		// console.log(value2);
+		// console.log(this.prefix.actor.system.level);
+		if ((value1 !== null) && (value2 !== null)) {
+			return value1 == value2;
+		}
+		return false;
+	});
 
     // Add hook functions.
     Hooks.on("renderChatMessage", (message, speaker) => {
