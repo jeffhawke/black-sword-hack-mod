@@ -9,13 +9,21 @@
 	overflow: hidden;
 	user-select: none;
 	cursor: pointer;
-	/*background: #404040;*/
-	/*background-image: url("Stelline_Low_transparent_white_center.png");*/
-	background-image: url("/systems/black-sword-hack-mod/templates/images/Stelline_Low_transparent_white_center_FlippedOK.png");
+}
+
+.bsh-triswitch-image {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	
+	/*background-image: url("/systems/black-sword-hack-mod/templates/images/Stelline_Low_transparent_white_center_FlippedOK.png");*/
+	background-image: url("/systems/black-sword-hack-mod/templates/images/Stelline_Low_transparent_FlippedOK.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
+	z-index: 1;
 }
+
 
 /* triswitch segments */
 .bsh-triswitch-segment {
@@ -24,7 +32,7 @@
 	justify-content: center;
 	font-size: 1.4rem;
 	font-weight: bold;
-	z-index: 1;
+	z-index: 10;
 	overflow: hidden;
 }
 
@@ -49,9 +57,9 @@
 .bsh-triswitch-knob {
 	position: absolute;
 	border-radius: 999px;
-	background-color: rgb(204,17,0, 0.5);
+	background-color: rgb(204,17,0);
 	transition: grid-column 0.15s ease;
-	z-index: 10;
+	z-index: 0;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
