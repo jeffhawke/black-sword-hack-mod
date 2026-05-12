@@ -18,6 +18,7 @@ import WeaponSheet from './modules/sheets/weapon-sheet.js';
 import {logDamageRoll, toggleAttributeTestDisplay} from './modules/chat_messages.js';
 import {getBackgrounds, getOrigins, isCustomOriginsActive} from './modules/origins.js';
 import {capitalize, stringToKey} from './modules/shared.js';
+import {handleKeyDownEvent} from './modules/triswitch.js';
 
 async function preloadHandlebarsTemplates() {
     const paths = ["systems/black-sword-hack-mod/templates/messages/attack-roll.hbs",
@@ -73,8 +74,15 @@ Hooks.once("init", function() {
 
 	game.keybindings.register("black-sword-hack-mod", "bsh-roll-modifier", { 
 		name: "BSH Roll Modifier for advantage and disadvantage rolls",
-		
-		onDown: () => {console.log("ciao");}
+		onDown: (cntx) => {
+			console.log("ciao: " + cntx.key);
+			let csheets = document.getElementsByClassName("bsh-character-sheet");
+			for (let i=0; i<csheets.length; i++) { console.log(csheets[i].dataset.id); }
+		},
+		editable: [
+			{ key: "ShiftLeft"},
+			{ key: "ControlLeft"}
+		]
 	}); 
 
     Items.unregisterSheet("core", ItemSheet);

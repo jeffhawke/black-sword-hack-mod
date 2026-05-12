@@ -19,6 +19,28 @@ export function getItemById(itemId) {
     return(game.items.find((a) => a.id === itemId));
 }
 
+
+export function getMyActors() {
+	
+	return( game.actors.filter( (a) => a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER ) );
+	
+	
+	// let myActors = {};
+	// game.actors.forEach( (v) => {
+		// let isSheetOpen = v.sheet.rendered;
+		// let iAmOwner = v.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+		// if (iAmOwner) {
+			// myActors[v.id] = {
+				// 'id': v.id, 
+				// 'actor': v,
+				// 'isSheetOpen': isSheetOpen
+			// }
+		// }
+	// }
+	// return myActors;
+}
+
+
 /**
  * Fetches the owned item by it's identifier. Returns undefined if the item
  * cannot be found.

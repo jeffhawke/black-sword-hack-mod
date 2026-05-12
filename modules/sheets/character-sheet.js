@@ -89,13 +89,13 @@ export default class CharacterSheet extends ActorSheet {
 		html.find(".bsh-rest-icon").click(this._onTakeRestClicked.bind(this));
 		html.find(".bsh-triswitch-segment").click(this._onChangeTriswitchState.bind(this));
 		
-		game.keybindings.set("black-sword-hack-mod", "bsh-roll-modifier", [{key: "ShiftLeft"}]);
+		//game.keybindings.get("black-sword-hack-mod", "bsh-roll-modifier");
+		//game.keybindings.set("black-sword-hack-mod", "bsh-roll-modifier", [{key: "ShiftLeft"}, {key: "ControlLeft"}]);
 		
 		initializeCollapsibles();
 		super.activateListeners(html);
 	}
-
-
+	
     _onBackgroundSelected(event) {
         if(event.currentTarget.value !== "") {
             let actor = game.actors.get(this.object.id);
