@@ -5,11 +5,8 @@ const TSLEFT = "left";
 const TSRIGHT = "right";
 
 
-export function setTriswitchState(newState) {
-	let myactors = getMyActors();
-	
-	//NOT WORKING, need actorId not userId
-	let sw = document.getElementById("bsh-triswitch-" + game.userId);
+export function setTriswitchState(actorId, newState) {
+	let sw = document.getElementById("bsh-triswitch-" + actorId);
 	let state = TSCENTER;
 	if(sw) {
 		// clicking/pressing same side resets to center
@@ -27,11 +24,8 @@ export function setTriswitchState(newState) {
 }
 
 
-export function getTriswitchState() {
-	let myactors = getMyActors();
-	
-	//NOT WORKING, need actorId not userId
-	let sw = document.getElementById("bsh-triswitch-" + game.userId);
+export function getTriswitchState(actorId) {
+	let sw = document.getElementById("bsh-triswitch-" + actorId);
 	if(sw) {
 		if (sw.classList.contains(TSCENTER)) {
 			return TSCENTER;

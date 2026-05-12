@@ -140,7 +140,7 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
                 message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
             }
         }
-		setTriswitchState(TSCENTER);
+		setTriswitchState(actor.id, TSCENTER);
         showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }

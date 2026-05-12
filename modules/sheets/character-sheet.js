@@ -357,20 +357,25 @@ export default class CharacterSheet extends ActorSheet {
 
 	_onChangeTriswitchState(event) {
 		let element = event.currentTarget;
+		let parent = element.parentElement;
 		console.log("[_onChangeTriswitchState]");
-		let newState = "";
-		if (element.classList.contains("bsh-triswitch-left-segment")) {
-			newState = "left";
-		} 
-		if (element.classList.contains("bsh-triswitch-right-segment")) {
-			newState = "right";
-		} 
-		if (element.classList.contains("bsh-triswitch-center-segment")) {
-			newState = "center";
-		} 
-		//element.classList.forEach((c) => { if (c.length > 21) {newState = c.substring(14, (c.length - 8))}  });
-		if (newState != "") {
-			setTriswitchState(newState);
+		if (parent) {
+			let actorId = parent.dataset.actor;
+		
+			let newState = "";
+			if (element.classList.contains("bsh-triswitch-left-segment")) {
+				newState = "left";
+			} 
+			if (element.classList.contains("bsh-triswitch-right-segment")) {
+				newState = "right";
+			} 
+			if (element.classList.contains("bsh-triswitch-center-segment")) {
+				newState = "center";
+			} 
+			//element.classList.forEach((c) => { if (c.length > 21) {newState = c.substring(14, (c.length - 8))}  });
+			if (newState != "") {
+				setTriswitchState(actorId, newState);
+			}
 		}
 	}
 

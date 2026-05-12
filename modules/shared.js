@@ -306,7 +306,7 @@ export async function handleRollAttributeDieEvent(event) {
     if(element.dataset.actor) {
         let actor = getActorById(element.dataset.actor);
 		
-		let triswitchState = getTriswitchState();
+		let triswitchState = getTriswitchState(actor.id);
 		let isWithDisadvantage = triswitchState == TSLEFT;
 		let isWithAdvantage = triswitchState == TSRIGHT;
 		if(event.shiftKey) {
