@@ -4,7 +4,7 @@ import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll} from '
 import {getTriswitchState, setTriswitchState, TSCENTER, TSLEFT, TSRIGHT} from './triswitch.js';
 
 /**
- * Retrieves an actor from the game list of actors based on it's unique
+ * Retrieves an actor from the game list of actors based on its unique
  * identifier.
  */
 export function getActorById(actorId) {
@@ -12,37 +12,33 @@ export function getActorById(actorId) {
 }
 
 /**
- * Fetches an unowned item by it's id. Returns undefined if the item cannot
+ * Fetches an unowned item by its id. Returns undefined if the item cannot
  * not found.
  */
 export function getItemById(itemId) {
     return(game.items.find((a) => a.id === itemId));
 }
 
-
-export function getMyActors() {
-	
-	return( game.actors.filter( (a) => a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER ) );
-	
-	
-	// let myActors = {};
-	// game.actors.forEach( (v) => {
-		// let isSheetOpen = v.sheet.rendered;
-		// let iAmOwner = v.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
-		// if (iAmOwner) {
-			// myActors[v.id] = {
-				// 'id': v.id, 
-				// 'actor': v,
-				// 'isSheetOpen': isSheetOpen
-			// }
-		// }
-	// }
-	// return myActors;
+/**
+ * Check is a particular actor is owned by the user
+ */
+export function isThisActorMine(actorId) {
+	let a = getActorById(actorId);
+	if(a) {
+		return a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+	} 
+	return false;
 }
 
+/**
+ * Retrieve only the actors the user is full owner.
+ */
+export function getMyActors() {
+	return( game.actors.filter( (a) => a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER ) );
+}
 
 /**
- * Fetches the owned item by it's identifier. Returns undefined if the item
+ * Fetches the owned item by its identifier. Returns undefined if the item
  * cannot be found.
  */
 export function getOwnedItemById(itemId) {
@@ -64,7 +60,7 @@ export function deleteOwnedItem(itemId) {
     if(item && item.actor) {
         item.actor.deleteEmbeddedDocuments("Item", [itemId]);
     } else {
-        console.error(`Delete of item id ${itemId} requested but unable to locate the actual item or it's owner.`);
+        console.error(`Delete of item id ${itemId} requested but unable to locate the actual item or its owner.`);
         ui.notifications.error(game.i18n.localize("bsh.errors.items.owned.notFound"));
     }
 }
@@ -297,7 +293,7 @@ export function generateDamageRollFormula(actor, weapon, options={}) {
  * This function provides functionality for rolling attribute tests including
  * with advantage/disadvantage (via the use of the shift or ctrl keys). This
  * function is expecting to be attached to a die icon that has attributes
- * that allow it to do it's work.
+ * that allow it to do its work.
  */
 export async function handleRollAttributeDieEvent(event) {
     let element = event.currentTarget;
@@ -305,6 +301,12 @@ export async function handleRollAttributeDieEvent(event) {
     event.preventDefault();
     if(element.dataset.actor) {
         let actor = getActorById(element.dataset.actor);
+		
+		if(!isThisActorMine(actor.id) and !game.user.isGM) {
+            console.error(`Cannot roll a die for an actor not owned.`);
+            ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
+			return(false);
+		}
 		
 		let triswitchState = getTriswitchState(actor.id);
 		let isWithDisadvantage = triswitchState == TSLEFT;
@@ -348,7 +350,7 @@ export async function handleRollAttributeDieEvent(event) {
  * This function provides functionality for rolling a single die including
  * with advantage/disadvantage (via the use of the shift or ctrl keys). This
  * function is expecting to be attached to a die icon that has attributes
- * that allow it to do it's work.
+ * that allow it to do its work.
  */
 export async function handleRollDieEvent(event) {
     let element = event.currentTarget;
@@ -453,7 +455,26 @@ export async function handleWeaponRollEvent(event) {
 
         if(weapon) {
             if(weapon.actor) {
-                logAttackRoll(weapon.actor.id, weapon.id, event.shiftKey, event.ctrlKey);
+
+				if(!isThisActorMine(weapon.actor.id) and !game.user.isGM) {
+					console.error(`Cannot roll a die for an actor not owned.`);
+					ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
+					return(false);
+				}
+				
+				let triswitchState = getTriswitchState(weapon.actor.id);
+				let isWithDisadvantage = triswitchState == TSLEFT;
+				let isWithAdvantage = triswitchState == TSRIGHT;
+				if(event.shiftKey) {
+					isWithAdvantage = true;
+					isWithDisadvantage = false;
+				} else if(event.ctrlKey) {
+					isWithAdvantage = false;
+					isWithDisadvantage = true;
+				} 
+				
+                // logAttackRoll(weapon.actor.id, weapon.id, event.shiftKey, event.ctrlKey);
+                logAttackRoll(weapon.actor.id, weapon.id, isWithAdvantage, isWithDisadvantage);
             } else {
                 console.error(`Unable to make a weapon attack roll for weapon id '${weapon.id}' as it is not an owned item.`);
                 ui.notifications.error(game.i18n.localize("bsh.errors.weapons.unowned"));
@@ -528,7 +549,7 @@ export async function incrementItemQuantity(itemId) {
 /**
  * A function that combines localization of a message with interpolation of
  * context specific details. The localized string can have place holders within
- * it's content that consist of a name enclosed in a set of '%' characters. The
+ * its content that consist of a name enclosed in a set of '%' characters. The
  * names in the localized string should be all upper case to make them stand out.
  * The function also accepts a context parameter that is expected to be a JS
  * object being used as a hash/dictionary. The values of this object will be
@@ -552,7 +573,7 @@ export function interpolate(key, context={}) {
  * a dot-separated list of field names that must conform to the standard JS
  * attribute naming conventions (e.g. "one.two.three"). The field will be
  * sought starting with the object passed in. If the field specified or any
- * of it's predecessors do not exist this function returns null.
+ * of its predecessors do not exist this function returns null.
  */
 export function getObjectField(path, object) {
     let value = null;

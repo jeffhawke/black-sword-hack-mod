@@ -76,7 +76,7 @@ export async function exhaustDoomDie(actor) {
 }
 
 /**
- * Resets a characters Doom Die to it's normal maximum level.
+ * Resets a characters Doom Die to its normal maximum level.
  */
 export function resetDoomDie(actor) {
     if(typeof actor === "string") {

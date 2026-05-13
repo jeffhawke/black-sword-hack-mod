@@ -315,7 +315,8 @@
     },
     "errors": {
       "actors": {
-        "notFound": "Unable to locate the required actor."
+        "notFound": "Unable to locate the required actor.",
+        "notOwned": "Cannot roll a die for an actor not owned."
       },
       "attributes": {
         "invalid": "Actor attribute setting not found. This is a bug!",
@@ -325,7 +326,7 @@
       "items": {
         "notFound": "Unable to locate the specified item.",
         "owned": {
-          "notFound": "Unable to locate the item and/or it's owner.",
+          "notFound": "Unable to locate the item and/or its owner.",
           "unavailable": "Unable to reset item usage die as the current quantity is zero."
         }
       },

@@ -9,7 +9,7 @@ import {calculateAttributeValues,
         interpolate,
         rollEm,
         setObjectField} from './shared.js';
-import {getTriswitchState, setTriswitchState, TSCENTER, TSLEFT, TSRIGHT} from './triswitch.js';
+import {resetTriswitchState} from './triswitch.js';
 
 
 export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false, expanded=false) {
@@ -77,7 +77,7 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false, 
                                    weapon:   weapon.name,
                                    weaponId: weapon.id};
                 }
-
+				resetTriswitchState(actor.id);
                 showMessage(actor, "systems/black-sword-hack-mod/templates/messages/attack-roll.hbs", data);
             });
         } else {
@@ -140,7 +140,7 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
                 message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
             }
         }
-		setTriswitchState(actor.id, TSCENTER);
+		resetTriswitchState(actor.id);
         showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }

@@ -40,50 +40,17 @@ export function getTriswitchState(actorId) {
 	return "";
 }
 
-export function handleKeyDownEvent(context) {
-	
+export function setTriswitchDisadvantage(actorId) {
+	setTriswitchState(actorId, TSLEFT);
+}
+
+export function setTriswitchAdvantage(actorId) {
+	setTriswitchState(actorId, TSRIGHT);
+}
+
+export function resetTriswitchState(actorId) {
+	setTriswitchState(actorId, TSCENTER);
 }
 
 
 export {TSCENTER, TSLEFT, TSRIGHT};
-
-
-/* keyboard */
-/*
-document.addEventListener("keydown", (e) => {
-
-	if (e.repeat)
-		return;
-
-	if (e.key === "Shift") {
-		setState("right");
-	}
-
-	if (e.key === "Control") {
-		setState("left");
-	}
-
-	if (e.key === "Escape") {
-		setState("center");
-	}
-});
-*/
-
-/* mouse */
-/*
-sw.querySelector(".bsh-triswitch-left-segment")
-	.addEventListener("click", () => {
-		setState("left");
-	});
-
-sw.querySelector(".bsh-triswitch-right-segment")
-	.addEventListener("click", () => {
-		setState("right");
-	});
-
-sw.querySelector(".bsh-triswitch-center-segment")
-	.addEventListener("click", () => {
-		setState("center");
-	});
-
-*/
