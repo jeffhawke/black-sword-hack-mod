@@ -302,7 +302,7 @@ export async function handleRollAttributeDieEvent(event) {
     if(element.dataset.actor) {
         let actor = getActorById(element.dataset.actor);
 		
-		if(!isThisActorMine(actor.id) and !game.user.isGM) {
+		if(!isThisActorMine(actor.id) && !game.user.isGM) {
             console.error(`Cannot roll a die for an actor not owned.`);
             ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
 			return(false);
@@ -456,7 +456,7 @@ export async function handleWeaponRollEvent(event) {
         if(weapon) {
             if(weapon.actor) {
 
-				if(!isThisActorMine(weapon.actor.id) and !game.user.isGM) {
+				if(!isThisActorMine(weapon.actor.id) && !game.user.isGM) {
 					console.error(`Cannot roll a die for an actor not owned.`);
 					ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
 					return(false);
