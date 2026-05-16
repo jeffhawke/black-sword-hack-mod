@@ -120,6 +120,10 @@ Hooks.once("init", function() {
 
     // Load templates.
     preloadHandlebarsTemplates();
+	
+	Handlebars.registerHelper("paddingForSingleDigitAttribute", (value) => {
+		return ((value < 10) ? "padding-left: 7px" : "");
+	});
 
     Handlebars.registerHelper("arrayIndexAdjuster", (index) => {
         return(`${index + 1}`);
