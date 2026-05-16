@@ -99,6 +99,7 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
                                  formula:  (doomed ? "2d20kh" : "1d20"),
                                  labels:   {result: "", title: ""},
                                  result:   0,
+								 rolled: [],
                                  success:  false,
                                  tested:   true}};
     let title      = game.i18n.localize(`bsh.fields.titles.dieRolls.attributes.${attribute}`)
@@ -114,16 +115,19 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
     }
 
     if(adjustment < 0) {
-        message.roll.formula = `${message.roll.formula}${adjustment}`;
+        message.roll.formula = `${message.roll.formula}${adjustment}`; //the minus is already in the value
     } else if(adjustment > 0) {
-        message.roll.formula = `${message.roll.formula}+${adjustment}`;
+        message.roll.formula = `${message.roll.formula}+${adjustment}`; //the plus sign must be added
     }
 
     rollEm(new Roll(message.roll.formula)).then((roll) => {
-        let dieResult = roll.terms[0].results[0].result;
+        let dieResult = roll.total; //roll.terms[0].results[0].result;
             critical.failure = (dieResult === 20);
             critical.success = (dieResult === 1);
-        message.roll.result  = roll.total;
+        
+		roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}))
+		
+		message.roll.result  = roll.total;
         message.roll.success = (critical.success || roll.total < attributes[attribute]);
         if(message.roll.success) {
             if(critical.success) {
