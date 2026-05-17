@@ -41,6 +41,6 @@
     "systems": [],
     "requires": []
   },
-  "manifest": "https://raw.githubusercontent.com/jeffhawke/black-sword-hack-mod/tree/v1.4.0-rc1/system.json",
+  "manifest": "https://raw.githubusercontent.com/jeffhawke/black-sword-hack-mod/refs/tags/v1.4.0-rc1/system.json",
   "download": "https://github.com/jeffhawke/black-sword-hack-mod/archive/refs/tags/v1.4.0-rc1.zip"
 }
