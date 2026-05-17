@@ -52,13 +52,13 @@ export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDi
                 data.roll        = {expanded: expanded,
                                     formula:  roll.formula,
                                     labels:   {title: interpolate("bsh.messages.titles.attackRoll")},
-									rolled: [],
+                                    rolled: [],
                                     result:   roll.total,
                                     tested:   true};
 
                 roll.terms[0].results.forEach(a => data.roll.rolled.push({result: a.result, active: a.active}))
-				
-				data.roll.success = (!critical.failure && attributes[attribute] > data.roll.result);
+                
+                data.roll.success = (!critical.failure && attributes[attribute] > data.roll.result);
 
                 if(!critical.success && !critical.failure) {
                     data.roll.labels.result = interpolate(data.roll.success ? "bsh.messages.labels.hit" : "bsh.messages.labels.miss");
@@ -80,7 +80,7 @@ export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDi
                                    weapon:   weapon.name,
                                    weaponId: weapon.id};
                 }
-				resetTriswitchState(actor.id);
+                resetTriswitchState(actor.id);
                 showMessage(actor, "systems/black-sword-hack-mod/templates/messages/attack-roll.hbs", data);
             });
         } else {
@@ -102,7 +102,7 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
                                  formula:  (doomed ? "2d20kh" : "1d20"),
                                  labels:   {result: "", title: ""},
                                  result:   0,
-								 rolled: [],
+                                 rolled: [],
                                  success:  false,
                                  tested:   true}};
     let title      = game.i18n.localize(`bsh.fields.titles.dieRolls.attributes.${attribute}`)
@@ -128,9 +128,9 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
             critical.failure = (dieResult === 20);
             critical.success = (dieResult === 1);
         
-		roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}))
-		
-		message.roll.result  = roll.total;
+        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}))
+        
+        message.roll.result  = roll.total;
         message.roll.success = (critical.success || roll.total < attributes[attribute]);
         if(message.roll.success) {
             if(critical.success) {
@@ -147,7 +147,7 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
                 message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
             }
         }
-		resetTriswitchState(actor.id);
+        resetTriswitchState(actor.id);
         showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
@@ -163,6 +163,7 @@ export function logCallSpirit(spirit, result) {
                              labels:   {result: game.i18n.localize("bsh.fields.titles.success"),
                                         title: game.i18n.localize("bsh.messages.titles.callSpirit")},
                              result:   result.result,
+                             rolled:   result.rolled.slice(), //shallow copy of array
                              success:  true,
                              tested:   true}};
 
@@ -181,6 +182,7 @@ export function logCallSpiritFailure(spirit, result) {
                              labels:   {result: game.i18n.localize("bsh.fields.titles.failure"),
                                         title: game.i18n.localize("bsh.messages.titles.callSpirit")},
                              result:   result.result,
+                             rolled:   result.rolled.slice(), //shallow copy of array
                              success:  false,
                              tested:   true}};
 
@@ -196,16 +198,16 @@ export function logDamageRoll(event) {
         let data    = {doomed: (rollData.doomed === "true"),
                        roll:   {expanded: true,
                                 labels: {title: interpolate("bsh.messages.titles.damageRoll")},
-								result: 0,
-								rolled: [],
+                                result: 0,
+                                rolled: [],
                                 tested: false}};
         let formula = rollData.formula;
 
         data.roll.formula = formula;
         rollEm(new Roll(formula)).then((roll) => {
             data.roll.result  = roll.total;
-			roll.terms[0].results.forEach(a => data.roll.rolled.push({result: a.result, active: a.active}));
-			resetTriswitchState(actor.id);
+            roll.terms[0].results.forEach(a => data.roll.rolled.push({result: a.result, active: a.active}));
+            resetTriswitchState(actor.id);
             showMessage(actor, "systems/black-sword-hack-mod/templates/messages/damage-roll.hbs", data);
         });
     } else {
@@ -222,17 +224,17 @@ export function logDefendRoll(event) {
         let actor = game.actors.find((a) => a.id === element.dataset.actor);
 
         if(actor) {
-			
-			let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-			let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
-			if(event.shiftKey) {
-				isWithAdvantage = true;
-				isWithDisadvantage = false;
-			} else if(event.ctrlKey) {
-				isWithAdvantage = false;
-				isWithDisadvantage = true;
-			} 			
-			
+            
+            let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+            let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+            if(event.shiftKey) {
+                isWithAdvantage = true;
+                isWithDisadvantage = false;
+            } else if(event.ctrlKey) {
+                isWithAdvantage = false;
+                isWithDisadvantage = true;
+            }             
+            
             if(element.dataset.attribute === "strength") {
                 logParryRoll(actor, isWithAdvantage, isWithDisadvantage);
             } else {
@@ -257,6 +259,7 @@ export function logDemonSummoning(demon, result) {
                              labels:   {result: game.i18n.localize("bsh.fields.titles.success"),
                                         title: game.i18n.localize("bsh.messages.titles.summonDemon")},
                              result:   result.result,
+                             rolled:   result.rolled.slice(), //shallow copy of array
                              success:  true,
                              tested:   true}};
 
@@ -275,6 +278,7 @@ export function logDemonSummoningFailure(demon, result) {
                              labels:   {result: game.i18n.localize("bsh.fields.titles.failure"),
                                         title: game.i18n.localize("bsh.messages.titles.summonDemon")},
                              result:   result.result,
+                             rolled:   result.rolled.slice(), //shallow copy of array
                              success:  false,
                              tested:   true}};
 
@@ -291,7 +295,7 @@ export function logDieRoll(actor, dieType, title, isWithAdvantage=false, isWithD
                               formula:  formula,
                               labels:   {title: title},
                               result:   0,
-							  rolled: [],
+                              rolled: [],
                               tested:   false}};
 
     if(isWithAdvantage) {
@@ -301,11 +305,11 @@ export function logDieRoll(actor, dieType, title, isWithAdvantage=false, isWithD
             formula = `2${dieType}kl`;
         }
     }
-	message.roll.formula = formula;
+    message.roll.formula = formula;
     rollEm(new Roll(formula)).then((roll) => {
         message.roll.result = roll.total;
-		roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
-		resetTriswitchState(actor.id);
+        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+        resetTriswitchState(actor.id);
         showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
@@ -321,7 +325,7 @@ export function logDodgeRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
                       roll:     {expanded: false,
                                  formula:  "",
                                  labels:   {title: title},
-								 rolled:   [],
+                                 rolled:   [],
                                  result:   0,
                                  tested:   true}};
 
@@ -342,7 +346,7 @@ export function logDodgeRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
             critical.success = (dieResult === 1);
         message.roll.result  = roll.total;
         message.roll.success = (critical.success || roll.total < attributes["dexterity"]);
-		roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
 
 
         if(!critical.success && !critical.failure) {
@@ -357,7 +361,7 @@ export function logDodgeRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
             }
         }
 
-		resetTriswitchState(actor.id);
+        resetTriswitchState(actor.id);
         showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
@@ -371,7 +375,7 @@ export function logDoomDieRoll(actor, isWithAdvantage=false, isWithDisadvantage=
                                    labels:   {result: "",
                                               title:  interpolate("bsh.messages.titles.doomRoll")},
                                    result:   0,
-								   rolled:   [],
+                                   rolled:   [],
                                    tested:   true}};
         let rollType = "standard";
         let result   = null;
@@ -384,7 +388,7 @@ export function logDoomDieRoll(actor, isWithAdvantage=false, isWithDisadvantage=
         rollDoom(actor, rollType).then((result) => {
             message.roll.formula = result.formula;
             message.roll.result  = result.result;
-			message.roll.rolled  = result.rolled.slice(); //shallow copy of array
+            message.roll.rolled  = result.rolled.slice(); //shallow copy of array
             message.roll.success = !result.downgraded;
             if(!message.roll.success) {
                 message.roll.labels.result = interpolate("bsh.fields.titles.failure");
@@ -394,7 +398,7 @@ export function logDoomDieRoll(actor, isWithAdvantage=false, isWithDisadvantage=
             }
 
             resetTriswitchState(actor.id);
-			showMessage(actor, "systems/black-sword-hack-mod/templates/messages/doom-roll.hbs", message);
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/doom-roll.hbs", message);
         });
     } else {
         console.error(`Unable to make a doom roll for '${actor.name}' as their doom die is exhausted.`);
@@ -418,21 +422,21 @@ export function logInitiativeRoll(event) {
                                      formula:  "",
                                      labels:   {title: title},
                                      result:   0,
-									 rolled:   [],
+                                     rolled:   [],
                                      tested:   true}};
 
         
-		let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-		let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
-		if(event.shiftKey) {
-			isWithAdvantage = true;
-			isWithDisadvantage = false;
-		} else if(event.ctrlKey) {
-			isWithAdvantage = false;
-			isWithDisadvantage = true;
-		} 	
-		
-		if(!doomed) {
+        let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+        let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+        if(event.shiftKey) {
+            isWithAdvantage = true;
+            isWithDisadvantage = false;
+        } else if(event.ctrlKey) {
+            isWithAdvantage = false;
+            isWithDisadvantage = true;
+        }     
+        
+        if(!doomed) {
             if(isWithAdvantage) {
                 message.roll.formula = "2d20kl";
             } else if(isWithDisadvantage) {
@@ -444,12 +448,12 @@ export function logInitiativeRoll(event) {
             message.roll.formula = (isWithAdvantage ? "1d20" : "2d20kh");
         }
         rollEm(new Roll(message.roll.formula)).then((roll) => {
-            let dieResult = roll.terms[0].results[0].result;
+            let dieResult = roll.total; //roll.terms[0].results[0].result;
                 critical.failure = (dieResult === 20);
                 critical.success = (dieResult === 1);
             message.roll.result  = roll.total;
             message.roll.success = (critical.success || roll.total < attributes["wisdom"]);
-			roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+            roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
 
             if(!critical.success && !critical.failure) {
                 message.roll.labels.result = interpolate(message.roll.success ? "bsh.messages.labels.success" : "bsh.messages.labels.failure");
@@ -464,7 +468,7 @@ export function logInitiativeRoll(event) {
             }
 
             resetTriswitchState(actor.id);
-			showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
         });
     } else {
         console.error("Initiative roll requested but requesting element is missing an actor id data attribute.");
@@ -488,7 +492,7 @@ export function logItemUsageDieRoll(item, field, isWithAdvantage=false, isWithDi
                                         labels:   {result: "",
                                                    title:  interpolate("bsh.messages.titles.usageDieRoll")},
                                         result:   0,
-										rolled:   [],
+                                        rolled:   [],
                                         tested:   true}};
 
             if(isWithAdvantage) {
@@ -498,7 +502,7 @@ export function logItemUsageDieRoll(item, field, isWithAdvantage=false, isWithDi
             }
             rollEm(new Roll(message.roll.formula)).then((roll) => {
                 message.roll.result = roll.total;
-				roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+                roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
                 if(roll.total < 3) {
                     let newDie = downgradeDie(usageDie);
                     let data   = setObjectField(`${field}.current`, newDie);
@@ -519,9 +523,9 @@ export function logItemUsageDieRoll(item, field, isWithAdvantage=false, isWithDi
                 }
 
                 if(item.actor) {
-					resetTriswitchState(item.actor.id);
-				}
-				showMessage(item.actor, "systems/black-sword-hack-mod/templates/messages/usage-die-roll.hbs", message);
+                    resetTriswitchState(item.actor.id);
+                }
+                showMessage(item.actor, "systems/black-sword-hack-mod/templates/messages/usage-die-roll.hbs", message);
             });
         } else {
             console.warn(`Unable to roll usage die for item id ${item.id} as the particular usage die request is exhausted.`);
@@ -546,7 +550,7 @@ export function logParryRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
                                  formula:  "",
                                  labels:   {title: title},
                                  result:   0,
-								 rolled:   [],
+                                 rolled:   [],
                                  tested:   true}};
     let shield     = (actor.system.armour.shield === "yes");
 
@@ -562,12 +566,12 @@ export function logParryRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
         message.roll.formula = (isWithAdvantage || shield ? "1d20" : "2d20kh");
     }
     rollEm(new Roll(message.roll.formula)).then((roll) => {
-        let dieResult = roll.terms[0].results[0].result;
+        let dieResult = roll.total; //roll.terms[0].results[0].result;
             critical.failure = (dieResult === 20);
             critical.success = (dieResult === 1);
         message.roll.result  = roll.total;
         message.roll.success = (critical.success || roll.total < attributes["strength"]);
-		roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
 
         if(!critical.success && !critical.failure) {
             message.roll.labels.result = interpolate(message.roll.success ? "bsh.messages.labels.success" : "bsh.messages.labels.failure");
@@ -582,7 +586,7 @@ export function logParryRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
         }
 
         resetTriswitchState(actor.id);
-		showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
     });
 }
 
@@ -602,20 +606,20 @@ export function logPerceptionRoll(event) {
                                      formula:  "",
                                      labels:   {title: title},
                                      result:   0,
-									 rolled:   [],
+                                     rolled:   [],
                                      tested:   true}};
 
-		let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-		let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
-		if(event.shiftKey) {
-			isWithAdvantage = true;
-			isWithDisadvantage = false;
-		} else if(event.ctrlKey) {
-			isWithAdvantage = false;
-			isWithDisadvantage = true;
-		} 	
-		
-		if(!doomed) {
+        let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+        let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+        if(event.shiftKey) {
+            isWithAdvantage = true;
+            isWithDisadvantage = false;
+        } else if(event.ctrlKey) {
+            isWithAdvantage = false;
+            isWithDisadvantage = true;
+        }     
+        
+        if(!doomed) {
             if(isWithAdvantage) {
                 message.roll.formula = "2d20kl";
             } else if(isWithDisadvantage) {
@@ -627,12 +631,12 @@ export function logPerceptionRoll(event) {
             message.roll.formula = (isWithAdvantage ? "1d20" : "2d20kh");
         }
         rollEm(new Roll(message.roll.formula)).then((roll) => {
-            let dieResult = roll.terms[0].results[0].result;
+            let dieResult = roll.total; //roll.terms[0].results[0].result;
                 critical.failure = (dieResult === 20);
                 critical.success = (dieResult === 1);
             message.roll.result  = roll.total;
             message.roll.success = (critical.success || roll.total < attributes["intelligence"]);
-			roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+            roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
 
             if(!critical.success && !critical.failure) {
                 message.roll.labels.result = interpolate(message.roll.success ? "bsh.messages.labels.success" : "bsh.messages.labels.failure");
@@ -647,7 +651,7 @@ export function logPerceptionRoll(event) {
             }
 
             resetTriswitchState(actor.id);
-			showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
+            showMessage(actor, "systems/black-sword-hack-mod/templates/messages/die-roll.hbs", message);
         });
     } else {
         console.error("Perception roll requested but requesting element is missing an actor id data attribute.");
@@ -665,8 +669,11 @@ export function logSpellCast(spell, result) {
                              labels:   {result: game.i18n.localize("bsh.fields.titles.success"),
                                         title: game.i18n.localize("bsh.messages.titles.castSpell")},
                              result:   result.result,
+                             rolled:   [],
                              success:  true,
                              tested:   true}};
+                             
+    result.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
 
     showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
 }
@@ -683,8 +690,11 @@ export function logSpellCastFailure(spell, result) {
                              labels:   {result: game.i18n.localize("bsh.fields.titles.failure"),
                                         title: game.i18n.localize("bsh.messages.titles.castSpell")},
                              result:   result.result,
+                             rolled:   [],
                              success:  false,
                              tested:   true}};
+    
+    result.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));     
 
     showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
 }

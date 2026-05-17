@@ -8,6 +8,8 @@ import {calculateAttributeValues,
         getActorById,
         getOwnedItemById,
         interpolate} from './shared.js';
+import {resetTriswitchState} from './triswitch.js';
+
 
 /**
  * Reset one of the types dark pacts, either demons or spirits.
@@ -32,9 +34,7 @@ export async function resetDarkPact(actorId, type) {
 /**
  * This function makes the doom roll related to summoning a demon.
  */
-export async function summonDemon(demonId, rollType) {
-    let demon = getOwnedItemById(demonId);
-
+export async function summonDemon(demon, rollType) {
     if(demon && demon.type === "demon") {
         if(demon.actor.system.doom !== "exhausted") {
             if(demon.actor.system.summoning.demon !== "unused") {
@@ -48,6 +48,7 @@ export async function summonDemon(demonId, rollType) {
             rollDoom(demon.actor, rollType).then((result) => {
                 demon.actor.update({system: {summoning: {demon: "used"}}}, {diff: true});
                 result.doomed = (result.die.ending === "exhausted");
+                resetTriswitchState(demon.actor.id);
                 if(result.downgraded) {
                     logDemonSummoningFailure(demon, result);
                 } else {
@@ -67,9 +68,7 @@ export async function summonDemon(demonId, rollType) {
 /**
  * This function makes the doom roll related to summoning a spirit.
  */
-export async function summonSpirit(spiritId, rollType) {
-    let spirit = getOwnedItemById(spiritId);
-
+export async function summonSpirit(spirit, rollType) {
     if(spirit && spirit.type === "spirit") {
         if(spirit.actor.system.doom !== "exhausted") {
             if(spirit.actor.system.summoning.spirit !== "unused") {
@@ -83,6 +82,7 @@ export async function summonSpirit(spiritId, rollType) {
             rollDoom(spirit.actor, rollType).then((result) => {
                 spirit.actor.update({system: {summoning: {spirit: "used"}}}, {diff: true});
                 result.doomed = (result.die.ending === "exhausted");
+                resetTriswitchState(spirit.actor.id);
                 if(result.downgraded) {
                     logCallSpiritFailure(spirit, result);
                 } else {
