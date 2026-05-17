@@ -2,16 +2,14 @@
   "id": "black-sword-hack-mod",
   "title": "Black Sword Hack Mod",
   "description": "System support for the Black Sword Hack RPG.",
-  "authors": [
-        {
-          "name": "Aureliano Rama"
-        },
-        {
-            "name": "Peter Wood",
-            "url": "https://ko-fi.com/peterwood",
-            "ko-fi": "peterwood"
-        }
-    ],
+  "authors": [{
+      "name": "Aureliano Rama"
+    }, {
+      "name": "Peter Wood",
+      "url": "https://ko-fi.com/peterwood",
+      "ko-fi": "peterwood"
+    }
+  ],
   "version": "1.4.0-rc1",
   "compatibility": {
     "minimum": 13,
@@ -19,22 +17,27 @@
   },
   "esmodules": ["black-sword-hack-mod.js"],
   "styles": ["black-sword-hack-mod.css"],
-  "languages": [
-  	{"lang": "en",
-     "name": "English",
-     "path": "languages/en.json"},
-    {"lang": "es",
-     "name": "Spanish",
-     "path": "languages/es.json"},
-    {"lang": "fr",
-     "name": "Français",
-     "path": "languages/fr.json"},
-    {"lang": "ru",
-     "name": "Russian",
-     "path": "languages/ru.json"},
-     {"lang": "uk",
-     "name": "Ukrainian",
-     "path": "languages/uk.json"}
+  "languages": [{
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }, {
+      "lang": "es",
+      "name": "Spanish",
+      "path": "languages/es.json"
+    }, {
+      "lang": "fr",
+      "name": "Français",
+      "path": "languages/fr.json"
+    }, {
+      "lang": "ru",
+      "name": "Russian",
+      "path": "languages/ru.json"
+    }, {
+      "lang": "uk",
+      "name": "Ukrainian",
+      "path": "languages/uk.json"
+    }
   ],
   "url": "https://github.com/jeffhawke/black-sword-hack-mod/",
   "relationships": {

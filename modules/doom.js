@@ -13,7 +13,7 @@ export function rollDoom(actor, rollType="standard") {
                            starting: null},
                      downgraded: false,
                      wasRolled: false,
-					 rolled: []};
+                     rolled: []};
     let actorData = actor.system;
 
     result.die.starting = result.die.ending = actorData.doom;
@@ -35,7 +35,7 @@ export function rollDoom(actor, rollType="standard") {
         return(rollEm(dice).then((roll) => {
                     result.formula = roll.formula;
                     result.result  = roll.total;
-					roll.terms[0].results.forEach(a => result.rolled.push({result: a.result, active: a.active}));
+                    roll.terms[0].results.forEach(a => result.rolled.push({result: a.result, active: a.active}));
                     if(roll.total < 3) {
                         let newDie = downgradeDie(actorData.doom);
 

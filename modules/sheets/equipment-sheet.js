@@ -7,14 +7,14 @@ export default class EquipmentSheet  extends ItemSheet {
                                           width:    600}));
     }
 
-	get template() {
-		return("systems/black-sword-hack-mod/templates/sheets/equipment-sheet.html");
-	}
+    get template() {
+        return("systems/black-sword-hack-mod/templates/sheets/equipment-sheet.html");
+    }
 
-	getData() {
-		let context = super.getData();
+    getData() {
+        let context = super.getData();
 
-		context.configuration = CONFIG.configuration;
-		return(context);
-	}
+        context.configuration = CONFIG.configuration;
+        return(context);
+    }
 }

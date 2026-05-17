@@ -23,18 +23,18 @@ export function getItemById(itemId) {
  * Check is a particular actor is owned by the user
  */
 export function isThisActorMine(actorId) {
-	let a = getActorById(actorId);
-	if(a) {
-		return a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
-	} 
-	return false;
+    let a = getActorById(actorId);
+    if(a) {
+        return a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+    } 
+    return false;
 }
 
 /**
  * Retrieve only the actors the user is full owner.
  */
 export function getMyActors() {
-	return( game.actors.filter( (a) => a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER ) );
+    return( game.actors.filter( (a) => a.ownership[game.userId] == foundry.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER ) );
 }
 
 /**
@@ -168,10 +168,10 @@ export function calculateLevel(data, configuration) {
     let stories      = data.stories;
 
     Object.keys(stories).sort().forEach((index) => {
-		//safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
-		if(stories[index].requiredForNextLevel != stories[index].level) {
-			stories[index].requiredForNextLevel = stories[index].level;
-		}
+        //safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
+        if(stories[index].requiredForNextLevel != stories[index].level) {
+            stories[index].requiredForNextLevel = stories[index].level;
+        }
         if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
             stories[index].title = "level achieved";
             totalStories++;
@@ -301,23 +301,23 @@ export async function handleRollAttributeDieEvent(event) {
     event.preventDefault();
     if(element.dataset.actor) {
         let actor = getActorById(element.dataset.actor);
-		
-		if(!isThisActorMine(actor.id) && !game.user.isGM) {
+        
+        if(!isThisActorMine(actor.id) && !game.user.isGM) {
             console.error(`Cannot roll a die for an actor not owned.`);
             ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
-			return(false);
-		}
-		
-		let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-		let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
-		if(event.shiftKey) {
-			isWithAdvantage = true;
-			isWithDisadvantage = false;
-		} else if(event.ctrlKey) {
-			isWithAdvantage = false;
-			isWithDisadvantage = true;
-		} 
-				
+            return(false);
+        }
+        
+        let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+        let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+        if(event.shiftKey) {
+            isWithAdvantage = true;
+            isWithDisadvantage = false;
+        } else if(event.ctrlKey) {
+            isWithAdvantage = false;
+            isWithDisadvantage = true;
+        } 
+                
         if(actor) {
             if(event.altKey) {
                 let attribute = element.dataset.attribute;
@@ -357,17 +357,17 @@ export async function handleRollDieEvent(event) {
     let title   = game.i18n.localize(`bsh.fields.titles.dieRolls.${element.dataset.type}`)
 
     event.preventDefault();
-	
-	let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-	let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
-	if(event.shiftKey) {
-		isWithAdvantage = true;
-		isWithDisadvantage = false;
-	} else if(event.ctrlKey) {
-		isWithAdvantage = false;
-		isWithDisadvantage = true;
-	} 		
-	
+    
+    let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+    let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+    if(event.shiftKey) {
+        isWithAdvantage = true;
+        isWithDisadvantage = false;
+    } else if(event.ctrlKey) {
+        isWithAdvantage = false;
+        isWithDisadvantage = true;
+    }         
+    
     logDieRoll(actor, element.dataset.die, title, isWithAdvantage, isWithDisadvantage);
     return(false);
 }
@@ -442,15 +442,15 @@ async function handleItemUsageDieRollEvent(event) {
 
     event.preventDefault();
 
-	let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-	let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
-	if(event.shiftKey) {
-		isWithAdvantage = true;
-		isWithDisadvantage = false;
-	} else if(event.ctrlKey) {
-		isWithAdvantage = false;
-		isWithDisadvantage = true;
-	} 
+    let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+    let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+    if(event.shiftKey) {
+        isWithAdvantage = true;
+        isWithDisadvantage = false;
+    } else if(event.ctrlKey) {
+        isWithAdvantage = false;
+        isWithDisadvantage = true;
+    } 
 
     if(item) {
         if(element.dataset.die) {
@@ -477,22 +477,22 @@ export async function handleWeaponRollEvent(event) {
         if(weapon) {
             if(weapon.actor) {
 
-				if(!isThisActorMine(weapon.actor.id) && !game.user.isGM) {
-					console.error(`Cannot roll a die for an actor not owned.`);
-					ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
-					return(false);
-				}
-				
-				let isWithDisadvantage = isTriswitchAtDisadvantage(weapon.actor.id);
-				let isWithAdvantage = isTriswitchAtAdvantage(weapon.actor.id);
-				if(event.shiftKey) {
-					isWithAdvantage = true;
-					isWithDisadvantage = false;
-				} else if(event.ctrlKey) {
-					isWithAdvantage = false;
-					isWithDisadvantage = true;
-				} 
-				
+                if(!isThisActorMine(weapon.actor.id) && !game.user.isGM) {
+                    console.error(`Cannot roll a die for an actor not owned.`);
+                    ui.notifications.error(game.i18n.localize("bsh.errors.actors.unowned"));
+                    return(false);
+                }
+                
+                let isWithDisadvantage = isTriswitchAtDisadvantage(weapon.actor.id);
+                let isWithAdvantage = isTriswitchAtAdvantage(weapon.actor.id);
+                if(event.shiftKey) {
+                    isWithAdvantage = true;
+                    isWithDisadvantage = false;
+                } else if(event.ctrlKey) {
+                    isWithAdvantage = false;
+                    isWithDisadvantage = true;
+                } 
+                
                 logAttackRoll(weapon.actor.id, weapon.id, isWithAdvantage, isWithDisadvantage);
             } else {
                 console.error(`Unable to make a weapon attack roll for weapon id '${weapon.id}' as it is not an owned item.`);

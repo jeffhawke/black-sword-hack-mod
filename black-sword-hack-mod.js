@@ -72,35 +72,35 @@ Hooks.once("init", function() {
                                                                  scope:   "world",
                                                                  type:    Boolean});
 
-	game.keybindings.register("black-sword-hack-mod", "bsh-roll-modifier-adv", { 
-		name: "Roll Modifier for advantage roll",
-		onDown: (cntx) => {
-			let csheets = document.getElementsByClassName("bsh-character-sheet");
-			for (let i=0; i<csheets.length; i++) { 
-				let actorId = csheets[i].dataset.id;
-				// console.log(actorId); 
-				if(isThisActorMine(actorId)) {
-					setTriswitchAdvantage(actorId);
-				}
-			}
-		},
-		editable: [ { key: "ShiftLeft"} ]
-	}); 
+    game.keybindings.register("black-sword-hack-mod", "bsh-roll-modifier-adv", { 
+        name: "Roll Modifier for advantage roll",
+        onDown: (cntx) => {
+            let csheets = document.getElementsByClassName("bsh-character-sheet");
+            for (let i=0; i<csheets.length; i++) { 
+                let actorId = csheets[i].dataset.id;
+                // console.log(actorId); 
+                if(isThisActorMine(actorId)) {
+                    setTriswitchAdvantage(actorId);
+                }
+            }
+        },
+        editable: [ { key: "ShiftLeft"} ]
+    }); 
 
-	game.keybindings.register("black-sword-hack-mod", "bsh-roll-modifier-disadv", { 
-		name: "Roll Modifier for disadvantage roll",
-		onDown: (cntx) => {
-			let csheets = document.getElementsByClassName("bsh-character-sheet");
-			for (let i=0; i<csheets.length; i++) { 
-				let actorId = csheets[i].dataset.id;
-				// console.log(actorId); 
-				if(isThisActorMine(actorId)) {
-					setTriswitchDisadvantage(actorId);
-				}
-			}
-		},
-		editable: [ { key: "ControlLeft"} ]
-	}); 
+    game.keybindings.register("black-sword-hack-mod", "bsh-roll-modifier-disadv", { 
+        name: "Roll Modifier for disadvantage roll",
+        onDown: (cntx) => {
+            let csheets = document.getElementsByClassName("bsh-character-sheet");
+            for (let i=0; i<csheets.length; i++) { 
+                let actorId = csheets[i].dataset.id;
+                // console.log(actorId); 
+                if(isThisActorMine(actorId)) {
+                    setTriswitchDisadvantage(actorId);
+                }
+            }
+        },
+        editable: [ { key: "ControlLeft"} ]
+    }); 
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("black-sword-hack-mod", ConsumableSheet, {types: ["consumable"]});
@@ -120,27 +120,27 @@ Hooks.once("init", function() {
 
     // Load templates.
     preloadHandlebarsTemplates();
-	
-	Handlebars.registerHelper("paddingForSingleDigitAttribute", (value) => {
-		return ((value < 10) ? "padding-left: 7px" : "");
-	});
+    
+    Handlebars.registerHelper("paddingForSingleDigitAttribute", (value) => {
+        return ((value < 10) ? "padding-left: 7px" : "");
+    });
 
     Handlebars.registerHelper("arrayIndexAdjuster", (index) => {
         return(`${index + 1}`);
     });
 
     Handlebars.registerHelper("backgroundSelect", function(offset, options) {
-    	let backgrounds = {"": ""};
-    	let labelKey    = `bsh.fields.labels.${offset}Background`;
-    	let context     = {field:    `../data.backgrounds.${offset}`,
+        let backgrounds = {"": ""};
+        let labelKey    = `bsh.fields.labels.${offset}Background`;
+        let context     = {field:    `../data.backgrounds.${offset}`,
                            labelKey: labelKey,
                            options:  backgrounds};
 
         for(var key in BSHConfiguration.backgroundList) {
             if(options.hash.fromOrigin) {
-            	if(BSHConfiguration.backgroundList[key].origin === this.actor.system.origin) {
-            		backgrounds[key] = BSHConfiguration.backgroundList[key].name;
-            	}
+                if(BSHConfiguration.backgroundList[key].origin === this.actor.system.origin) {
+                    backgrounds[key] = BSHConfiguration.backgroundList[key].name;
+                }
             } else {
                 backgrounds[key] = BSHConfiguration.backgroundList[key].name;
             }
@@ -290,16 +290,16 @@ Hooks.once("init", function() {
             return(game.i18n.localize("bsh.weapons.types.melee"));
         };
     });
-	
-	Handlebars.registerHelper("isEquals", function(value1, value2) {
-		// console.log(value1);
-		// console.log(value2);
-		// console.log(this.prefix.actor.system.level);
-		if ((value1 !== null) && (value2 !== null)) {
-			return value1 == value2;
-		}
-		return false;
-	});
+    
+    Handlebars.registerHelper("isEquals", function(value1, value2) {
+        // console.log(value1);
+        // console.log(value2);
+        // console.log(this.prefix.actor.system.level);
+        if ((value1 !== null) && (value2 !== null)) {
+            return value1 == value2;
+        }
+        return false;
+    });
 
     // Add hook functions.
     Hooks.on("renderChatMessage", (message, speaker) => {

@@ -23,7 +23,7 @@ export default class BackgroundDialog extends FormApplication {
                                           width:         575}));
     }
 
-	constructor(settings) {
+    constructor(settings) {
         let buttons = {save: {callback: () => this._saveBackground(),
                               label: game.i18n.localize("bsh.buttons.save")}};
 
@@ -33,7 +33,7 @@ export default class BackgroundDialog extends FormApplication {
                                                       {buttons: buttons}));
         this._newOrigin = (settings.newOrigin === true);
         this._originId  = settings.originId;
-	}
+    }
 
     get background() {
         let object = this.object;

@@ -7,14 +7,14 @@ export default class GiftSheet  extends ItemSheet {
                                           width:    600}));
     }
 
-	get template() {
-		return("systems/black-sword-hack-mod/templates/sheets/gift-sheet.html");
-	}
+    get template() {
+        return("systems/black-sword-hack-mod/templates/sheets/gift-sheet.html");
+    }
 
-	getData() {
-		let context = super.getData();
+    getData() {
+        let context = super.getData();
 
-		context.configuration = CONFIG.configuration;
-		return(context);
-	}
+        context.configuration = CONFIG.configuration;
+        return(context);
+    }
 }

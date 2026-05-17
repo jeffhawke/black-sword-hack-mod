@@ -74,7 +74,7 @@ export {
     generateBirthPlace,
     getBackgrounds,
     getCharacterBackgrounds,
-	getCustomOrigins,
+    getCustomOrigins,
     getOriginKeys,
     getOrigins,
     isCustomOriginsActive

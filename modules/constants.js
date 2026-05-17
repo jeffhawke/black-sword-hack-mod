@@ -200,14 +200,14 @@ const STREET_URCHIN = {description: "<p>Get <strong>Advantage</strong> on action
                        key:         "civilized#street_urchin",
                        localeKeys:  {"description": "bsh.backgrounds.street_urchin.description",
                                      "label": "bsh.backgrounds.street_urchin.label"},
-	                     name:        "Street Urchin",
-	                     stats:       {charisma:     "+0",
-	                                   constitution: "+0",
-	                                   dexterity:    "+1",
+                         name:        "Street Urchin",
+                         stats:       {charisma:     "+0",
+                                       constitution: "+0",
+                                       dexterity:    "+1",
                                      intelligence: "+0",
                                      strength:     "+0",
                                      wisdom:       "+0"},
-	                     unique:     false};
+                         unique:     false};
 
 const SURGEON   = {description: "<p>Make an <strong>INT</strong> test when taking care of someone who has fallen to 0 HP. They roll a d4 on the Helpless table instead of a d6 if you succeed.</p>",
                    index:       5,
@@ -365,43 +365,43 @@ const CHANGELING = {description: "<p>You were abducted as a baby and raised by v
 
 // Classic origins.
 const BARBARIAN = {backgrounds: [
-	                   JSON.stringify(BERSERKER),
-	                   JSON.stringify(HERBALIST),
-	                   JSON.stringify(HUNTER),
-	                   JSON.stringify(SHAMAN),
-	                   JSON.stringify(STORYTELLER),
-	                   JSON.stringify(WILDLING),
+                       JSON.stringify(BERSERKER),
+                       JSON.stringify(HERBALIST),
+                       JSON.stringify(HUNTER),
+                       JSON.stringify(SHAMAN),
+                       JSON.stringify(STORYTELLER),
+                       JSON.stringify(WILDLING),
                      JSON.stringify(CHIEFTAIN),
                      JSON.stringify(RAIDER),
                      JSON.stringify(SCOUT),
                      JSON.stringify(SURVIVOR)
-	                 ],
+                     ],
                    id:          "barbarian",
                    name:        "Barbarian"};
 
 const CIVILIZED = {backgrounds: [
-	                   JSON.stringify(BOOKWORM),
-	                   JSON.stringify(INVENTOR),
-	                   JSON.stringify(LEGIONNAIRE),
-	                   JSON.stringify(SOPHIST),
-	                   JSON.stringify(STREET_URCHIN),
-	                   JSON.stringify(SURGEON),
-	                   JSON.stringify(SWORDMASTER),
+                       JSON.stringify(BOOKWORM),
+                       JSON.stringify(INVENTOR),
+                       JSON.stringify(LEGIONNAIRE),
+                       JSON.stringify(SOPHIST),
+                       JSON.stringify(STREET_URCHIN),
+                       JSON.stringify(SURGEON),
+                       JSON.stringify(SWORDMASTER),
                      JSON.stringify(BODYGUARD),
                      JSON.stringify(DIPLOMAT)
-	                 ],
+                     ],
                    id:          "civilized",
                    name:        "Civilized"};
 
 const DECADENT  = {backgrounds: [
-	                   JSON.stringify(ASSASSIN),
-	                   JSON.stringify(FORBIDDEN_KNOWLEDGE),
-	                   JSON.stringify(PIT_FIGHTER),
-	                   JSON.stringify(SNAKE_BLOOD),
-	                   JSON.stringify(VICIOUS),
-	                   JSON.stringify(WARLOCK),
+                       JSON.stringify(ASSASSIN),
+                       JSON.stringify(FORBIDDEN_KNOWLEDGE),
+                       JSON.stringify(PIT_FIGHTER),
+                       JSON.stringify(SNAKE_BLOOD),
+                       JSON.stringify(VICIOUS),
+                       JSON.stringify(WARLOCK),
                      JSON.stringify(CHANGELING)
-	                 ],
+                     ],
                    id:          "decadent",
                    name:        "Decadent"};
 
@@ -410,32 +410,32 @@ const CLASSIC_ORIGINS = {barbarian: BARBARIAN,
                          decadent:  DECADENT};
 
 const CLASSIC_ORIGIN_MAP = {
-	"assassin":            {id: "decadent", index: 0, key: "assassin"},
-	"berserker":           {id: "barbarian", index: 0, key: "berserker"},
+    "assassin":            {id: "decadent", index: 0, key: "assassin"},
+    "berserker":           {id: "barbarian", index: 0, key: "berserker"},
   "bodyguard":           {id: "civilized", index: 7, key: "bodyguard"},
   "changeling":          {id: "decadent", index: 6, key: "changeling"},
   "chieftain":           {id: "barbarian", index: 6, key: "chieftain"},
   "diplomat":            {id: "civilized", index: 8, key: "diplomat"},
-	"bookworm":            {id: "civilized", index: 0, key: "bookworm"},
-	"forbidden_knowledge": {id: "decadent", index: 1, key: "forbidden_knowledge"},
-	"herbalist":           {id: "barbarian", index: 1, key: "herbalist"},
-	"hunter":              {id: "barbarian", index: 2, key: "hunter"},
-	"inventor":            {id: "civilized", index: 1, key: "inventor"},
-	"legionnaire":         {id: "civilized", index: 2, key: "legionnaire"},
-	"pit-fighter":         {id: "decadent", index: 2, key: "pit-fighter"},
+    "bookworm":            {id: "civilized", index: 0, key: "bookworm"},
+    "forbidden_knowledge": {id: "decadent", index: 1, key: "forbidden_knowledge"},
+    "herbalist":           {id: "barbarian", index: 1, key: "herbalist"},
+    "hunter":              {id: "barbarian", index: 2, key: "hunter"},
+    "inventor":            {id: "civilized", index: 1, key: "inventor"},
+    "legionnaire":         {id: "civilized", index: 2, key: "legionnaire"},
+    "pit-fighter":         {id: "decadent", index: 2, key: "pit-fighter"},
   "raider":              {id: "barbarian", index: 7, key: "raider"},
   "scout":               {id: "barbarian", index: 8, key: "scout"},
-	"shaman":              {id: "barbarian", index: 3, key: "shaman"},
-	"snake_blood":         {id: "decadent", index: 3, key: "snake_blood"},
-	"sophist":             {id: "civilized", index: 3, key: "sophist"},
-	"storyteller":         {id: "barbarian", index: 4, key: "storyteller"},
-	"street_urchin":       {id: "civilized", index: 4, key: "street_urchin"},
-	"surgeon":             {id: "civilized", index: 5, key: "surgeon"},
+    "shaman":              {id: "barbarian", index: 3, key: "shaman"},
+    "snake_blood":         {id: "decadent", index: 3, key: "snake_blood"},
+    "sophist":             {id: "civilized", index: 3, key: "sophist"},
+    "storyteller":         {id: "barbarian", index: 4, key: "storyteller"},
+    "street_urchin":       {id: "civilized", index: 4, key: "street_urchin"},
+    "surgeon":             {id: "civilized", index: 5, key: "surgeon"},
   "survivor":            {id: "barbarian", index: 9, key: "survivor"},
-	"swordmaster":         {id: "civilized", index: 6, key: "swordmaster"},
-	"vicious":             {id: "decadent", index: 4, key: "vicious"},
-	"warlock":             {id: "decadent", index: 5, key: "warlock"},
-	"wildling":            {id: "barbarian", index: 5, key: "wildling"}
+    "swordmaster":         {id: "civilized", index: 6, key: "swordmaster"},
+    "vicious":             {id: "decadent", index: 4, key: "vicious"},
+    "warlock":             {id: "decadent", index: 5, key: "warlock"},
+    "wildling":            {id: "barbarian", index: 5, key: "wildling"}
 };
 
 export {BARBARIAN, CIVILIZED, DECADENT, CLASSIC_ORIGINS, CLASSIC_ORIGIN_MAP};

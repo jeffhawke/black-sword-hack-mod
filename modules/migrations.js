@@ -21,27 +21,27 @@ async function updateCharacterBirthPlaces() {
  */
 async function updateClassicCharacterBackgrounds() {
     if(!game.settings.get("black-sword-hack-mod", "customOrigins")) {
-    	game.actors.forEach((actor) => {
-    		if(actor.type === "character") {
-    			let first  = `${actor.system.backgrounds.first}`.trim();
-    			let second = `${actor.system.backgrounds.second}`.trim();
-    			let third  = `${actor.system.backgrounds.third}`.trim();
+        game.actors.forEach((actor) => {
+            if(actor.type === "character") {
+                let first  = `${actor.system.backgrounds.first}`.trim();
+                let second = `${actor.system.backgrounds.second}`.trim();
+                let third  = `${actor.system.backgrounds.third}`.trim();
 
                 console.log(`Attempting classic background migration for '${actor.name}' (id: ${actor.id}).`);
-    			if(typeof actor.system.backgrounds.first === "string" ||
-    			   typeof actor.system.backgrounds.second === "string" ||
-    			   typeof actor.system.backgrounds.third === "string") {
+                if(typeof actor.system.backgrounds.first === "string" ||
+                   typeof actor.system.backgrounds.second === "string" ||
+                   typeof actor.system.backgrounds.third === "string") {
                     let updatable = true;
-    				let updates   = {system: {
-    					                    backgrounds: {first: first, second: second, third:  third}
-    					                }
-    					            };
+                    let updates   = {system: {
+                                            backgrounds: {first: first, second: second, third:  third}
+                                        }
+                                    };
 
                     Object.values(actor.system.backgrounds).forEach((name) => {
                         if(name.trim() !== "") {
                             let match = `${name}`.trim().match(/^(barbarian|civilized|decadent)#(.*)/);
 
-                        	if(!match) {
+                            if(!match) {
                                 let origin = CLASSIC_ORIGIN_MAP[name.trim()];
                                 if(!origin) {
                                     console.error(`Unable to migrate the '${name}' background for character id '${actor.id}' (${actor.name}).`);
@@ -55,29 +55,29 @@ async function updateClassicCharacterBackgrounds() {
                         if(first !== "" && typeof actor.system.backgrounds.first === "string" && CLASSIC_ORIGIN_MAP[first]) {
                             let key = `${CLASSIC_ORIGIN_MAP[first].id}#${CLASSIC_ORIGIN_MAP[first].key}`
 
-                        	console.log(`Migrating '${actor.system.backgrounds.first}' to`, key);
-                        	updates.system.backgrounds.first = key;
+                            console.log(`Migrating '${actor.system.backgrounds.first}' to`, key);
+                            updates.system.backgrounds.first = key;
                         }
 
                         if(second !== "" && typeof actor.system.backgrounds.second === "string" && CLASSIC_ORIGIN_MAP[second]) {
                             let key = `${CLASSIC_ORIGIN_MAP[first].id}#${CLASSIC_ORIGIN_MAP[second].key}`;
 
-                        	console.log(`Migrating '${actor.system.backgrounds.second}' to`, key);
-                        	updates.system.backgrounds.second = key;
+                            console.log(`Migrating '${actor.system.backgrounds.second}' to`, key);
+                            updates.system.backgrounds.second = key;
                         }
 
                         if(third !== "" && typeof actor.system.backgrounds.third === "string" && CLASSIC_ORIGIN_MAP[third]) {
                             let key = `${CLASSIC_ORIGIN_MAP[first].id}#${CLASSIC_ORIGIN_MAP[third].key}`;
 
-                        	console.log(`Migrating '${actor.system.backgrounds.third}' to`, key);
-                        	updates.system.backgrounds.third = key;
+                            console.log(`Migrating '${actor.system.backgrounds.third}' to`, key);
+                            updates.system.backgrounds.third = key;
                         }
 
                         actor.update(updates, {diff: true});
                     }
-    			}
-    		}
-    	});
+                }
+            }
+        });
     }
 }
 
