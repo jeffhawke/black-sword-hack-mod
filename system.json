@@ -12,7 +12,7 @@
             "ko-fi": "peterwood"
         }
     ],
-  "version": "1.3.7",
+  "version": "1.4.0-rc1",
   "compatibility": {
     "minimum": 13,
     "verified": "13.346"
@@ -41,6 +41,6 @@
     "systems": [],
     "requires": []
   },
-  "manifest": "https://raw.githubusercontent.com/jeffhawke/black-sword-hack-mod/master/system.json",
-  "download": "https://github.com/jeffhawke/black-sword-hack-mod/archive/refs/tags/v1.3.7.zip"
+  "manifest": "https://raw.githubusercontent.com/jeffhawke/black-sword-hack-mod/tree/v1.4.0-rc1/system.json",
+  "download": "https://github.com/jeffhawke/black-sword-hack-mod/archive/refs/tags/v1.4.0-rc1.zip"
 }
