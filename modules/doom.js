@@ -12,7 +12,8 @@ export function rollDoom(actor, rollType="standard") {
     let result    = {die: {ending: null,
                            starting: null},
                      downgraded: false,
-                     rolled: false};
+                     wasRolled: false,
+					 rolled: []};
     let actorData = actor.system;
 
     result.die.starting = result.die.ending = actorData.doom;
@@ -22,7 +23,7 @@ export function rollDoom(actor, rollType="standard") {
 
 
         result.die.starting = actorData.doom;
-        result.rolled       = true;
+        result.wasRolled       = true;
         if(rollType === "advantage") {
             dice = new Roll(`2${actorData.doom}kh`);
         } else if(rollType === "disadvantage") {
@@ -34,6 +35,7 @@ export function rollDoom(actor, rollType="standard") {
         return(rollEm(dice).then((roll) => {
                     result.formula = roll.formula;
                     result.result  = roll.total;
+					roll.terms[0].results.forEach(a => result.rolled.push({result: a.result, active: a.active}));
                     if(roll.total < 3) {
                         let newDie = downgradeDie(actorData.doom);
 

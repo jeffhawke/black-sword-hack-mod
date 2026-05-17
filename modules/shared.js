@@ -1,7 +1,7 @@
 import {BSHConfiguration} from './configuration.js';
 import AttributeTestDialog from './attribute_test_dialog.js';
 import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll} from './chat_messages.js';
-import {getTriswitchState, setTriswitchState, TSCENTER, TSLEFT, TSRIGHT} from './triswitch.js';
+import {isTriswitchAtDisadvantage, isTriswitchAtAdvantage} from './triswitch.js';
 
 /**
  * Retrieves an actor from the game list of actors based on its unique
@@ -308,9 +308,8 @@ export async function handleRollAttributeDieEvent(event) {
 			return(false);
 		}
 		
-		let triswitchState = getTriswitchState(actor.id);
-		let isWithDisadvantage = triswitchState == TSLEFT;
-		let isWithAdvantage = triswitchState == TSRIGHT;
+		let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+		let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
 		if(event.shiftKey) {
 			isWithAdvantage = true;
 			isWithDisadvantage = false;
@@ -358,7 +357,18 @@ export async function handleRollDieEvent(event) {
     let title   = game.i18n.localize(`bsh.fields.titles.dieRolls.${element.dataset.type}`)
 
     event.preventDefault();
-    logDieRoll(actor, element.dataset.die, title, event.shiftKey, event.ctrlKey);
+	
+	let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+	let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+	if(event.shiftKey) {
+		isWithAdvantage = true;
+		isWithDisadvantage = false;
+	} else if(event.ctrlKey) {
+		isWithAdvantage = false;
+		isWithDisadvantage = true;
+	} 		
+	
+    logDieRoll(actor, element.dataset.die, title, isWithAdvantage, isWithDisadvantage);
     return(false);
 }
 
@@ -431,9 +441,20 @@ async function handleItemUsageDieRollEvent(event) {
     let item    = getOwnedItemById(element.dataset.item);
 
     event.preventDefault();
+
+	let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+	let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+	if(event.shiftKey) {
+		isWithAdvantage = true;
+		isWithDisadvantage = false;
+	} else if(event.ctrlKey) {
+		isWithAdvantage = false;
+		isWithDisadvantage = true;
+	} 
+
     if(item) {
         if(element.dataset.die) {
-            logItemUsageDieRoll(item, element.dataset.die, event.shiftKey, event.ctrlKey);
+            logItemUsageDieRoll(item, element.dataset.die, isWithAdvantage, isWithDisadvantage);
         } else {
             console.error("Usage die roll requested but requesting element has no die path attribute.");
             ui.notifications.error(game.i18n.localize("bsh.errors.attributes.missing"));
@@ -462,9 +483,8 @@ export async function handleWeaponRollEvent(event) {
 					return(false);
 				}
 				
-				let triswitchState = getTriswitchState(weapon.actor.id);
-				let isWithDisadvantage = triswitchState == TSLEFT;
-				let isWithAdvantage = triswitchState == TSRIGHT;
+				let isWithDisadvantage = isTriswitchAtDisadvantage(weapon.actor.id);
+				let isWithAdvantage = isTriswitchAtAdvantage(weapon.actor.id);
 				if(event.shiftKey) {
 					isWithAdvantage = true;
 					isWithDisadvantage = false;
@@ -473,7 +493,6 @@ export async function handleWeaponRollEvent(event) {
 					isWithDisadvantage = true;
 				} 
 				
-                // logAttackRoll(weapon.actor.id, weapon.id, event.shiftKey, event.ctrlKey);
                 logAttackRoll(weapon.actor.id, weapon.id, isWithAdvantage, isWithDisadvantage);
             } else {
                 console.error(`Unable to make a weapon attack roll for weapon id '${weapon.id}' as it is not an owned item.`);
