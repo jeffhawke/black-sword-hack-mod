@@ -15,9 +15,9 @@ import DemonSheet from './modules/sheets/demon-sheet.js';
 import SpellSheet from './modules/sheets/spell-sheet.js';
 import SpiritSheet from './modules/sheets/spirit-sheet.js';
 import WeaponSheet from './modules/sheets/weapon-sheet.js';
-import {logDamageRoll, toggleAttributeTestDisplay} from './modules/chat_messages.js';
+import {toggleAttributeTestDisplay} from './modules/chat_messages.js';
 import {getBackgrounds, getOrigins, isCustomOriginsActive} from './modules/origins.js';
-import {capitalize, stringToKey, isThisActorMine} from './modules/shared.js';
+import {capitalize, stringToKey, isThisActorMine, handleWeaponDamageRollDieEvent} from './modules/shared.js';
 import {setTriswitchDisadvantage, setTriswitchAdvantage} from './modules/triswitch.js';
 
 async function preloadHandlebarsTemplates() {
@@ -304,19 +304,22 @@ Hooks.once("init", function() {
     // Add hook functions.
     Hooks.on("renderChatMessage", (message, speaker) => {
         setTimeout(() => {
-            let element = document.querySelector(`[data-message-id="${message.id}"]`);
-            let node    = element.querySelector(".bsh-roll-title");
-
-            if(node) {
-                node.addEventListener("click", toggleAttributeTestDisplay);
-            }
-
-            node = element.querySelector(".bsh-damage-button");
-            if(node) {
-                node.addEventListener("click", logDamageRoll);
-            }
+            //if the chat column is hidden, a popup element with the chat message will appear for a few seconds.
+            //Without using querySelectorAll, that temp message was the only one to get the click bindings
+            let chatElements = document.querySelectorAll(`[data-message-id="${message.id}"]`);
+            chatElements.forEach((elem) => { 
+                let attackTitleNode = elem.querySelector(".bsh-roll-title");
+                if(attackTitleNode) {
+                    attackTitleNode.addEventListener("click", toggleAttributeTestDisplay);
+                }
+                let damageButtonNode = elem.querySelector(".bsh-damage-button");
+                if (damageButtonNode) {
+                    damageButtonNode.addEventListener("click", handleWeaponDamageRollDieEvent);
+                }
+            } );
         }, 250);
     });
+
 });
 
 Hooks.once("ready", function() {

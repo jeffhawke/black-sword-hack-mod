@@ -189,7 +189,7 @@ export function logCallSpiritFailure(spirit, result) {
     showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spirit-failure.hbs", message);
 }
 
-export function logDamageRoll(event) {
+export function OLDlogDamageRoll(event) {
     let element  = event.currentTarget;
     let rollData = element.dataset;
 
@@ -216,6 +216,27 @@ export function logDamageRoll(event) {
     }
 
     return(false);
+}
+
+export function logDamageRoll(actor, rollData) {
+
+    let data    = {actor:   actor.name,
+                   doomed: (rollData.doomed === "true"),
+                   roll:   {expanded: true,
+                            labels: {title: interpolate("bsh.messages.titles.damageRoll")},
+                            result: 0,
+                            rolled: [],
+                            tested: false}};
+    let formula = rollData.formula;
+
+    data.roll.formula = formula;
+    rollEm(new Roll(formula)).then((roll) => {
+        data.roll.result  = roll.total;
+        roll.terms[0].results.forEach(a => data.roll.rolled.push({result: a.result, active: a.active}));
+        resetTriswitchState(actor.id);
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/damage-roll.hbs", data);
+    });
+
 }
 
 export function logDefendRoll(event) {

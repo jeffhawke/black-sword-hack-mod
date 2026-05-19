@@ -20,7 +20,7 @@ import {calculateCharacterData,
         deleteOwnedItem,
         handleRollAttributeDieEvent,
         handleRollDieEvent,
-        handleDamageRollDieEvent,
+        handleGenericDamageRollDieEvent,
         handleRollUsageDieEvent,
         handleWeaponRollEvent,
         incrementItemQuantity,
@@ -277,7 +277,7 @@ export default class CharacterSheet extends ActorSheet {
     }
 
     _onDamageDieRollClicked(event) {
-        handleDamageRollDieEvent(event);
+        handleGenericDamageRollDieEvent(event);
     }
 
     _onIncreaseItemQuantityClicked(event) {

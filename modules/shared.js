@@ -1,6 +1,6 @@
 import {BSHConfiguration} from './configuration.js';
 import AttributeTestDialog from './attribute_test_dialog.js';
-import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll} from './chat_messages.js';
+import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll, logDamageRoll} from './chat_messages.js';
 import {isTriswitchAtDisadvantage, isTriswitchAtAdvantage} from './triswitch.js';
 
 /**
@@ -372,16 +372,16 @@ export async function handleRollDieEvent(event) {
     return(false);
 }
 
-
-//TODO: MUST BE REWORKED FOR DAMAGE DIE SPECIFICS
+//TODO: TO BE MADE COMPATIBLE WITH handleWeaponDamageRollDieEvent and logDamageRoll
 /**
- * This function provides functionality for rolling a single die including
- * with advantage/disadvantage (via the use of the shift or ctrl keys). This
- * function is expecting to be attached to a die icon that has attributes
- * that allow it to do its work.
+ * This function maps a generic damage roll (not linked to a specific weapon)
+ * to the logging method made for weapons, logDamageRoll, instead of the generic logDieRoll.
+ * It must handle advantage and disadvantage with keys and triswitch
+ * while specific weapon damage roll do that by using the kind of weapon (two hands or one).
  */
-export async function handleDamageRollDieEvent(event) {
+export async function handleGenericDamageRollDieEvent(event) {
     let element = event.currentTarget;
+    
     let actor   = game.actors.find((a) => a.id === element.dataset.id);
     let title   = game.i18n.localize(`bsh.fields.titles.dieRolls.${element.dataset.type}`)
 
@@ -400,6 +400,29 @@ export async function handleDamageRollDieEvent(event) {
     logDieRoll(actor, element.dataset.die, title, isWithAdvantage, isWithDisadvantage);
     return(false);
 }
+
+
+export async function handleWeaponDamageRollDieEvent(event) {
+    let element  = event.currentTarget;
+    let rollData = element.dataset;
+
+    if(rollData.formula && rollData.actor) {
+        let actor = game.actors.find((a) => a.id === rollData.actor);
+        let data  = {
+                        doomed:   (rollData.doomed === "true"),
+                        critical: (rollData.critical === "true"),
+                        formula:  rollData.formula,
+                        weapon:   rollData.name
+                    };
+        
+        logDamageRoll(actor, data);
+    } else {
+        console.error("Damage roll requested but requesting element did not have a damage formula attribute.");
+    }
+    
+    return(false);
+}
+
 
 
 export async function handleRollUsageDieEvent(event) {
