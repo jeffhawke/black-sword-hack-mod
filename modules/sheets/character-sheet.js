@@ -20,6 +20,7 @@ import {calculateCharacterData,
         deleteOwnedItem,
         handleRollAttributeDieEvent,
         handleRollDieEvent,
+        handleDamageRollDieEvent,
         handleRollUsageDieEvent,
         handleWeaponRollEvent,
         incrementItemQuantity,
@@ -70,6 +71,7 @@ export default class CharacterSheet extends ActorSheet {
         html.find(".bsh-attribute-roll-icon").click(this._onAttributeRollClicked.bind(this));
         html.find(".bsh-background-select").click(this._onBackgroundSelected.bind(this));
         html.find(".bsh-dice-roll-icon").click(this._onDieRollClicked.bind(this));
+        html.find(".bsh-damage-dice-roll-icon").click(this._onDamageDieRollClicked.bind(this));
         html.find(".bsh-usage-die-roll-icon").click(this._onUsageDieRollClicked.bind(this));
         html.find(".bsh-attack-roll-icon").click(this._onWeaponRollClicked.bind(this));
         html.find(".bsh-delete-item-icon").click(this._onDeleteItemClicked.bind(this));
@@ -120,8 +122,13 @@ export default class CharacterSheet extends ActorSheet {
         let element = event.currentTarget;
 
         event.preventDefault();
-        if(element.dataset.spell) {
-            castSpell(element.dataset.spell);
+        let spellId = element.dataset.spell;
+        if(spellId) {
+            /* 
+             * casting a spell has not an advantage or disadvantage modifier with the keys
+             * instead the spell will be cast at a disadvantage if it's already been casted at least once in the day
+             */
+            castSpell(spellId);
         } else {
             console.error("Spell casting requested but requesting element does not have a spell attribute.");
         }
@@ -227,7 +234,7 @@ export default class CharacterSheet extends ActorSheet {
             }
             summonDemon(demon, rollType);
         } else {
-            console.error("Summoning of a demon was requested but requesting element does not have an actor attribute.");
+            console.error("Summoning of a demon was requested but requesting element does not have an demon attribute.");
         }
         return(false);
     }
@@ -260,13 +267,17 @@ export default class CharacterSheet extends ActorSheet {
             }
             summonSpirit(spirit, rollType);
         } else {
-            console.error("Summoning of a spirit was requested but requesting element does not have an actor attribute.");
+            console.error("Summoning of a spirit was requested but requesting element does not have an spirit attribute.");
         }
         return(false);
     }
 
     _onDieRollClicked(event) {
         handleRollDieEvent(event);
+    }
+
+    _onDamageDieRollClicked(event) {
+        handleDamageRollDieEvent(event);
     }
 
     _onIncreaseItemQuantityClicked(event) {

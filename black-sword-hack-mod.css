@@ -114,7 +114,7 @@
     width: 70% !important;
 }
 
-.bsh-attribute-roll-icon, .bsh-dice-roll-icon, .bsh-usage-die-roll-icon {
+.bsh-attribute-roll-icon, .bsh-dice-roll-icon, .bsh-usage-die-roll-icon, .bsh-damage-dice-roll-icon {
     cursor: pointer;
 }
 

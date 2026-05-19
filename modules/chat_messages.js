@@ -195,7 +195,8 @@ export function logDamageRoll(event) {
 
     if(rollData.formula && rollData.actor) {
         let actor   = game.actors.find((a) => a.id === rollData.actor);
-        let data    = {doomed: (rollData.doomed === "true"),
+        let data    = {actor:   actor.name,
+                       doomed: (rollData.doomed === "true"),
                        roll:   {expanded: true,
                                 labels: {title: interpolate("bsh.messages.titles.damageRoll")},
                                 result: 0,

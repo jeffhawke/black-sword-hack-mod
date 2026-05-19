@@ -372,6 +372,36 @@ export async function handleRollDieEvent(event) {
     return(false);
 }
 
+
+//TODO: MUST BE REWORKED FOR DAMAGE DIE SPECIFICS
+/**
+ * This function provides functionality for rolling a single die including
+ * with advantage/disadvantage (via the use of the shift or ctrl keys). This
+ * function is expecting to be attached to a die icon that has attributes
+ * that allow it to do its work.
+ */
+export async function handleDamageRollDieEvent(event) {
+    let element = event.currentTarget;
+    let actor   = game.actors.find((a) => a.id === element.dataset.id);
+    let title   = game.i18n.localize(`bsh.fields.titles.dieRolls.${element.dataset.type}`)
+
+    event.preventDefault();
+    
+    let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
+    let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+    if(event.shiftKey) {
+        isWithAdvantage = true;
+        isWithDisadvantage = false;
+    } else if(event.ctrlKey) {
+        isWithAdvantage = false;
+        isWithDisadvantage = true;
+    }         
+    
+    logDieRoll(actor, element.dataset.die, title, isWithAdvantage, isWithDisadvantage);
+    return(false);
+}
+
+
 export async function handleRollUsageDieEvent(event) {
     let element = event.currentTarget;
 

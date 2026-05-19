@@ -12,7 +12,6 @@ import {calculateAttributeValues,
  */
 export async function castSpell(spellId) {
     let spell = getOwnedItemById(spellId);
-
     if(spell && spell.type === "spell") {
         if(spell.system.state !== "unavailable") {
             let caster     = spell.actor;
@@ -21,6 +20,10 @@ export async function castSpell(spellId) {
             let message;
             let data       = {system: {state: "cast"}};
 
+            /* 
+             * casting a spell has not an advantage or disadvantage modifier with the keys
+             * instead the spell will be cast at a disadvantage if it's already been casted at least once in the day
+             */
             if(spell.system.state === "available") {
                 dice = new Roll("1d20");
             } else {
