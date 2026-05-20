@@ -220,16 +220,17 @@ export function OLDlogDamageRoll(event) {
 
 export function logDamageRoll(actor, rollData) {
 
-    let data    = {actor:   actor.name,
-                   doomed: (rollData.doomed === "true"),
-                   roll:   {expanded: true,
-                            labels: {title: interpolate("bsh.messages.titles.damageRoll")},
-                            result: 0,
-                            rolled: [],
-                            tested: false}};
+    let data = {actor:  actor.name,
+                doomed: rollData.doomed,
+                roll: { expanded: true,
+                        formula: rollData.formula,
+                        labels: {title: interpolate("bsh.messages.titles.damageRoll")},
+                        result: 0,
+                        rolled: [],
+                        tested: false
+                      }
+              };
     let formula = rollData.formula;
-
-    data.roll.formula = formula;
     rollEm(new Roll(formula)).then((roll) => {
         data.roll.result  = roll.total;
         roll.terms[0].results.forEach(a => data.roll.rolled.push({result: a.result, active: a.active}));
@@ -313,12 +314,14 @@ export function logDieRoll(actor, dieType, title, isWithAdvantage=false, isWithD
     let message = {actor:    actor.name, 
                    actorId:  actor.id,
                    doomed:   doomed,
-                   roll:     {expanded: true,
-                              formula:  formula,
-                              labels:   {title: title},
-                              result:   0,
-                              rolled: [],
-                              tested:   false}};
+                   roll:     {expanded:   true,
+                              formula:    formula,
+                              labels:     {title: title},
+                              result:     0,
+                              rolled:     [],
+                              tested:     false,
+                              }
+                  };
 
     if(isWithAdvantage) {
         formula = (doomed ? `1${dieType}` : `2${dieType}kh`);
