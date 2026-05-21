@@ -1,6 +1,6 @@
 import {BSHConfiguration} from './configuration.js';
 import AttributeTestDialog from './attribute_test_dialog.js';
-import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll, logDamageRoll} from './chat_messages.js';
+import {logAttackRoll, logAttributeTest, logDieRoll, logItemUsageDieRoll, logDamageRoll, logGenericDamageRoll} from './chat_messages.js';
 import {isTriswitchAtDisadvantage, isTriswitchAtAdvantage} from './triswitch.js';
 
 /**
@@ -372,7 +372,6 @@ export async function handleRollDieEvent(event) {
     return(false);
 }
 
-//TODO: TO BE MADE COMPATIBLE WITH handleWeaponDamageRollDieEvent and logDamageRoll
 /**
  * This function maps a generic damage roll (not linked to a specific weapon)
  * to the logging method made for weapons, logDamageRoll, instead of the generic logDieRoll.
@@ -397,7 +396,7 @@ export async function handleGenericDamageRollDieEvent(event) {
         isWithDisadvantage = true;
     }         
     
-    logDieRoll(actor, element.dataset.die, title, isWithAdvantage, isWithDisadvantage);
+    logGenericDamageRoll(actor, element.dataset.die, title, isWithAdvantage, isWithDisadvantage);
     return(false);
 }
 
