@@ -706,6 +706,34 @@ export function logSpellCast(spell, result) {
     showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
 }
 
+export function logSpellCastUnified(spell, result, success) {
+    let actor   = spell.actor;
+    let message = {actor:   actor.name,
+                   actorId: actor.id,
+                   spell:   spell.name,
+                   doomed:  (actor.system.doom === "exhausted"),
+                   fumble:  (result.total === 20),
+				   critical:(result.total === 1),
+                   roll:    {expanded: false,
+                             formula:  result.formula,
+                             labels:   {result: "",
+                                        title: game.i18n.localize("bsh.messages.titles.castSpell")},
+                             result:   result.result,
+                             rolled:   [],
+                             success:  success,
+                             tested:   true}};
+    result.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+
+    if (success) {
+        message.roll.labels.result = game.i18n.localize("bsh.fields.titles.success");
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
+
+    } else {
+        message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
+        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
+    }
+} 
+
 export function logSpellCastFailure(spell, result) {
     let actor   = spell.actor;
     let message = {actor:   actor.name,

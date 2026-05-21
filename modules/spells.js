@@ -1,5 +1,6 @@
 import {logSpellCast,
-        logSpellCastFailure} from './chat_messages.js';
+        logSpellCastFailure,
+		logSpellCastUnified} from './chat_messages.js';
 import {BSHConfiguration} from './configuration.js';
 import {calculateAttributeValues,
         getOwnedItemById,
@@ -15,27 +16,32 @@ export async function castSpell(spellId) {
     if(spell && spell.type === "spell") {
         if(spell.system.state !== "unavailable") {
             let caster     = spell.actor;
+			let doomed     = (caster.system.doom === "exhausted");
             let dice       = null;
             let attributes = calculateAttributeValues(caster.system, BSHConfiguration);
-            let message;
             let data       = {system: {state: "cast"}};
 
             /* 
              * casting a spell has not an advantage or disadvantage modifier with the keys
              * instead the spell will be cast at a disadvantage if it's already been casted at least once in the day
              */
-            if(spell.system.state === "available") {
+            if(spell.system.state === "available" && !doomed) {
                 dice = new Roll("1d20");
             } else {
                 dice = new Roll("2d20kh");
             }
             rollEm(dice).then((roll) => {
-                if(roll.total >= attributes.intelligence) {
+                let success = roll.total < attributes.intelligence;
+                // if(!success) {
+                    // data.system.state = "unavailable";
+                    // logSpellCastFailure(spell, roll);
+                // } else {
+                    // logSpellCast(spell, roll);
+                // }
+                if(!success) {
                     data.system.state = "unavailable";
-                    logSpellCastFailure(spell, roll);
-                } else {
-                    logSpellCast(spell, roll);
                 }
+                logSpellCastUnified(spell, roll, success);
                 spell.update(data, {diff: true});
             });
         } else {
