@@ -98,7 +98,11 @@ export default class CharacterSheet extends ActorSheet {
     _onBackgroundSelected(event) {
         if(event.currentTarget.value !== "") {
             let actor = game.actors.get(this.object.id);
-            calculateCharacterData(actor.system, CONFIG.configuration);
+			if(actor) {
+				calculateCharacterData(actor, CONFIG.configuration);
+			} else {
+				console.error("Cannot find given actor");
+			}
         }
     }
 

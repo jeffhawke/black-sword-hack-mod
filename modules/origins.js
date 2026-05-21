@@ -4,10 +4,10 @@ import {stringToKey} from './shared.js';
 
 async function generateBirthPlace(origin) {
     if(origin && BSHConfiguration.birthList[origin]) {
-        return((new Roll("1d20")).evaluate({async: true})
+        return((new Roll("1d20")).evaluate()
                .then((roll) => game.i18n.localize(BSHConfiguration.birthList[origin][roll.total])));
     } else {
-        return((new Roll("2d6")).evaluate({async: true})
+        return((new Roll("2d6")).evaluate()
                .then((roll) => game.i18n.localize(BSHConfiguration.classicBirthList[roll.total])));
     }
 }

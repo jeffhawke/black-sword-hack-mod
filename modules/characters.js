@@ -76,7 +76,7 @@ function generateAttributeScores() {
 function generateAttributeScore() {
     let dice = new Roll("2d6");
 
-    return(dice.evaluate({async: true})).then((roll) => ROLL_TABLE[`${roll.total}`]);
+    return(dice.evaluate()).then((roll) => ROLL_TABLE[`${roll.total}`]);
 }
 
 /**
@@ -87,7 +87,7 @@ function generateAttributeScore() {
  */
 function generateBackground(origins, allowUniques, ignoreList) {
     let options = filterBackgroundsByOrigin(origins, allowUniques, ignoreList);
-    return((new Roll(`1d${options.length}-1`)).evaluate({async: true}).then((roll) => {
+    return((new Roll(`1d${options.length}-1`)).evaluate().then((roll) => {
         return(options[roll.total]);
     }));
 }
@@ -154,7 +154,7 @@ export function randomizeCharacter(actor) {
 function randomOrigin() {
     let keys = getOriginKeys();
 
-    return(new Roll(`1d${keys.length}-1`)).evaluate({async: true}).then((roll) => {
+    return(new Roll(`1d${keys.length}-1`)).evaluate().then((roll) => {
         return(keys[roll.total]);
     });
 }

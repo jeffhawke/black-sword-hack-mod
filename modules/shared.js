@@ -165,21 +165,23 @@ export function calculateMaximumHitPoints(context, level) {
  */
 export function calculateLevel(data, configuration) {
     let totalStories = 0;
-    let stories      = data.stories;
-
-    Object.keys(stories).sort().forEach((index) => {
-        //safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
-        if(stories[index].requiredForNextLevel != stories[index].level) {
-            stories[index].requiredForNextLevel = stories[index].level;
-        }
-        if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
-            stories[index].title = "level achieved";
-            totalStories++;
-        } else {
-            stories[index].title = ""
-        }
-    });
-
+    if(data) {
+		let stories = data.stories;
+		Object.keys(stories).sort().forEach((index) => {
+			//safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
+			if(stories[index].requiredForNextLevel != stories[index].level) {
+				stories[index].requiredForNextLevel = stories[index].level;
+			}
+			if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
+				stories[index].title = "level achieved";
+				totalStories++;
+			} else {
+				stories[index].title = ""
+			}
+		});
+	} else {
+		console.error("No actor data here, something is very wrong");
+	}
     return(totalStories + 1);
 }
 
@@ -692,7 +694,7 @@ export function onInfoIconClicked(event) {
  * and returns a promise that yields the roll once resolved.
  */
 export function rollEm(dice) {
-    return(dice.evaluate({async: true}).then((roll) => {
+    return(dice.evaluate().then((roll) => {
         if(game.dice3d) {
             game.dice3d.showForRoll(roll);
         }
