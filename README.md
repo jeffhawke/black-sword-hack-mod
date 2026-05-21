@@ -4,6 +4,15 @@ I don't intend to offer support to anyone besides my own play group. If someone 
 
 If you're interested in changing it further, you're free to do so. If you're interested in a collab with me on this, write me and let's talk about it.
 
+## INSTALLATION
+
+In foundryvtt, go to Game System section and click on "Install System"
+
+In the popup window, once the list of available packages is fully loaded, use the following link in the "Manifest URL" line at the end and click "Install":
+
+https://raw.githubusercontent.com/jeffhawke/black-sword-hack-mod/master/system.json
+
+
 ## FAQ
 
 1. Why not using one of the other forks? Why making one of your own?
