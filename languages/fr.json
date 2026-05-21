@@ -341,9 +341,9 @@
       },
       "items": {
         "notFound": "Impossible de trouver l'élément spécifié.",
+        "unavailable": "Impossible de réinitialiser le dé d'usage de l'objet car la quantité actuelle est nulle.",
         "owned": {
-          "notFound": "Impossible de localiser l'objet et/ou son propriétaire.",
-          "unavailable": "Impossible de réinitialiser le dé d'usage de l'objet car la quantité actuelle est nulle."
+          "notFound": "Impossible de localiser l'objet et/ou son propriétaire."
         }
       },
       "origins": {

@@ -324,9 +324,9 @@
       },
       "items": {
         "notFound": "No se ha encontrado el objeto especificado.",
+        "unavailable": "No se puede restablecer el dado de uso del objeto porque la cantidad actual es cero..",
         "owned": {
-          "notFound": "No se ha encontrado el objeto o su propietario..",
-          "unavailable": "No se puede restablecer el dado de uso del objeto porque la cantidad actual es cero.."
+          "notFound": "No se ha encontrado el objeto o su propietario.."
         }
       },
       "origins": {

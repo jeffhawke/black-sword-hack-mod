@@ -325,9 +325,9 @@
       },
       "items": {
         "notFound": "Unable to locate the specified item.",
+         "unavailable": "Unable to reset item usage die as the current quantity is zero.",
         "owned": {
-          "notFound": "Unable to locate the item and/or its owner.",
-          "unavailable": "Unable to reset item usage die as the current quantity is zero."
+          "notFound": "Unable to locate the item and/or its owner."
         }
       },
       "origins": {

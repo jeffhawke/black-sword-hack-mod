@@ -493,11 +493,12 @@ function handleActorUsageDieRollEvent(event) {
 async function handleItemUsageDieRollEvent(event) {
     let element = event.currentTarget;
     let item    = getOwnedItemById(element.dataset.item);
+    let actorId = item.parent.id;
 
     event.preventDefault();
 
-    let isWithDisadvantage = isTriswitchAtDisadvantage(actor.id);
-    let isWithAdvantage = isTriswitchAtAdvantage(actor.id);
+    let isWithDisadvantage = isTriswitchAtDisadvantage(actorId);
+    let isWithAdvantage = isTriswitchAtAdvantage(actorId);
     if(event.shiftKey) {
         isWithAdvantage = true;
         isWithDisadvantage = false;
@@ -576,6 +577,7 @@ export async function resetItemUsageDie(itemId) {
             item.update(data, {diff: true});
         } else {
             console.warn(`Unable to reset the usage die for owned item id '${itemId}' as it has a quantity of zero.`);
+            ui.notifications.error(game.i18n.localize("bsh.errors.items.unavailable"));
         }
     } else {
         console.error(`Unable to locate an owned item with the id '${itemId}'.`);
@@ -596,7 +598,7 @@ export async function decrementItemQuantity(itemId) {
             item.update(data, {diff: true});
         } else {
             console.error(`Unable to reduce the quantity for owned item id '${itemId}'.`);
-            ui.notifications.error(game.i18n.localize("bsh.errors.items.owned.unavailable"));
+            ui.notifications.error(game.i18n.localize("bsh.errors.items.unavailable"));
         }
     } else {
         console.error(`Unable to locate an owned item with the id '${itemId}'.`);
