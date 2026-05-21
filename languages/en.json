@@ -562,8 +562,8 @@
       "attributeRollFailed": "%NAME% %ATTRIBUTE% attribute test failed.",
       "attributeRollSuccess": "%NAME% %ATTRIBUTE% attribute test successful.",
       "blurbs": {
-        "attacksWith": "attacks With",
-        "calls": "calls Upon",
+        "attacksWith": "attacks with",
+        "calls": "calls upon",
         "callFailure": "The spirit chooses to ignore the call!",
         "castFumble": "Spell fails catastrophically (roll on the Torn Veil table).",
         "callSuccess": "The spirit responds to the call!",

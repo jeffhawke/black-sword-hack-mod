@@ -301,16 +301,21 @@ Hooks.once("init", function() {
         return false;
     });
 
-    // Add hook functions.
+    // Hook functions.
+
+    /**
+     * This function is called every time a new chat message is added to the chat window
+     * It is called immediately after the message has been rendered, thus it can be found in the document model
+    */
     Hooks.on("renderChatMessage", (message, speaker) => {
         setTimeout(() => {
-            //if the chat column is hidden, a popup element with the chat message will appear for a few seconds.
+            //if the chat column is hidden, a popup element with an identical chat message will appear for a few seconds.
             //Without using querySelectorAll, that temp message was the only one to get the click bindings
             let chatElements = document.querySelectorAll(`[data-message-id="${message.id}"]`);
             chatElements.forEach((elem) => { 
-                let attackTitleNode = elem.querySelector(".bsh-roll-title");
-                if(attackTitleNode) {
-                    attackTitleNode.addEventListener("click", toggleAttributeTestDisplay);
+                let messageTitleNode = elem.querySelector(".bsh-roll-title");
+                if(messageTitleNode) {
+                    messageTitleNode.addEventListener("click", toggleAttributeTestDisplay);
                 }
                 let damageButtonNode = elem.querySelector(".bsh-damage-button");
                 if (damageButtonNode) {
