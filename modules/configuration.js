@@ -519,9 +519,9 @@ BSHConfiguration.powersList = {
 };
 
 BSHConfiguration.rollTypes = {
+    "standard": "bsh.rolls.types.standard",
     "advantage": "bsh.rolls.types.advantage",
-    "disadvantage": "bsh.rolls.types.disadvantage",
-    "standard": "bsh.rolls.types.standard"
+    "disadvantage": "bsh.rolls.types.disadvantage"
 };
 
 BSHConfiguration.spellStates = {
