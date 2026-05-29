@@ -1,4 +1,4 @@
-export default class SpellSheet  extends ItemSheet {
+export default class SpellSheet  extends foundry.appv1.sheets.ItemSheet {
     get template() {
         return("systems/black-sword-hack-mod/templates/sheets/spell-sheet.html");
     }

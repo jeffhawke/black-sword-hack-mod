@@ -33,7 +33,7 @@ import {castSpell,
         resetSpellState,
         resetSpellStatesForActor} from '../spells.js';
 
-export default class CharacterSheet extends ActorSheet {
+export default class CharacterSheet extends foundry.appv1.sheets.ActorSheet {
     static get defaultOptions() {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes: ["bsh", "bsh-sheet", "bsh-character"],

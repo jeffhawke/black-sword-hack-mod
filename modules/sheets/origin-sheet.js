@@ -1,6 +1,6 @@
 import BackgroundDialog from "../dialogs/background_dialog.js";
 
-export default class OriginSheet extends ItemSheet {
+export default class OriginSheet extends foundry.appv1.sheets.ItemSheet {
     static get defaultOptions() {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes: ["bsh", "bsh-sheet", "bsh-origin"],

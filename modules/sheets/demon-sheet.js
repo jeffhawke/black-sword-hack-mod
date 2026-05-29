@@ -1,4 +1,4 @@
-export default class DemonSheet  extends ItemSheet {
+export default class DemonSheet  extends foundry.appv1.sheets.ItemSheet {
     static get defaultOptions() {
         return(foundry.utils.mergeObject(super.defaultOptions,
                                          {classes: ["bsh", "bsh-sheet", "bsh-demon"],

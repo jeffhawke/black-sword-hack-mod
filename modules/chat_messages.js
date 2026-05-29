@@ -756,7 +756,7 @@ export function logSpellCastFailure(spell, result) {
 }
 
 export function showMessage(actor, templateKey, data) {
-    getTemplate(templateKey)
+    foundry.applications.handlebars.getTemplate(templateKey)
         .then((template) => {
             let message = {speaker: ChatMessage.getSpeaker(actor=actor),
                            user:    game.user};
