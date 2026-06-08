@@ -98,11 +98,11 @@ export default class CharacterSheet extends foundry.appv1.sheets.ActorSheet {
     _onBackgroundSelected(event) {
         if(event.currentTarget.value !== "") {
             let actor = game.actors.get(this.object.id);
-			if(actor) {
-				calculateCharacterData(actor, CONFIG.configuration);
-			} else {
-				console.error("Cannot find given actor");
-			}
+            if(actor) {
+                calculateCharacterData(actor, CONFIG.configuration);
+            } else {
+                console.error("Cannot find given actor");
+            }
         }
     }
 

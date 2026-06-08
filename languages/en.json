@@ -673,6 +673,14 @@
       "title": "Roll Modal!"
     },
     "rolls": {
+      "attacks": {
+        "dexterity": {
+          "title": "Ranged Weapon Attack"
+        },
+        "strength": {
+          "title": "Melee Weapon Attack"
+        }  
+      },
       "tests": {
         "charisma": {
           "title": "Test Charisma"

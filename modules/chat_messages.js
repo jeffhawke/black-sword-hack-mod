@@ -12,7 +12,7 @@ import {calculateAttributeValues,
 import {resetTriswitchState, isTriswitchAtDisadvantage, isTriswitchAtAdvantage} from './triswitch.js';
 
 
-export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDisadvantage=false, expanded=false) {
+export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDisadvantage=false, expanded=false, adjustment=0) {
     let actor  = game.actors.find((a) => a.id === actorId);
 
     if(actor) {
@@ -32,19 +32,20 @@ export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDi
 
             if(isWithAdvantage) {
                 if(!doomed) {
-                    dice = new Roll(generateDieRollFormula({kind: "advantage"}));
+                    dice = new Roll(generateDieRollFormula({kind: "advantage", adjustment: adjustment}));
                 } else {
-                    dice = new Roll(generateDieRollFormula());
+                    dice = new Roll(generateDieRollFormula({adjustment: adjustment}));
                 }
             } else if(isWithDisadvantage) {
-                dice = new Roll(generateDieRollFormula({kind: "disadvantage"}));
+                dice = new Roll(generateDieRollFormula({kind: "disadvantage", adjustment: adjustment}));
             } else {
                 if(!doomed) {
-                    dice = new Roll(generateDieRollFormula());
+                    dice = new Roll(generateDieRollFormula({adjustment: adjustment}));
                 } else {
-                    dice = new Roll(generateDieRollFormula({kind: "disadvantage"}));
+                    dice = new Roll(generateDieRollFormula({kind: "disadvantage", adjustment: adjustment}));
                 }
             }
+
             rollEm(dice).then((roll) => {
                 let dieResult = roll.total; //roll.terms[0].results[0].result;
                     critical.failure = (dieResult === 20);
@@ -713,7 +714,7 @@ export function logSpellCastUnified(spell, result, success) {
                    spell:   spell.name,
                    doomed:  (actor.system.doom === "exhausted"),
                    fumble:  (result.total === 20),
-				   critical:(result.total === 1),
+                   critical:(result.total === 1),
                    roll:    {expanded: false,
                              formula:  result.formula,
                              labels:   {result: "",

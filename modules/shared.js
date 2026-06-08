@@ -166,22 +166,22 @@ export function calculateMaximumHitPoints(context, level) {
 export function calculateLevel(data, configuration) {
     let totalStories = 0;
     if(data) {
-		let stories = data.stories;
-		Object.keys(stories).sort().forEach((index) => {
-			//safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
-			if(stories[index].requiredForNextLevel != stories[index].level) {
-				stories[index].requiredForNextLevel = stories[index].level;
-			}
-			if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
-				stories[index].title = "level achieved";
-				totalStories++;
-			} else {
-				stories[index].title = ""
-			}
-		});
-	} else {
-		console.error("No actor data here, something is very wrong");
-	}
+        let stories = data.stories;
+        Object.keys(stories).sort().forEach((index) => {
+            //safety check for importing actors from versions v1.3.5, which had a wrong requiredForNextLevel
+            if(stories[index].requiredForNextLevel != stories[index].level) {
+                stories[index].requiredForNextLevel = stories[index].level;
+            }
+            if(stories[index].sessions && stories[index].sessions >= stories[index].requiredForNextLevel) {
+                stories[index].title = "level achieved";
+                totalStories++;
+            } else {
+                stories[index].title = ""
+            }
+        });
+    } else {
+        console.error("No actor data here, something is very wrong");
+    }
     return(totalStories + 1);
 }
 
@@ -225,6 +225,7 @@ export function generateDieRollFormula(options={}) {
     let formula = null;
     let dieType = (options.dieType ? options.dieType : "d20");
     let kind    = (options.kind ? options.kind : "standard");
+    let adjustment = (options.adjustment || 0);
 
     switch(dieType) {
         case "one":
@@ -255,6 +256,12 @@ export function generateDieRollFormula(options={}) {
           formula = `1${formula}`;
         }
     }
+    
+    if(adjustment < 0) {
+        formula = `${formula}${adjustment}`; //the minus is already in the value
+    } else if(adjustment > 0) {
+        formula = `${formula}+${adjustment}`; //the plus sign must be added
+    }    
 
     return(formula);
 }
@@ -424,8 +431,6 @@ export async function handleWeaponDamageRollDieEvent(event) {
     return(false);
 }
 
-
-
 export async function handleRollUsageDieEvent(event) {
     let element = event.currentTarget;
 
@@ -439,7 +444,7 @@ export async function handleRollUsageDieEvent(event) {
     }
 }
 
-function handleActorUsageDieRollEvent(event) {
+async function handleActorUsageDieRollEvent(event) {
     let element = event.currentTarget;
     let actor   = game.actors.find((a) => a.id === element.dataset.actor);
 
@@ -521,11 +526,12 @@ async function handleItemUsageDieRollEvent(event) {
     return(false);
 }
 
+
 export async function handleWeaponRollEvent(event) {
     let element = event.currentTarget;
 
     event.preventDefault();
-    logAttackRoll
+    
     if(element.dataset.item) {
         let weapon = getOwnedItemById(element.dataset.item);
 
@@ -548,7 +554,25 @@ export async function handleWeaponRollEvent(event) {
                     isWithDisadvantage = true;
                 } 
                 
-                logAttackRoll(weapon.actor.id, weapon.id, isWithAdvantage, isWithDisadvantage);
+                
+                
+                if(event.altKey) {
+                    let attribute = (weapon.system.type !== "ranged" ? "strength" : "dexterity");
+                    let rollType = "standard";
+                    let title     = game.i18n.localize(`bsh.rolls.attacks.${attribute}.title`);
+
+                    if(isWithAdvantage) {
+                        rollType = "advantage";
+                    } else if(isWithDisadvantage) {
+                        rollType = "disadvantage";
+                    }
+
+                    showAttributeRollModal(weapon.actor, attribute, title, {rollType: rollType, isWeaponRoll: true, weaponId: weapon.id});
+                } else {
+                    // logAttributeTest(actor, element.dataset.attribute, isWithAdvantage, isWithDisadvantage);
+                    logAttackRoll(weapon.actor.id, weapon.id, isWithAdvantage, isWithDisadvantage);
+                }                
+                
             } else {
                 console.error(`Unable to make a weapon attack roll for weapon id '${weapon.id}' as it is not an owned item.`);
                 ui.notifications.error(game.i18n.localize("bsh.errors.weapons.unowned"));

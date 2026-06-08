@@ -1,4 +1,4 @@
-import {logAttributeTest} from './chat_messages.js';
+import {logAttributeTest, logAttackRoll} from './chat_messages.js';
 import {calculateCharacterData, rollEm} from './shared.js';
 
 export default class AttributeTestDialog extends Dialog {
@@ -71,12 +71,22 @@ export default class AttributeTestDialog extends Dialog {
     }
 
     _onRollIt() {
-        logAttributeTest(this._actor,
-                         this._attribute,
-                         this.isWithAdvantage,
-                         this.isWithDisadvantage,
-                         false,
-                         this.totalAdjustment);
+        if (this._settings.isWeaponRoll) {
+            logAttackRoll( this._actor.id, 
+                           this._settings.weaponId, 
+                           this.isWithAdvantage, 
+                           this.isWithDisadvantage,
+                           false,
+                           this.totalAdjustment);
+        }
+        else {
+            logAttributeTest(this._actor,
+                             this._attribute,
+                             this.isWithAdvantage,
+                             this.isWithDisadvantage,
+                             false,
+                             this.totalAdjustment);
+        }
     }
 
     _onThreatChanged(event) {
@@ -95,6 +105,8 @@ export default class AttributeTestDialog extends Dialog {
         let settings = Object.assign({}, options);
         let data     = {adjustment:    (settings.adjustment || 0),
                         attribute:     game.i18n.localize(`bsh.attributes.${attribute}.long`),
+                        isWeaponRoll:  (settings.isWeaponRoll || false),
+                        weaponId:      (settings.weaponId || -1),
                         configuration: CONFIG.configuration,
                         score:         0,
                         threat:        (settings.threat || 0),
@@ -102,7 +114,11 @@ export default class AttributeTestDialog extends Dialog {
 
         calculateCharacterData(actor, CONFIG.configuration);
         data.score     = (actor.system.calculated || actor.system.calculated)[attribute];
-        settings.title = actor.name + " : " + game.i18n.localize(`bsh.rolls.tests.${attribute}.title`);
+        if (settings.isWeaponRoll) {
+            settings.title = actor.name + " : " + game.i18n.localize(`bsh.rolls.attacks.${attribute}.title`)
+        } else {
+            settings.title = actor.name + " : " + game.i18n.localize(`bsh.rolls.tests.${attribute}.title`);
+        }
 
         return(renderTemplate("systems/black-sword-hack-mod/templates/roll-modal.html", data)
                    .then((content) => {

@@ -1,6 +1,6 @@
 import {logSpellCast,
         logSpellCastFailure,
-		logSpellCastUnified} from './chat_messages.js';
+        logSpellCastUnified} from './chat_messages.js';
 import {BSHConfiguration} from './configuration.js';
 import {calculateAttributeValues,
         getOwnedItemById,
@@ -16,7 +16,7 @@ export async function castSpell(spellId) {
     if(spell && spell.type === "spell") {
         if(spell.system.state !== "unavailable") {
             let caster     = spell.actor;
-			let doomed     = (caster.system.doom === "exhausted");
+            let doomed     = (caster.system.doom === "exhausted");
             let dice       = null;
             let attributes = calculateAttributeValues(caster.system, BSHConfiguration);
             let data       = {system: {state: "cast"}};
