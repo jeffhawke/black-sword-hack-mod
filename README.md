@@ -1,6 +1,10 @@
-This project will be used to fix a few bugs, update things for new versions of foundry (v14 for now), and implement a few "quality of life" fixes and changes on things that made using the original system a little jarring.
+I forked this project to fix a few bugs, work on a more visually appealing character sheet and update things for new versions of foundry (v14 and future versions).
 
-I don't intend to offer support to anyone besides my own play group. If someone is interested in this code, you can take it as-is, no guarantee given, with the same liberal licence the original author provided.
+I implemented a few "quality of life" fixes and changes on things that made using the original system a little annoying.
+
+I'm offering limited support as this is mostly done for my own play group. As long as we play it, I'll keep it updated. Afterwards I'm not promising anything.
+
+If someone is interested in this code, you can take it as-is, no guarantee given, with the same liberal licence the original author provided.
 
 If you're interested in changing it further, you're free to do so. If you're interested in a collab with me on this, write me and let's talk about it.
 
@@ -18,6 +22,11 @@ https://raw.githubusercontent.com/jeffhawke/black-sword-hack-mod/master/system.j
 1. Why not using one of the other forks? Why making one of your own?
    
    Because almost no other existing fork was making any meaningful changes at that time, they just forked the code and let it sit there. 
+
+2. There are words in english in the other translations, is it normal?
+
+   Unfortunately I don't speak Russian, Ukranian or (for the most part) Spanish. That means that their language files have been left behind when I updated English and French. 
+   There is not much I can do at the moment but I welcome any contribution if you wish to make corrections.
 
 # Original Readme below
 
