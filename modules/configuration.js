@@ -349,6 +349,37 @@ BSHConfiguration.classicBirthList = [
   "bsh.births.20"
 ];
 
+BSHConfiguration.bonusMalusList = {
+    "strongerBonus": { 
+        "label": "bsh.diceModifiers.bonus.stronger",
+        "value": "-3"
+    },
+    "strongBonus": { 
+        "label": "bsh.diceModifiers.bonus.strong",
+        "value": "-2"
+    },
+    "weakBonus": {
+        "label": "bsh.diceModifiers.bonus.weak",
+        "value": "-1"
+    },
+    "neutral": {
+        "label": "bsh.diceModifiers.neutral",
+        "value": "0"
+    },
+    "weakMalus": {
+        "label": "bsh.diceModifiers.malus.weak",
+        "value": "+1"
+    },
+    "strongMalus": {
+        "label": "bsh.diceModifiers.malus.strong",
+        "value": "+2"
+    },
+    "strongerMalus": {
+        "label": "bsh.diceModifiers.malus.stronger",
+        "value": "+3"
+    }
+};
+
 BSHConfiguration.diceList = {
     "d4": "bsh.dice.d4",
     "d6": "bsh.dice.d6",

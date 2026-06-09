@@ -322,6 +322,19 @@
       "d20": "1d20",
       "exhausted": "Épuisé"
     },
+    "diceModifiers": {
+        "bonus": {
+            "stronger": "Stronger Bonus (-3)",
+            "strong": "Strong Bonus (-2)",
+            "weak": "Weak Bonus (-1)"
+        },
+        "malus": {
+            "stronger": "Stronger Malus (+3)",
+            "strong": "Strong Malus (+2)",
+            "weak": "Weak Malus (+1)"
+        },
+        "neutral": "No Modifier (0)"
+    },
     "demons": {
       "tableName": "La vengeance du démon"
     },
@@ -332,7 +345,8 @@
     },
     "errors": {
       "actors": {
-        "notFound": "Impossible de trouver l'acteur requis."
+        "notFound": "Impossible de trouver l'acteur requis.",
+        "notOwned": "Cannot roll a die for an actor not owned."
       },
       "attributes": {
         "invalid": "Paramètre d'attribut d'acteur non trouvé. Il s'agit d'un bug !",
@@ -383,14 +397,18 @@
         "disadvantage": "Désavantage",
         "doomDie": "Destin",
         "doomDieUpgrade": "Amélioration du dé de Destin",
+        "equipmentNotes": "Equipment notes",
         "firstBackground": "Historique 1",
         "gift": "Don",
         "hands": "Mains",
         "hitPoints": "PV",
         "hitPointsCurrent": "PV (Actuel)",
         "hitPointsMaximum": "PV (Maximum)",
+        "languageNotes": "Language notes",
         "level": "Niveau",
         "name": "Nom",
+        "nextLevel": "Next Level",
+        "numberOfSessions": "Number of sessions",
         "origin": "Origine",
         "otherPossessions": "Autres possessions",
         "playerName": "Joueur",
@@ -403,12 +421,14 @@
         "shield": "Bouclier ?",
         "standardRoll": "Standard",
         "stories": "Historiques",
+        "storyForLevel": "Story for level",
         "thirdBackground": "Historique 3",
         "title": "Titre",
         "threat": "Niveau de menace",
         "type": "Type",
         "unique": "Unique",
         "usageDie": "Dé d'usage",
+        "value": "Value",
         "vulnerabilities": "Vulnérabilités"
       },
       "titles": {
@@ -451,6 +471,8 @@
         "rollParry": "Jet de défense (Parade).",
         "rollPerception": "Jet de perception.",
         "rollDie": "Lancer le dé",
+        "rollArmedDamage": "Roll armed damage die.",
+        "rollUnarmedDamage": "Roll unarmed damage die.",
         "success": "Succès !",
         "summonDemon": "Invoquez ce démon.",
         "summonSpirit": "Invoquez cet esprit."
@@ -532,6 +554,7 @@
       "itemQuantity": "Quantité",
       "itemUsageDie": "Dé",
       "level": "Niveau",
+      "Languages": "Languages",
       "random": "Générer un Personnage Aléatoirement",
       "spellName": "Sort",
       "spells": "Sorts",
@@ -634,6 +657,7 @@
         "parryRoll": "Jet de parade",
         "perceptionRoll": "Jet de perception",
         "roll": "Résultat",
+        "rolled": "Rolled",
         "summonDemon": "Invoquer un démon (Jet de Destin)",
         "usageDieRoll": "Dé d'usage"
       },
@@ -680,6 +704,14 @@
       "title": "Roll Modal!"
     },
     "rolls": {
+      "attacks": {
+        "dexterity": {
+          "title": "Ranged Weapon Attack"
+        },
+        "strength": {
+          "title": "Melee Weapon Attack"
+        }  
+      },
       "tests": {
         "charisma": {
           "title": "Test de Charisme"

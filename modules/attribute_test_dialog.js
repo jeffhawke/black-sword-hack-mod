@@ -23,7 +23,8 @@ export default class AttributeTestDialog extends Dialog {
     }
 
     get adjustment() {
-        let value = this.element[0].querySelector('input[name="adjustment"]').value.trim();
+        // let value = this.element[0].querySelector('input[name="adjustment"]').value.trim();
+        let value = this.element[0].querySelector('select[name="adjustment"]').value;
 
         if(value !== "") {
             return(parseInt(value));

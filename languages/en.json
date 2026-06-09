@@ -305,6 +305,19 @@
       "d20": "1d20",
       "exhausted": "Exhausted"
     },
+    "diceModifiers": {
+        "bonus": {
+            "stronger": "Stronger Bonus (-3)",
+            "strong": "Strong Bonus (-2)",
+            "weak": "Weak Bonus (-1)"
+        },
+        "malus": {
+            "stronger": "Stronger Malus (+3)",
+            "strong": "Strong Malus (+2)",
+            "weak": "Weak Malus (+1)"
+        },
+        "neutral": "No Modifier (0)"
+    },
     "demons": {
       "tableName": "Demon's Revenge"
     },
@@ -644,13 +657,16 @@
     "origins": {
       "barbarian": {
         "backgrounds": {},
-        "name": "Barbarian"},
+        "name": "Barbarian"
+      },
       "civilized": {
         "backgrounds": {},
-        "name": "Civilized"},
+        "name": "Civilized"
+      },
       "decadent": {
         "backgrounds": {},
-        "name": "Decadent"}
+        "name": "Decadent"
+      }
     },
     "powers": {
       "balance": {

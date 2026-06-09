@@ -15,7 +15,9 @@
 
         <div class="bsh-field">
             <label class="bsh-label">{{localize "bsh.fields.labels.bonusPenalty"}}</label>
-            <input class="bsh-input" name="adjustment" type="number" value="{{adjustment}}">
+            <select name="adjustment" class="bsh-input bsh-select">
+                {{selectOptions configuration.bonusMalusList localize=true selected=configuration.bonusMalusList.neutral.value}}
+            </select>
         </div>
 
         <div class="bsh-field">
