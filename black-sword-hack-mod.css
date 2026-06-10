@@ -417,6 +417,10 @@
     margin-bottom: 20px;
 }
 
+.bsh-altPopup-body {
+	grid-template-columns: 2fr 3fr 2fr;
+}
+
 .bsh-field {
     margin-bottom: 10px;
     width: 100%;

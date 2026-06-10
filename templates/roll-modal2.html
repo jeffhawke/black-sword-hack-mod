@@ -1,0 +1,33 @@
+<form autocomplete="off" class="{{cssClass}}">
+    <hr>
+    <div class="bsh-font-size-5">
+        <center>
+            <strong>{{attribute}}</strong>: {{score}} ,
+            <strong>{{localize "bsh.fields.labels.level"}}</strong>: {{level}}
+        </center>
+    </div>
+    <hr>
+
+    <div class="bsh-grid bsh-altPopup-body bsh-grid-extended-gap">
+        <div class="bsh-field">
+            <label class="bsh-label">Monster level</label>
+            <input class="bsh-input" name="threat" type="number" value="{{threat}}">
+			<strong>{{localize "bsh.fields.labels.threat"}}</strong>&nbsp;:&nbsp;<span name="threat">10</span>
+        </div>
+
+        <div class="bsh-field">
+            <label class="bsh-label">{{localize "bsh.fields.labels.bonusPenalty"}}</label>
+            <select name="adjustment" class="bsh-input bsh-select">
+                {{selectOptions configuration.bonusMalusList localize=true selected=configuration.bonusMalusList.neutral.value}}
+            </select>
+        </div>
+
+        <div class="bsh-field">
+            <label class="bsh-label">{{localize "bsh.fields.labels.rollType"}}</label>
+            <select name="type" class="bsh-input bsh-select">
+            {{selectOptions configuration.rollTypes selected=type localize=true}}
+            </select>
+        </div>
+        <br>
+    </div>
+</form>
