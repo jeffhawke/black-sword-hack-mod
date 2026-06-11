@@ -2,8 +2,8 @@ import {BSHConfiguration} from './configuration.js';
 import {calculateCharacterData, downgradeDie, getActorById, interpolate, rollEm} from './shared.js';
 
 /**
- * This function makes a doom role for a specified actor, downgrading the actors
- * doom die as appropriate and returning an object detailing the results of the
+ * This function makes a doom roll for a specified actor, downgrading the actors
+ * doom die if required and returning an object detailing the results of the
  * roll. The function accepts a second parameter to indicate whether the roll
  * should be made with "advantage", "disadvantage" or just a "standard" single
  * die roll (the default).
@@ -90,7 +90,7 @@ export function resetDoomDie(actor) {
         let updates = {system: {doom: "d6"}};
 
         calculateCharacterData(actor, CONFIG.configuration);
-        if(actor.level > 9) {
+        if(actor.system.level > 9) {
             updates.system.doom = "d8";
         }
         actor.update(updates, {diff: true});

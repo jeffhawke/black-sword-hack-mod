@@ -14,7 +14,8 @@ export default class AttributeTestDialog extends Dialog {
     }
 
     activateListeners(html) {
-        html.find('input[name="threat"]').on("change", this._onThreatChanged.bind(this));
+        html.find('input[name="threat"]').on("change", this._onNumberChanged.bind(this));
+        html.find('input[name="opponent"]').on("change", this._onNumberChanged.bind(this));
         super.activateListeners(html);
     }
 
@@ -50,14 +51,24 @@ export default class AttributeTestDialog extends Dialog {
     }
 
     get threat() {
-        let value = this.element[0].querySelector('input[name="threat"]').value.trim();
-
-        if(value !== "") {
-            value = parseInt(value);
-            return(value < 0 ? 0 : value);
+        let threatValue = 0;
+        if(this._settings.isWeaponRoll) {
+            let opponentString = this.element[0].querySelector('input[name="opponent"]').value.trim();
+            let opponentValue = parseInt(opponentString);
+            if(opponentValue<0) {
+                opponentValue = 0;
+            }
+            threatValue = opponentValue - this._actor.system.level;
         } else {
-            return(0);
+            let threatString = this.element[0].querySelector('input[name="threat"]').value.trim();
+            if(threatString !== "") {
+                threatValue = parseInt(threatString);
+            }
         }
+        if(threatValue<0) {
+            threatValue = 0;
+        }            
+        return threatValue;
     }
 
     get totalAdjustment() {
@@ -90,15 +101,20 @@ export default class AttributeTestDialog extends Dialog {
         }
     }
 
-    _onThreatChanged(event) {
-        if(event.currentTarget.value.trim() !== "") {
-            let value = parseInt(event.currentTarget.value);
+    _onNumberChanged(event) {
+        let valueString = event.currentTarget.value.trim();
+        let value = (valueString !== "") ? parseInt(valueString) : 0;
+        if(value < 0) {
+            value = 0;
+        }
+        event.currentTarget.value = value;
 
-            if(value < 0) {
-                event.currentTarget.value = 0;
+        if(this._settings.isWeaponRoll) {
+            let threatLevel = value - this._actor.system.level;
+            if(threatLevel<0) {
+                threatLevel = 0;
             }
-        } else {
-            event.currentTarget.value = 0;
+            this.element[0].querySelector('span[name="threat"]').innerText = threatLevel;
         }
     }
 
@@ -106,6 +122,7 @@ export default class AttributeTestDialog extends Dialog {
         let settings = Object.assign({}, options);
         let data     = {adjustment:    (settings.adjustment || 0),
                         attribute:     game.i18n.localize(`bsh.attributes.${attribute}.long`),
+                        level:         actor.system.level,
                         isWeaponRoll:  (settings.isWeaponRoll || false),
                         weaponId:      (settings.weaponId || -1),
                         configuration: CONFIG.configuration,

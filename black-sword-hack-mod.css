@@ -418,7 +418,7 @@
 }
 
 .bsh-altPopup-body {
-	grid-template-columns: 2fr 3fr 2fr;
+    grid-template-columns: 2fr 3fr 2fr;
 }
 
 .bsh-field {

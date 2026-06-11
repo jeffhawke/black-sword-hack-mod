@@ -305,7 +305,7 @@
       "d20": "1d20",
       "exhausted": "Agotado"
     },
-	"diceModifiers": {
+    "diceModifiers": {
         "bonus": {
             "stronger": "Stronger Bonus (-3)",
             "strong": "Strong Bonus (-2)",
@@ -318,7 +318,7 @@
         },
         "neutral": "No Modifier (0)"
     },
-			  
+              
     "demons": {
       "tableName": "Represalia demoníaca"
     },
