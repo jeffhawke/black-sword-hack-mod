@@ -10,6 +10,7 @@ import {calculateAttributeValues,
 /**
  * Retrieves a spell and attempts to cast it (if possible), reporting the
  * result to chat.
+ * THIS DOES NOT WORK CORRECTLY FOR CRITICAL SUCCESS OR FAILURE!
  */
 export async function castSpell(spellId) {
     let spell = getOwnedItemById(spellId);

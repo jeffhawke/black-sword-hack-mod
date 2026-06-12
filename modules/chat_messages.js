@@ -48,8 +48,8 @@ export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDi
 
             rollEm(dice).then((roll) => {
                 let dieResult = roll.total; //roll.terms[0].results[0].result;
-                    critical.failure = (dieResult === 20);
-                    critical.success = (dieResult === 1);
+                    critical.failure = false; //(dieResult === 20);
+                    critical.success = false; //(dieResult === 1);
                 data.roll        = {expanded: expanded,
                                     formula:  roll.formula,
                                     labels:   {title: interpolate("bsh.messages.titles.attackRoll")},
@@ -57,9 +57,13 @@ export function logAttackRoll(actorId, weaponId, isWithAdvantage=false, isWithDi
                                     result:   roll.total,
                                     tested:   true};
 
-                roll.terms[0].results.forEach(a => data.roll.rolled.push({result: a.result, active: a.active}))
+                roll.terms[0].results.forEach(a => {
+                    data.roll.rolled.push({result: a.result, active: a.active});
+                    critical.failure = critical.failure || (a.result == 20);
+                    critical.success = critical.success || (a.result == 1);
+                })
                 
-                data.roll.success = (!critical.failure && attributes[attribute] > data.roll.result);
+                data.roll.success = critical.success || (!critical.failure && attributes[attribute] > data.roll.result);
 
                 if(!critical.success && !critical.failure) {
                     data.roll.labels.result = interpolate(data.roll.success ? "bsh.messages.labels.hit" : "bsh.messages.labels.miss");
@@ -126,13 +130,17 @@ export function logAttributeTest(actor, attribute, isWithAdvantage=false, isWith
 
     rollEm(new Roll(message.roll.formula)).then((roll) => {
         let dieResult = roll.total; //roll.terms[0].results[0].result;
-            critical.failure = (dieResult === 20);
-            critical.success = (dieResult === 1);
+            critical.failure = false; //(dieResult === 20);
+            critical.success = false; //(dieResult === 1);
         
-        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}))
+        roll.terms[0].results.forEach(a => {
+            message.roll.rolled.push({result: a.result, active: a.active});
+            critical.failure = critical.failure || (a.result == 20);
+            critical.success = critical.success || (a.result == 1);
+        })
         
         message.roll.result  = roll.total;
-        message.roll.success = (critical.success || roll.total < attributes[attribute]);
+        message.roll.success = critical.success || (!critical.failure && roll.total < attributes[attribute]);
         if(message.roll.success) {
             if(critical.success) {
                 message.roll.labels.result = game.i18n.localize("bsh.fields.titles.criticalSuccess");
@@ -371,11 +379,17 @@ export function logDodgeRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
     }
     rollEm(new Roll(message.roll.formula)).then((roll) => {
         let dieResult = roll.total; //roll.terms[0].results[0].result;
-            critical.failure = (dieResult === 20);
-            critical.success = (dieResult === 1);
+            critical.failure = false; //(dieResult === 20);
+            critical.success = false; //(dieResult === 1);
         message.roll.result  = roll.total;
-        message.roll.success = (critical.success || roll.total < attributes["dexterity"]);
-        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+        
+        roll.terms[0].results.forEach(a => {
+            message.roll.rolled.push({result: a.result, active: a.active});
+            critical.failure = critical.failure || (a.result == 20);
+            critical.success = critical.success || (a.result == 1);
+        });
+        
+        message.roll.success = critical.success || (!critical.failure && roll.total < attributes["dexterity"]);
 
 
         if(!critical.success && !critical.failure) {
@@ -478,11 +492,15 @@ export function logInitiativeRoll(event) {
         }
         rollEm(new Roll(message.roll.formula)).then((roll) => {
             let dieResult = roll.total; //roll.terms[0].results[0].result;
-                critical.failure = (dieResult === 20);
-                critical.success = (dieResult === 1);
+                critical.failure = false; //(dieResult === 20);
+                critical.success = false; //(dieResult === 1);
             message.roll.result  = roll.total;
-            message.roll.success = (critical.success || roll.total < attributes["wisdom"]);
-            roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+            roll.terms[0].results.forEach(a => {
+                message.roll.rolled.push({result: a.result, active: a.active});
+                critical.failure = critical.failure || (a.result == 20);
+                critical.success = critical.success || (a.result == 1);
+            });
+            message.roll.success = critical.success || (!critical.failure && roll.total < attributes["wisdom"]);
 
             if(!critical.success && !critical.failure) {
                 message.roll.labels.result = interpolate(message.roll.success ? "bsh.messages.labels.success" : "bsh.messages.labels.failure");
@@ -596,11 +614,15 @@ export function logParryRoll(actor, isWithAdvantage=false, isWithDisadvantage=fa
     }
     rollEm(new Roll(message.roll.formula)).then((roll) => {
         let dieResult = roll.total; //roll.terms[0].results[0].result;
-            critical.failure = (dieResult === 20);
-            critical.success = (dieResult === 1);
+            critical.failure = false; //(dieResult === 20);
+            critical.success = false; //(dieResult === 1);
         message.roll.result  = roll.total;
-        message.roll.success = (critical.success || roll.total < attributes["strength"]);
-        roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+        roll.terms[0].results.forEach(a => {
+            message.roll.rolled.push({result: a.result, active: a.active});
+            critical.failure = critical.failure || (a.result == 20);
+            critical.success = critical.success || (a.result == 1);
+        });
+        message.roll.success = critical.success || (!critical.failure && roll.total < attributes["strength"]);
 
         if(!critical.success && !critical.failure) {
             message.roll.labels.result = interpolate(message.roll.success ? "bsh.messages.labels.success" : "bsh.messages.labels.failure");
@@ -661,11 +683,15 @@ export function logPerceptionRoll(event) {
         }
         rollEm(new Roll(message.roll.formula)).then((roll) => {
             let dieResult = roll.total; //roll.terms[0].results[0].result;
-                critical.failure = (dieResult === 20);
-                critical.success = (dieResult === 1);
+                critical.failure = false; //(dieResult === 20);
+                critical.success = false; //(dieResult === 1);
             message.roll.result  = roll.total;
-            message.roll.success = (critical.success || roll.total < attributes["intelligence"]);
-            roll.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+            roll.terms[0].results.forEach(a => {
+                message.roll.rolled.push({result: a.result, active: a.active});
+                critical.failure = critical.failure || (a.result == 20);
+                critical.success = critical.success || (a.result == 1);
+            });
+            message.roll.success = critical.success || (!critical.failure && roll.total < attributes["intelligence"]);
 
             if(!critical.success && !critical.failure) {
                 message.roll.labels.result = interpolate(message.roll.success ? "bsh.messages.labels.success" : "bsh.messages.labels.failure");
@@ -707,23 +733,30 @@ export function logSpellCast(spell, result) {
     showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
 }
 
-export function logSpellCastUnified(spell, result, success) {
+/**
+ * TODO: This needs to be reworked, especially the variables' names.
+ */
+export function logSpellCastUnified(spell, roll, success) {
     let actor   = spell.actor;
     let message = {actor:   actor.name,
                    actorId: actor.id,
                    spell:   spell.name,
                    doomed:  (actor.system.doom === "exhausted"),
-                   fumble:  (result.total === 20),
-                   critical:(result.total === 1),
+                   fumble:  false, //(roll.total === 20),
+                   critical:false, //(roll.total === 1),
                    roll:    {expanded: false,
-                             formula:  result.formula,
+                             formula:  roll.formula,
                              labels:   {result: "",
                                         title: game.i18n.localize("bsh.messages.titles.castSpell")},
-                             result:   result.result,
+                             result:   roll.result,
                              rolled:   [],
                              success:  success,
                              tested:   true}};
-    result.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
+    roll.terms[0].results.forEach(a => {
+        message.roll.rolled.push({result: a.result, active: a.active});
+        message.fumble = message.fumble || (a.result == 20);
+        message.critical = message.critical || (a.result == 1);
+    });
 
     if (success) {
         message.roll.labels.result = game.i18n.localize("bsh.fields.titles.success");
