@@ -51,20 +51,13 @@ export default class AttributeTestDialog extends Dialog {
     }
 
     get threat() {
-        let threatValue = 0;
-        if(this._settings.isWeaponRoll) {
-            let opponentString = this.element[0].querySelector('input[name="opponent"]').value.trim();
-            let opponentValue = parseInt(opponentString);
-            if(opponentValue<0) {
-                opponentValue = 0;
-            }
-            threatValue = opponentValue - this._actor.system.level;
-        } else {
-            let threatString = this.element[0].querySelector('input[name="threat"]').value.trim();
-            if(threatString !== "") {
-                threatValue = parseInt(threatString);
-            }
+        let opponentString = this.element[0].querySelector('input[name="opponent"]').value.trim();
+        let opponentValue = parseInt(opponentString);
+        if(opponentValue<0) {
+            opponentValue = 0;
         }
+        let threatValue = opponentValue - this._actor.system.level;
+
         if(threatValue<0) {
             threatValue = 0;
         }            
@@ -109,13 +102,12 @@ export default class AttributeTestDialog extends Dialog {
         }
         event.currentTarget.value = value;
 
-        if(this._settings.isWeaponRoll) {
-            let threatLevel = value - this._actor.system.level;
-            if(threatLevel<0) {
-                threatLevel = 0;
-            }
-            this.element[0].querySelector('span[name="threat"]').innerText = threatLevel;
+        let threatLevel = value - this._actor.system.level;
+        if(threatLevel<0) {
+            threatLevel = 0;
         }
+        this.element[0].querySelector('span[name="threat"]').innerText = threatLevel;
+
     }
 
     static build(actor, attribute, options={}) {
