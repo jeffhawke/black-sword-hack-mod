@@ -409,6 +409,7 @@
         "name": "Nom",
         "nextLevel": "Next Level",
         "numberOfSessions": "Number of sessions",
+        "opponentLevel": "Opponent level",
         "origin": "Origine",
         "otherPossessions": "Autres possessions",
         "playerName": "Joueur",

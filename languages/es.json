@@ -388,6 +388,7 @@
         "hitPointsMaximum": "PG (Máximo)",
         "level": "Nivel",
         "name": "Nombre",
+        "opponentLevel": "Opponent level",
         "origin": "Origen",
         "otherPossessions": "Otras posesiones",
         "playerName": "Jugador",

@@ -392,6 +392,7 @@
         "name": "Name",
         "nextLevel": "Next Level",
         "numberOfSessions": "Number of sessions",
+        "opponentLevel": "Opponent level",
         "origin": "Origin",
         "otherPossessions": "Other Possessions",
         "playerName": "Player",
