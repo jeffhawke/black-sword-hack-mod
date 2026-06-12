@@ -57,6 +57,60 @@ export function rollDoom(actor, rollType="standard") {
     }
 }
 
+
+/**
+ * This function makes a doom roll following a failed dice roll to help changing its result,
+ * then the doom dice is downgraded automatically, whatever the dice roll might have been.
+ */
+export function callOnDoom(actor, rollType="standard") {
+    let result    = {die: {ending: null,
+                           starting: null},
+                     downgraded: false,
+                     wasRolled: false,
+                     rolled: []};
+    let actorData = actor.system;
+
+    result.die.starting = result.die.ending = actorData.doom;
+    if(actorData.doom !== "exhausted") {
+        let data      = {system: {doom: actorData.doom}};
+        let dice;
+
+
+        result.die.starting = actorData.doom;
+        result.wasRolled       = true;
+        if(rollType === "advantage") {
+            dice = new Roll(`2${actorData.doom}kh`);
+        } else if(rollType === "disadvantage") {
+            dice = new Roll(`2${actorData.doom}kl`);
+        } else {
+            dice = new Roll(`1${actorData.doom}`);
+        }
+
+        return(rollEm(dice).then((roll) => {
+                    result.formula = roll.formula;
+                    result.result  = roll.total;
+                    roll.terms[0].results.forEach(a => result.rolled.push({result: a.result, active: a.active}));
+
+					//call on doom degrade the die every time
+					let newDie = downgradeDie(actorData.doom);
+
+					result.downgraded = true;
+					result.die.ending = newDie;
+					data.system.doom  = newDie;
+					if(result.die.ending === "exhausted") {
+						ui.notifications.warn(interpolate("bsh.messages.doom.failExhausted", {name: actor.name}));
+					}
+
+                    actor.update(data, {diff: true});
+                    return(result);
+                }));
+    } else {
+        console.error(`Unable to roll doom for ${actor.name} as their doom die is exhausted.`);
+        ui.notifications.error(interpolate("bsh.messages.doom.exhausted", {name: actor.name}));
+    }
+}
+
+
 /**
  * Sets the actors Doom die to be exhausted and tweaks a few other elements
  * that are tied to Doom.
