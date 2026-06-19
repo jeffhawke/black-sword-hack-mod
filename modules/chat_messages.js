@@ -733,6 +733,20 @@ export function logSpellCast(spell, result) {
     showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
 }
 
+export function logSpellCastSimplified(message) {
+    if (message.roll.success) {
+        message.roll.labels.result = game.i18n.localize("bsh.fields.titles.success");
+        showMessage(message.actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
+
+    } else {
+        message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
+        showMessage(message.actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
+    }
+
+}
+
+
+
 /**
  * TODO: This needs to be reworked, especially the variables' names.
  */
