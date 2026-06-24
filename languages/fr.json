@@ -429,6 +429,7 @@
         "type": "Type",
         "unique": "Unique",
         "usageDie": "Dé d'usage",
+        "usageDieMax": "Dé d'usage max",
         "value": "Value",
         "vulnerabilities": "Vulnérabilités"
       },

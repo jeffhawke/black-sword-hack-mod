@@ -413,6 +413,7 @@
         "type": "Type",
         "unique": "Unique",
         "usageDie": "Usage Die",
+        "usageDieMax": "Max Usage Die",
         "value": "Value",
         "vulnerabilities": "Vulnerabilities",
         "whatHappened": "What happened since last time"

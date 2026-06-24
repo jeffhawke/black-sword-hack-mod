@@ -16,6 +16,15 @@
                 </select>
             </div>
 
+{{#if openingUserIsGM}}
+            <div class="bsh-field">
+                <label class="bsh-label">{{localize "bsh.fields.labels.usageDieMax"}}</label>
+                <select name="system.usageDie.maximum" class="bsh-input bsh-select">
+                {{{selectOptions configuration.usageDieList selected=item.system.usageDie.maximum localize=true }}}
+                </select>
+            </div>
+{{/if}}
+
             <div class="bsh-field">
                 <label class="bsh-label">{{localize "bsh.fields.labels.rarity"}}</label>
                 <select name="system.rarity" class="bsh-input bsh-select">

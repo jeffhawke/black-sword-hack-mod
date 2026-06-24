@@ -407,6 +407,7 @@
         "type": "Tipo",
         "unique": "Único",
         "usageDie": "Dado de Uso",
+        "usageDieMax": "Dado de Uso Max",
         "vulnerabilities": "Vulnerabilidades"
       },
       "titles": {

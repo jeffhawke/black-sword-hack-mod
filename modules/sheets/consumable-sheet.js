@@ -15,6 +15,9 @@ export default class ConsumableSheet  extends foundry.appv1.sheets.ItemSheet {
         let context = super.getData();
 
         context.configuration = CONFIG.configuration;
+
+        context.openingUserIsGM = game.user.isGM;
+
         return(context);
     }
 }
