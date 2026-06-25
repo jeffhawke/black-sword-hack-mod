@@ -1,7 +1,4 @@
-import {logSpellCast,
-        logSpellCastFailure,
-        logSpellCastUnified,
-		logSpellCastSimplified} from './chat_messages.js';
+import {logSpellCastSimplified} from './chat_messages.js';
 import {BSHConfiguration} from './configuration.js';
 import {calculateAttributeValues,
         getOwnedItemById,
@@ -11,7 +8,8 @@ import {calculateAttributeValues,
 /**
  * Retrieves a spell and attempts to cast it (if possible), reporting the
  * result to chat.
- * THIS DOES NOT WORK CORRECTLY FOR CRITICAL SUCCESS OR FAILURE!
+ * This kind of function is usually in chat_messages.js but in this case 
+ * we need to update the spell after the roll result is known
  */
 export async function castSpell(spellId) {
     let spell = getOwnedItemById(spellId);
@@ -69,7 +67,6 @@ export async function castSpell(spellId) {
                 if(!message.roll.success) {
                     data.system.state = "unavailable";
                 }
-                // logSpellCastUnified(spell, roll, success);
                 spell.update(data, {diff: true});
 				
 				logSpellCastSimplified(message);

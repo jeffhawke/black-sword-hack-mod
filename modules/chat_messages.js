@@ -713,26 +713,6 @@ export function logPerceptionRoll(event) {
     }
 }
 
-export function logSpellCast(spell, result) {
-    let actor   = spell.actor;
-    let message = {actor:   actor.name,
-                   actorId: actor.id,
-                   spell:   spell.name,
-                   doomed:  result.doomed,
-                   roll:    {expanded: false,
-                             formula:  result.formula,
-                             labels:   {result: game.i18n.localize("bsh.fields.titles.success"),
-                                        title: game.i18n.localize("bsh.messages.titles.castSpell")},
-                             result:   result.result,
-                             rolled:   [],
-                             success:  true,
-                             tested:   true}};
-                             
-    result.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));
-
-    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
-}
-
 export function logSpellCastSimplified(message) {
     if (message.roll.success) {
         message.roll.labels.result = game.i18n.localize("bsh.fields.titles.success");
@@ -743,64 +723,6 @@ export function logSpellCastSimplified(message) {
         showMessage(message.actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
     }
 
-}
-
-
-
-/**
- * TODO: This needs to be reworked, especially the variables' names.
- */
-export function logSpellCastUnified(spell, roll, success) {
-    let actor   = spell.actor;
-    let message = {actor:   actor.name,
-                   actorId: actor.id,
-                   spell:   spell.name,
-                   doomed:  (actor.system.doom === "exhausted"),
-                   fumble:  false, //(roll.total === 20),
-                   critical:false, //(roll.total === 1),
-                   roll:    {expanded: false,
-                             formula:  roll.formula,
-                             labels:   {result: "",
-                                        title: game.i18n.localize("bsh.messages.titles.castSpell")},
-                             result:   roll.result,
-                             rolled:   [],
-                             success:  success,
-                             tested:   true}};
-    roll.terms[0].results.forEach(a => {
-        message.roll.rolled.push({result: a.result, active: a.active});
-        message.fumble = message.fumble || (a.result == 20);
-        message.critical = message.critical || (a.result == 1);
-    });
-
-    if (success) {
-        message.roll.labels.result = game.i18n.localize("bsh.fields.titles.success");
-        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-success.hbs", message);
-
-    } else {
-        message.roll.labels.result = game.i18n.localize("bsh.fields.titles.failure");
-        showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
-    }
-} 
-
-export function logSpellCastFailure(spell, result) {
-    let actor   = spell.actor;
-    let message = {actor:   actor.name,
-                   actorId: actor.id,
-                   spell:  spell.name,
-                   doomed:  result.doomed,
-                   fumble:  (result.total === 20),
-                   roll:    {expanded: false,
-                             formula:  result.formula,
-                             labels:   {result: game.i18n.localize("bsh.fields.titles.failure"),
-                                        title: game.i18n.localize("bsh.messages.titles.castSpell")},
-                             result:   result.result,
-                             rolled:   [],
-                             success:  false,
-                             tested:   true}};
-    
-    result.terms[0].results.forEach(a => message.roll.rolled.push({result: a.result, active: a.active}));     
-
-    showMessage(actor, "systems/black-sword-hack-mod/templates/messages/spell-failure.hbs", message);
 }
 
 export function showMessage(actor, templateKey, data) {
