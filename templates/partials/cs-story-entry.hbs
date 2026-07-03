@@ -11,49 +11,11 @@
         </h2>
 
         <div class="collapsible-widget-target">
-        
-
-            <div class="bsh-field" >
-                <label class="bsh-label">{{localize "bsh.fields.labels.whatHappened"}}</label>
-                <textarea id="story.{{@key}}" name="system.stories.{{@key}}.trueTitle"  rows="5" cols="33">{{trueTitle}}</textarea>
-            </div>
-
-                
-            <div class="bsh-story-entry-level">
-                <div class="bsh-field">
-                    <label class="bsh-label">{{localize "bsh.fields.labels.numberOfSessions"}}</label>
-                    <input type="range" min="0" max="{{requiredForNextLevel}}" class="slider" id="myRange.{{@key}}" value="{{sessions}}" name="system.stories.{{@key}}.sessions" step=1 >
-                </div>
-                <div class="bsh-field">
-                    <center>
-                    <label class="bsh-label">{{localize "bsh.fields.labels.value"}}</label>
-                    <div>
-                        {{sessions}}
-                    </div>
-                    </center>
-                </div>
-                <div class="bsh-field">
-                    <center>
-                    <label class="bsh-label">{{localize "bsh.fields.labels.requiredForNextLevel"}}</label>
-                    <div>
-                        {{requiredForNextLevel}}
-                    </div>
-                    </center>
-                </div>        
-
-            </div>
 
 {{#if improvements}}
-            <div class="bsh-story-entry-improvements">
-            {{#if improvements.level}}
-                <div class="bsh-field">
-                    <label class="bsh-label">{{localize "bsh.fields.labels.nextLevel"}}</label>
-                    <div>
-                        {{localize improvements.level}}
-                    </div>
-                </div>
-            {{/if}}
 
+			<label class="bsh-label">Reward for the level</label>
+            <div class="bsh-story-entry-improvements">
             {{#if improvements.hitPoints}}
                 <div class="bsh-field">
                     <label class="bsh-label">{{localize "bsh.fields.labels.hitPoints"}}</label>
@@ -106,7 +68,37 @@
             {{/if}}
             </div>
 {{/if}}
+        
 
+            <div class="bsh-field" >
+                <label class="bsh-label">{{localize "bsh.fields.labels.whatHappened"}}</label>
+                <textarea id="story.{{@key}}" name="system.stories.{{@key}}.trueTitle"  rows="5" cols="33">{{trueTitle}}</textarea>
+            </div>
+
+                
+            <div class="bsh-story-entry-level">
+                <div class="bsh-field">
+                    <label class="bsh-label">{{localize "bsh.fields.labels.numberOfSessions"}}</label>
+                    <input type="range" min="0" max="{{requiredForNextLevel}}" class="slider" id="myRange.{{@key}}" value="{{sessions}}" name="system.stories.{{@key}}.sessions" step=1 >
+                </div>
+                <div class="bsh-field">
+                    <center>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.value"}}</label>
+                    <div>
+                        {{sessions}}
+                    </div>
+                    </center>
+                </div>
+                <div class="bsh-field">
+                    <center>
+                    <label class="bsh-label">{{localize "bsh.fields.labels.requiredForNextLevel"}}</label>
+                    <div>
+                        {{requiredForNextLevel}}
+                    </div>
+                    </center>
+                </div>        
+
+            </div>
         </div>
     </div>
 

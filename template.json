@@ -48,6 +48,13 @@
       "playerName": "",
       "stories": {
         "00": {
+          "level": 1,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 1
+        },
+        "01": {
           "improvements": {
             "attributes": {
               "first": {
@@ -58,26 +65,7 @@
             "gift": {
               "granted": false
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.2"
-          },
-          "level": 1,
-          "title": "",
-          "trueTitle": "",
-          "sessions": 0,
-          "requiredForNextLevel": 1
-        },
-        "01": {
-          "improvements": {
-            "attributes": {
-              "granted": false
-            },
-            "gift": {
-              "choice": "none",
-              "granted": true
-            },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.3"
+            "hitPoints": 1
           },
           "level": 2,
           "title": "",
@@ -88,19 +76,13 @@
         "02": {
           "improvements": {
             "attributes": {
-              "first": {
-                "choice": "none"
-              },
-              "granted": true,
-              "second": {
-                "choice": "none"
-              }
-            },
-            "gift": {
               "granted": false
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.4"
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1
           },
           "level": 3,
           "title": "",
@@ -111,14 +93,18 @@
         "03": {
           "improvements": {
             "attributes": {
-              "granted": false
+              "first": {
+                "choice": "none"
+              },
+              "granted": true,
+              "second": {
+                "choice": "none"
+              }
             },
             "gift": {
-              "choice": "none",
-              "granted": true
+              "granted": false
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.5"
+            "hitPoints": 1
           },
           "level": 4,
           "title": "",
@@ -129,16 +115,13 @@
         "04": {
           "improvements": {
             "attributes": {
-              "first": {
-                "choice": "none"
-              },
-              "granted": true
-            },
-            "gift": {
               "granted": false
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.6"
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1
           },
           "level": 5,
           "title": "",
@@ -149,14 +132,15 @@
         "05": {
           "improvements": {
             "attributes": {
-              "granted": false
-            },
-            "gift": {
-              "choice": "none",
+              "first": {
+                "choice": "none"
+              },
               "granted": true
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.7"
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1
           },
           "level": 6,
           "title": "",
@@ -165,6 +149,23 @@
           "requiredForNextLevel": 6
         },
         "06": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "gift": {
+              "choice": "none",
+              "granted": true
+            },
+            "hitPoints": 1
+          },
+          "level": 7,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 7
+        },
+        "07": {
           "improvements": {
             "attributes": {
               "first": {
@@ -178,26 +179,7 @@
             "gift": {
               "granted": false
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.8"
-          },
-          "level": 7,
-          "title": "",
-          "trueTitle": "",
-          "sessions": 0,
-          "requiredForNextLevel": 7
-        },
-        "07": {
-          "improvements": {
-            "attributes": {
-              "granted": false
-            },
-            "gift": {
-              "choice": "none",
-              "granted": true
-            },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.9"
+            "hitPoints": 1
           },
           "level": 8,
           "title": "",
@@ -210,18 +192,34 @@
             "attributes": {
               "granted": false
             },
-            "doomDie": "d8",
             "gift": {
-              "granted": false
+              "choice": "none",
+              "granted": true
             },
-            "hitPoints": 1,
-            "level": "bsh.levels.names.10"
+            "hitPoints": 1
           },
           "level": 9,
           "title": "",
           "trueTitle": "",
           "sessions": 0,
           "requiredForNextLevel": 9
+        },
+        "09": {
+          "improvements": {
+            "attributes": {
+              "granted": false
+            },
+            "doomDie": "d8",
+            "gift": {
+              "granted": false
+            },
+            "hitPoints": 1
+          },
+          "level": 10,
+          "title": "",
+          "trueTitle": "",
+          "sessions": 0,
+          "requiredForNextLevel": 10
         }
       },
       "summoning": {
